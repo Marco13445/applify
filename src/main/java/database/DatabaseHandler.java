@@ -50,7 +50,7 @@ public class DatabaseHandler {
 
 
             //declaring attributes so that they can be used later to get the table contents attributed row per row
-            int id = 0;
+            int id = -2;
             String postingName = "";
             String company = "";
             String postingLink = "";
@@ -67,7 +67,7 @@ public class DatabaseHandler {
                 applicationStatus = convertStringToStatus(rs.getString("applicationStatus"));
 
                 // Create an instance of JobApplication and add it to the list to be returned by this method
-                appliedJobsList.add(new JobApplication(postingName, company, postingLink, applicationDate, applicationStatus));
+                appliedJobsList.add(new JobApplication(id, postingName, company, postingLink, applicationDate, applicationStatus));
             }
 
         } catch (SQLException e) {
@@ -160,6 +160,8 @@ public class DatabaseHandler {
             statement.setString(1, newPostingName);
             statement.setString(2, newCompanyName);
             statement.setString(3, jobApplication.getPostingLink());
+            // to understand
+
             statement.setDate(4, new java.sql.Date(Date.from(jobApplication.getApplicationDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
             statement.setString(5, convertStatusToString(jobApplication.getApplicationStatus()));
             statement.setString(6, jobApplication.getPostingName());

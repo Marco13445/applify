@@ -1,5 +1,8 @@
 package model;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 import java.time.LocalDate;
 
 /**
@@ -11,18 +14,20 @@ import java.time.LocalDate;
 public class JobApplication {
 
     //fields
-    //private static int id =0;
+    private int id =-1;
     private String postingName;
     private String company;
     private String postingLink;
     private LocalDate applicationDate;
     private Status applicationStatus = Status.WaitingForReply;
 
+    //
+
     //constructor
     //reflect, how the details should be entered by the user
     //probably through a window in JavaFX
-    public JobApplication(String postingName, String company, String postingLink, LocalDate applicationDate, Status applicationStatus){
-        //this.id = id++;
+    public JobApplication(int id, String postingName, String company, String postingLink, LocalDate applicationDate, Status applicationStatus){
+        this.id = id;
         this.postingName=postingName;
         this.company=company;
         this.postingLink=postingLink;
@@ -62,14 +67,14 @@ public class JobApplication {
     }
 
     //Getters and Setters
-  /*  public int getId() {
+    public int getId() {
         return id;
     }
-*/
- /*   public void setId(int id) {
+
+    public void setId(int id) {
         this.id = id;
     }
-*/
+
     public String getPostingName() {
         return postingName;
     }

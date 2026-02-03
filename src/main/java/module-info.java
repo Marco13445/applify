@@ -1,7 +1,10 @@
+//https://javabeginners.de/Grundlagen/Module_verwenden.php
+
 module org.example.applify {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    opens model to javafx.base;      // 👈 DAS ist der Schlüssel
 
 
     opens org.example.controllerAndMain to javafx.fxml;

@@ -16,6 +16,6 @@
     <Label fx:id="buttonPressedText"/>
     <Button text="Press me!" onAction="#onHelloABCButtonClick"/>
     <Button text="New Button :D" onAction="#onNewButtonClick"/>
-    <ListView fx:id="list"/>
+    <ListView fx:id="table_id"/>
 
 </VBox>
