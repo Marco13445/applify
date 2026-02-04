@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.JobApplication;
 import model.Status;
+import service.ApplicationService;
 
 import java.lang.reflect.Array;
 import java.time.LocalDate;
@@ -62,7 +63,8 @@ public class applifyController {
         System.out.println("Search button clicked");
     }
     public void addButtonOnAction(ActionEvent event){
-
+        
+        //ApplifyMain.getService().addJobApplication();
     }
     public void editButtonOnAction(ActionEvent event){
 
@@ -90,14 +92,5 @@ public class applifyController {
         table.setItems(observableList);
     }
 
-    private void createColumnTable_id(){
-        //create list for saving id_list only
-        ArrayList<Integer> id_list = new ArrayList<>();
-        //iterate through application list / "database" for copying every entry's id into the id_list
-        for (JobApplication application : applicationList ) {
-            id_list.add(application.getId());
-        }
-        //view id_list in the column table_id
-       // table_id.setItems(FXCollections.observableList(id_list));
-    }
+
 }
