@@ -4,12 +4,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.JobApplication;
 import model.Status;
 import service.ApplicationService;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -62,9 +66,17 @@ public class applifyController {
 
         System.out.println("Search button clicked");
     }
-    public void addButtonOnAction(ActionEvent event){
-        
+    public void addButtonOnAction(ActionEvent event) throws IOException {
+        startAddButtonView(new Stage());
         //ApplifyMain.getService().addJobApplication();
+    }
+    private void startAddButtonView(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/addButtonViewer.fxml")
+        );
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Add information about applied Job");
+        stage.setScene(scene);
+        stage.show();
     }
     public void editButtonOnAction(ActionEvent event){
 
