@@ -36,6 +36,8 @@ public class JobApplication {
     }
 
     //Methods
+
+
     public static String convertStatusToString(Status applicationStatus){
         if(applicationStatus.equals(Status.WaitingForReply)){
             return "Waiting for reply";
