@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -18,6 +19,7 @@ import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+
 
 public class applifyController {
 
@@ -64,20 +66,46 @@ public class applifyController {
     }
     public void searchButtonOnAction(ActionEvent event){
 
+        //search without criterion
+        ApplifyMain.getService().readJobApplicationsFromDatabase();
+        applicationList = (ArrayList<JobApplication>) ApplifyMain.getService().getApplicationList();
+
+        //connect id_column with field id
+        table_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        table_Posting_Name.setCellValueFactory(new PropertyValueFactory<>("postingName"));
+        table_Company_Name.setCellValueFactory(new PropertyValueFactory<>("company"));
+        table_Posting_Link.setCellValueFactory(new PropertyValueFactory<>("postingLink"));
+        table_Application_Date.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
+        table_Application_Status.setCellValueFactory(new PropertyValueFactory<>("applicationStatus"));
+
+
+        //Fill list with data
+        ObservableList<JobApplication> observableList = FXCollections.observableList(applicationList);
+
+        //view in table
+        table.setItems(observableList);
+
         System.out.println("Search button clicked");
+
+
     }
     public void addButtonOnAction(ActionEvent event) throws IOException {
-        startAddButtonView(new Stage());
-        //ApplifyMain.getService().addJobApplication();
-    }
-    private void startAddButtonView(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/addButtonViewer.fxml")
         );
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Add information about applied Job");
-        stage.setScene(scene);
-        stage.show();
+        Stage secondaryStage = new Stage();
+        secondaryStage.setTitle("Add information about applied Job");
+        secondaryStage.setScene(scene);
+
+        //block primary stage while secondary stage is open
+        secondaryStage.initOwner((Stage) ((Button) event.getSource()).getScene().getWindow()); // block the primary stage
+        secondaryStage.initModality(Modality.WINDOW_MODAL); // modal to owner
+        secondaryStage.showAndWait();                    // 🔒 blocks the primary stage
+
+
+        //ApplifyMain.getService().addJobApplication();
     }
+
     public void editButtonOnAction(ActionEvent event){
 
     }

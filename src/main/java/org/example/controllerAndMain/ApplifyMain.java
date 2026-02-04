@@ -14,11 +14,15 @@ import service.ApplicationService;
 import java.io.IOException;
 import java.time.LocalDate;
 
+
+
+
 public class ApplifyMain extends Application {
 
     //Fields
     private static DatabaseHandler databaseHandler = new DatabaseHandler();
     private static ApplicationService service = new ApplicationService(databaseHandler);
+
 
     public static ApplicationService getService() {
         return service;
@@ -29,13 +33,14 @@ public class ApplifyMain extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/applifyViewer.fxml")
         );
         Scene scene = new Scene(fxmlLoader.load(), 900, 800);
-        stage.setTitle("Applify Dashboard");
-        stage.setScene(scene);
-        stage.show();
+        primaryStage.setTitle("Applify Dashboard");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
 /**
         BorderPane root = new BorderPane();
         ListView <String> list = new ListView<>();

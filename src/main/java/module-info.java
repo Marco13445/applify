@@ -4,6 +4,9 @@ module org.example.applify {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires jdk.zipfs;
+    requires java.net.http;
+
     opens model to javafx.base;      // 👈 DAS ist der Schlüssel
 
 
