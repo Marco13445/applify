@@ -12,16 +12,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.JobApplication;
 import model.Status;
-import service.ApplicationService;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
+
+import static model.JobApplication.convertStatusToString;
 
 
-public class applifyController {
+public class ApplifyController {
 
     //Field
     ArrayList<JobApplication> applicationList;
@@ -61,14 +61,26 @@ public class applifyController {
     @FXML
     private Button deleteButton;
 
+    public static JobApplication selectedJobApplication;
+
+    private int selectedSearchCriterion;
+
     public void criteriaDropDownOnAction(ActionEvent event){
 
     }
-    public void searchButtonOnAction(ActionEvent event){
 
-        //search without criterion
-        ApplifyMain.getService().readJobApplicationsFromDatabase();
-        applicationList = (ArrayList<JobApplication>) ApplifyMain.getService().getApplicationList();
+    public void searchButtonOnAction(ActionEvent event){
+        //define value of search criterion based on selected criterion
+                if (criteriaDropDown.getSelectionModel().getSelectedItem().equals("Show all applications that have a current invitation")){
+                    selectedSearchCriterion = 1;
+                }else if(criteriaDropDown.getSelectionModel().getSelectedItem().equals("Show all applications from the last three weeks")){
+                    selectedSearchCriterion = 2;
+                }else {
+                    selectedSearchCriterion = 0;
+                };
+
+        ArrayList<JobApplication> searchList = ApplifyMain.getService().searchJobApplication(selectedSearchCriterion);
+
 
         //connect id_column with field id
         table_id.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -78,14 +90,11 @@ public class applifyController {
         table_Application_Date.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
         table_Application_Status.setCellValueFactory(new PropertyValueFactory<>("applicationStatus"));
 
-
-        //Fill list with data
-        ObservableList<JobApplication> observableList = FXCollections.observableList(applicationList);
+        //Fill list with data from search list this time, not from application list
+        ObservableList<JobApplication> observableList = FXCollections.observableList(searchList);
 
         //view in table
         table.setItems(observableList);
-
-        System.out.println("Search button clicked");
 
 
     }
@@ -102,17 +111,48 @@ public class applifyController {
         secondaryStage.initModality(Modality.WINDOW_MODAL); // modal to owner
         secondaryStage.showAndWait();                    // 🔒 blocks the primary stage
 
+        refreshTableView();
 
-        //ApplifyMain.getService().addJobApplication();
+
     }
 
-    public void editButtonOnAction(ActionEvent event){
+    public void editButtonOnAction(ActionEvent event) throws IOException{
+        //JobApplication should be selected before new stage opens
+        selectedJobApplication = table.getSelectionModel().getSelectedItem();
 
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/editButtonViewer.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage secondaryStage = new Stage();
+        secondaryStage.setTitle("Add information about applied Job to be edited");
+        secondaryStage.setScene(scene);
+
+        //block primary stage while secondary stage is open
+        secondaryStage.initOwner((Stage) ((Button) event.getSource()).getScene().getWindow()); // block the primary stage
+        secondaryStage.initModality(Modality.WINDOW_MODAL); // modal to owner
+        if(selectedJobApplication!=null){
+            secondaryStage.showAndWait();
+            refreshTableView();
+        }else {
+            System.out.println("A job application must be selected before the edit Button is clicked. ");
+        }
     }
     public void deleteButtonOnAction(ActionEvent event){
-       // ApplifyMain.getService().removeJobApplication();
+        selectedJobApplication = table.getSelectionModel().getSelectedItem();
+        ApplifyMain.getService().removeJobApplication(selectedJobApplication);
+        refreshTableView();
     }
     public void initialize(){
+        //initialise criteria dropdowns
+        criteriaDropDown.setValue("No criterion has currently been selected. ");
+        criteriaDropDown.getItems().add("No criterion has currently been selected. ");
+        criteriaDropDown.getItems().add("Show all applications that have a current invitation");
+        criteriaDropDown.getItems().add("Show all applications from the last three weeks");
+
+        refreshTableView();
+    }
+
+    private void refreshTableView() {
+        //search without criterion
         ApplifyMain.getService().readJobApplicationsFromDatabase();
         applicationList = (ArrayList<JobApplication>) ApplifyMain.getService().getApplicationList();
 
@@ -124,13 +164,15 @@ public class applifyController {
         table_Application_Date.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
         table_Application_Status.setCellValueFactory(new PropertyValueFactory<>("applicationStatus"));
 
-
         //Fill list with data
         ObservableList<JobApplication> observableList = FXCollections.observableList(applicationList);
 
         //view in table
         table.setItems(observableList);
+
+        criteriaDropDown.setValue("No criterion has currently been selected. ");
     }
+
 
 
 }

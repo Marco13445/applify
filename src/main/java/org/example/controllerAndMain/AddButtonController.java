@@ -24,7 +24,7 @@ import java.time.LocalDate;
  */
 
 
-public class addButtonController {
+public class AddButtonController {
 
     @FXML
     private TextField postingNameField;
@@ -45,23 +45,25 @@ public class addButtonController {
     private Button exitButton;
 
     public void okButtonOnAction(ActionEvent e) {
-
+        //Fields to be entered by user
         String postingName = postingNameField.getText();
         String companyName = companyField.getText();
         String postingLink = postingLinkField.getText();
         LocalDate applicationDate = applicationDatePicker.getValue();
 
-
+        //Execution through method
         ApplifyMain.getService().addJobApplication(new JobApplication(-1, postingName,
                 companyName,postingLink,
                 applicationDate,Status.WaitingForReply));
-        /** ApplifyMain.getService().addJobApplication(new JobApplication(-1, postingNameField.getText(),
-                companyField.getText(),postingLinkField.getText(),
-                applicationDatePicker.getValue(),Status.WaitingForReply));
-    */
+
+        //close secondary stage so that to turn back to primary stage
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     public void exitButtonOnAction (ActionEvent e){
+        //close secondary stage so that to turn back to primary stage
+        //Here: to interrupt operation of making entries
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         stage.close();
     }

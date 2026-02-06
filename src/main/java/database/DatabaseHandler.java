@@ -12,6 +12,13 @@ import java.util.List;
 import static model.JobApplication.convertStatusToString;
 import static model.JobApplication.convertStringToStatus;
 
+/**
+ * This is only class directly accessing the database (through methods with sql-queries).
+ * So it results into a clear localisation of methods with this specific purpose.
+ *  It is called 'Data-Access-Object'-Layer (DAO).
+ */
+
+
 public class DatabaseHandler {
 
     //fields
@@ -30,7 +37,6 @@ public class DatabaseHandler {
      * This method reads the current entries in the database and returns them in a List<JobApplication>
      */
     public List<JobApplication> readDatabase() {
-        System.out.println("Test");
         List<JobApplication> appliedJobsList = new ArrayList<JobApplication>();
 
         //SQL Command reading the whole table
@@ -115,16 +121,14 @@ public class DatabaseHandler {
 
     public void deleteFromDatabase(JobApplication jobApplication) {
         //sql command for deletion
-        String sqlDeleteCommand = "DELETE FROM appliedJobsList WHERE postingName = ? AND " +
-                "company = ?";
+        String sqlDeleteCommand = "DELETE FROM appliedJobsList WHERE id = ?";
 
         //create connection
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             PreparedStatement statement = connection.prepareStatement(sqlDeleteCommand);
 
             //substitute ?-tags with attributes of the parameter jobApplication
-            statement.setString(1, jobApplication.getPostingName());
-            statement.setString(2, jobApplication.getCompany());
+            statement.setInt(1, jobApplication.getId());
 
             //Execute statement, which is a 'Delete'-statement
             statement.executeUpdate();
@@ -140,7 +144,8 @@ public class DatabaseHandler {
                 jobApplication.getCompany() + " has been removed from database. ");
     }
 
-    public void updateDatabase(JobApplication jobApplication, String newPostingName, String newCompanyName) {
+    public void updateDatabase(JobApplication jobApplication, String newPostingName, String newCompanyName,
+                               String newPostingLink, String newApplicationStatus) {
 
         //sql command for update
         String sqlUpdateCommand = "UPDATE  appliedJobsList " +
@@ -149,23 +154,45 @@ public class DatabaseHandler {
                 " postingLink = ?, " +
                 " applicationDate = ?," +
                 " applicationStatus = ? " +
-                " WHERE postingName = ? AND " + //here, the ?-tag has to use the current postingName
-                " company = ?"; // here, the ?-tag has to use the current company name
+                " WHERE id = ? "; //here, the ?-tag has to use the selected ID
+
+        //We have to make sure that when no entry is made while editing an application
+        //the former value remains. Otherwise, the new value (which was entered by the user) is used.
+        String postingName, companyName, postingLink, applicationStatus;
+
+        if(newPostingName.equals("")){
+            postingName = jobApplication.getPostingName();
+        }else{
+            postingName = newPostingName;
+        }
+        if(newCompanyName.equals("")){
+            companyName = jobApplication.getCompany();
+        }else{
+            companyName = newCompanyName;
+        }
+        if(newPostingLink.equals("")){
+            postingLink = jobApplication.getPostingLink();
+        }else{
+            postingLink = newPostingLink;
+        }
+        if(newApplicationStatus.equals("")){
+            applicationStatus = convertStatusToString(jobApplication.getApplicationStatus());
+        }else{
+            applicationStatus = newApplicationStatus;
+        }
 
         //create connection
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             PreparedStatement statement = connection.prepareStatement(sqlUpdateCommand);
 
             //substitute ?-tags with attributes of the parameter jobApplication
-            statement.setString(1, newPostingName);
-            statement.setString(2, newCompanyName);
-            statement.setString(3, jobApplication.getPostingLink());
+            statement.setString(1, postingName);
+            statement.setString(2, companyName);
+            statement.setString(3, postingLink);
             // to understand
-
             statement.setDate(4, new java.sql.Date(Date.from(jobApplication.getApplicationDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
-            statement.setString(5, convertStatusToString(jobApplication.getApplicationStatus()));
-            statement.setString(6, jobApplication.getPostingName());
-            statement.setString(7, jobApplication.getCompany());
+            statement.setString(5, applicationStatus);
+            statement.setInt(6, jobApplication.getId());
 
             //Execute statement, which is a 'Delete'-statement
             statement.executeUpdate();
