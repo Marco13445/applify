@@ -37,7 +37,6 @@ public class ApplifyMain extends Application {
         primaryStage.setTitle("Applify Dashboard");
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {
