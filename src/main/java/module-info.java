@@ -6,10 +6,7 @@ module org.example.applify {
     requires java.sql;
     requires jdk.zipfs;
     requires java.net.http;
-
-    opens model to javafx.base;      // 👈 DAS ist der Schlüssel
-
-
+    opens model to javafx.base;
     opens org.example.controllerAndMain to javafx.fxml;
     exports org.example.controllerAndMain;
 }
