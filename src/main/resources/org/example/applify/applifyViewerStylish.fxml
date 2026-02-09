@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- import of insets, label, buttons, TableViews and containers -->
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!-- loads css-file among others -->
 <VBox alignment="CENTER"
       spacing="25.0"
-      prefHeight="800.0"
-      prefWidth="1000.0"
+      prefHeight="900.0"
+      prefWidth="943.0"
       stylesheets="@style.css"
       styleClass="root"
       xmlns="http://javafx.com/javafx/25"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="org.example.controllerAndMain.ApplifyController">
 
+    <!-- adds inner spacing so that the content does not touch the window edges -->
     <padding>
         <Insets top="30" right="30" bottom="30" left="30"/>
     </padding>

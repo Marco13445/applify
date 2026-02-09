@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="20"
+      prefWidth="960"
+      prefHeight="900"
+      stylesheets="@cssFileSytylishCv.css"
+      xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.controllerAndMain.ApplifyController">
+
+    <padding>
+        <Insets top="24" right="24" bottom="24" left="24"/>
+    </padding>
+
+    <!-- Header -->
+    <VBox spacing="6">
+        <Label text="Applify"
+               styleClass="app-title"/>
+        <Label text="Application Tracking Dashboard"
+               styleClass="app-subtitle"/>
+    </VBox>
+
+    <!-- Filter Bar -->
+    <HBox spacing="12" alignment="CENTER_LEFT" styleClass="filter-bar">
+        <Label text="Filter:"/>
+        <ChoiceBox fx:id="criteriaDropDown" prefWidth="200"/>
+        <Button text="Search"
+                onAction="#searchButtonOnAction"
+                styleClass="btn-primary"/>
+    </HBox>
+
+    <!-- Table -->
+    <TableView fx:id="table"
+               VBox.vgrow="ALWAYS"
+               styleClass="data-table">
+        <columns>
+            <TableColumn fx:id="table_id" text="ID" prefWidth="60"/>
+            <TableColumn fx:id="table_Posting_Name" text="Posting" prefWidth="180"/>
+            <TableColumn fx:id="table_Company_Name" text="Company" prefWidth="160"/>
+            <TableColumn fx:id="table_Posting_Link" text="Link" prefWidth="160"/>
+            <TableColumn fx:id="table_Application_Date" text="Applied" prefWidth="140"/>
+            <TableColumn fx:id="table_Application_Status" text="Status" prefWidth="140"/>
+        </columns>
+    </TableView>
+
+    <!-- Actions -->
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Add" styleClass="btn-success"/>
+        <Button text="Edit" styleClass="btn-secondary"/>
+        <Button text="Delete" styleClass="btn-danger"/>
+    </HBox>
+
+</VBox>

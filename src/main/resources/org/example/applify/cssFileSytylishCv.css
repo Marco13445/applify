@@ -1,0 +1,95 @@
+/* Base */
+.root {
+    -fx-background-color: #1f2933;
+    -fx-font-family: "Segoe UI", "Inter", sans-serif;
+}
+
+/* Titles */
+.app-title {
+    -fx-font-size: 26px;
+    -fx-text-fill: #2B5093;
+    -fx-font-weight: 600;
+}
+
+.app-subtitle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #9ca3af;
+}
+
+/* Filter Bar */
+.filter-bar {
+    -fx-background-color: #111827;
+    -fx-background-radius: 10;
+    -fx-padding: 14;
+}
+
+/* Table */
+.data-table {
+    -fx-background-color: transparent;
+    -fx-border-color: #374151;
+    -fx-border-radius: 10;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #111827;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #e5e7eb;
+    -fx-font-weight: 600;
+}
+
+.table-row-cell {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: rgba(255,255,255,0.03);
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #1F3F73;
+}
+
+.table-cell {
+    -fx-text-fill: #e5e7eb;
+}
+
+/* Buttons */
+.button {
+    -fx-background-radius: 6;
+    -fx-padding: 8 18;
+    -fx-font-size: 13px;
+}
+
+/* Button variants */
+.btn-primary {
+    -fx-background-color: #2B5093;
+    -fx-text-fill: white;
+}
+
+.btn-secondary {
+    -fx-background-color: #374151;
+    -fx-text-fill: #e5e7eb;
+}
+
+.btn-success {
+    -fx-background-color: #15803d;
+    -fx-text-fill: white;
+}
+
+.btn-danger {
+    -fx-background-color: #b91c1c;
+    -fx-text-fill: white;
+}
+
+/* ChoiceBox */
+.choice-box {
+    -fx-background-color: #374151;
+    -fx-background-radius: 6;
+    -fx-mark-color: white;
+}
+
+.choice-box .label {
+    -fx-text-fill: #e5e7eb;
+}
