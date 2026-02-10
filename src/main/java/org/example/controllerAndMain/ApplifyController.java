@@ -71,9 +71,9 @@ public class ApplifyController {
 
     public void searchButtonOnAction(ActionEvent event){
         //define value of search criterion based on selected criterion
-                if (criteriaDropDown.getSelectionModel().getSelectedItem().equals("Show all applications that have a current invitation")){
+                if (criteriaDropDown.getSelectionModel().getSelectedItem().equals("Invitation")){
                     selectedSearchCriterion = 1;
-                }else if(criteriaDropDown.getSelectionModel().getSelectedItem().equals("Show all applications from the last three weeks")){
+                }else if(criteriaDropDown.getSelectionModel().getSelectedItem().equals("Last three weeks")){
                     selectedSearchCriterion = 2;
                 }else {
                     selectedSearchCriterion = 0;
@@ -143,10 +143,10 @@ public class ApplifyController {
     }
     public void initialize(){
         //initialise criteria dropdowns
-        criteriaDropDown.setValue("No criterion has currently been selected. ");
-        criteriaDropDown.getItems().add("No criterion has currently been selected. ");
-        criteriaDropDown.getItems().add("Show all applications that have a current invitation");
-        criteriaDropDown.getItems().add("Show all applications from the last three weeks");
+        criteriaDropDown.setValue("No selection");
+        criteriaDropDown.getItems().add("No selection");
+        criteriaDropDown.getItems().add("Invitation");
+        criteriaDropDown.getItems().add("Last three weeks");
 
         refreshTableView();
     }
@@ -170,7 +170,7 @@ public class ApplifyController {
         //view in table
         table.setItems(observableList);
 
-        criteriaDropDown.setValue("No criterion has currently been selected. ");
+        criteriaDropDown.setValue("No selection");
     }
 
 
