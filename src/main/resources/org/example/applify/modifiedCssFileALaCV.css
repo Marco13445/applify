@@ -1,0 +1,110 @@
+/* Base */
+.root {
+    -fx-background-color: #05317f;
+    -fx-font-family: "Verdana", "Inter", sans-serif;
+}
+
+/* Titles */
+.title-label {
+-fx-text-fill:  fefefe;
+-fx-font-size: 40px;
+-fx-font-weight: 900;
+}
+
+/* text */
+.text-style{
+-fx-text-fill: fefefe;
+-fx-font-size: 12px;
+}
+
+/* Table */
+.table-view {
+    -fx-background-color: #c3cee0;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-background-radius: 6 6 6 6; /* outer radius */
+}
+
+.table-view .column-header {
+    -fx-background-color:     #c3cee0;
+    -fx-text-fill: #05317f;
+    -fx-border-color: transparent;
+     -fx-background-radius: 6 6 0 0; /* round top-left & top-right corners */
+}
+
+.table-view .column-header-background {
+        -fx-background-color:      #c3cee0;
+        -fx-background-insets: 0;
+        -fx-background-radius: 6 6 0 0; /* round top-left & top-right only */
+}
+
+.table-view .column-header .label {
+    -fx-background-color:      #c3cee0;
+    -fx-text-fill: #05317f;
+}
+
+.table-view .column-header-background .corner{
+    -fx-background-color:   #c3cee0;
+    -fx-background-radius: 6 6 0 0;
+}
+
+/* Rows / body */
+.table-view .virtual-flow {
+    -fx-background-radius: 0 0 6 6; /* round bottom corners */
+}
+
+.table-view .filler {
+    -fx-background-color:   #c3cee0;
+    -fx-background-radius: 6 6 6 6;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #1F3F73;
+}
+
+
+table-style{
+    -fx-background-color: #fefefe;
+    -fx-border-color: #05317f;
+    -fx-font-size: 12px;
+    -fx-background-radius: 6 6 6 6;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #e5eaf1;
+  }
+
+.table-row-cell:even {
+    -fx-background-color: #fefefe;
+
+}
+.table-view .table-cell {
+    -fx-text-fill: #05317f;
+}
+
+.table-row-cell:last-child {
+    -fx-background-radius: 0 0 6 6; /* bottom-left and bottom-right */
+}
+
+/* Buttons */
+.button {
+    -fx-background-radius: 6;
+    -fx-padding: 8 18;
+    -fx-font-size: 13px;
+    -fx-text-fill: #05317f;
+}
+
+/* ChoiceBox */
+.choice-box .label {
+    -fx-text-fill: #05317f;
+    -fx-font-size: 12px;
+    -fx-border-color: #fefefe;
+    -fx-background-color: #fefefe;
+}
+.choice-box .menu-item:focused {
+    -fx-background-color: #05317f;
+}
+.choice-box .menu-item:focused .label {
+    -fx-text-fill: #05317f;
+}
+
