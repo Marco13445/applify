@@ -10,7 +10,7 @@
       spacing="25.0"
       prefHeight="900.0"
       prefWidth="943.0"
-      stylesheets="@style.css"
+      stylesheets="@modifiedCssFileALaCV.css"
       styleClass="root"
       xmlns="http://javafx.com/javafx/25"
       xmlns:fx="http://javafx.com/fxml/1"
@@ -26,18 +26,19 @@
 
     <!-- Filter Bar -->
     <HBox alignment="CENTER" spacing="15" styleClass="card">
-        <Label fx:id="filterLabel" text="Filter by:"/>
+        <Label fx:id="filterLabel" text="Filter criterion:" styleClass="text-style"/>
         <ChoiceBox fx:id="criteriaDropDown"
-                   prefWidth="180"
-                   onAction="#criteriaDropDownOnAction"/>
+                   prefWidth="300"
+                   onAction="#criteriaDropDownOnAction"
+                   styleClass="choice-box.label"/>
         <Button fx:id="searchButton"
                 text="Search"
                 onAction="#searchButtonOnAction"
-                styleClass="primary-button"/>
+                styleClass=".button"/>
     </HBox>
 
     <!-- Table -->
-    <TableView fx:id="table" styleClass="fancy-table" VBox.vgrow="ALWAYS">
+    <TableView fx:id="table" styleClass="table-style" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="table_id" text="ID" prefWidth="60"/>
             <TableColumn fx:id="table_Posting_Name" text="Posting Name" prefWidth="180"/>
@@ -53,17 +54,17 @@
         <Button fx:id="addButton"
                 text="Add"
                 onAction="#addButtonOnAction"
-                styleClass="success-button"/>
+                styleClass=".button"/>
 
         <Button fx:id="editButton"
                 text="Edit"
                 onAction="#editButtonOnAction"
-                styleClass="warning-button"/>
+                styleClass=".button"/>
 
         <Button fx:id="deleteButton"
                 text="Delete"
                 onAction="#deleteButtonOnAction"
-                styleClass="danger-button"/>
+                styleClass=".button"/>
     </HBox>
 
 </VBox>
