@@ -1,3 +1,43 @@
+/*CSS Basics summarised here
+https://javabeginners.de/Frameworks/JavaFX/Layout/JavaFX_mit_Stylesheets.php
+
+CSS - Cascading Style Sheets (CSS)
+
+Selector-1 [,[selector-2 ], ...]{
+    Property-1: Value-1;
+    ---
+    Property-n: Value-n [;]
+}
+
+Possible selectors are type-selector, a CSS-class, or an ID or combinations of these
+
+Example for type-selector (?)
+Label {
+    -fx-background-color: #f31100;
+}
+
+Example for CSS-class aka style class (?)
+.styleclass{
+...
+}
+.grid-pane {
+    -fx-alignment: center;
+    -fx-grid-lines-visible: true;
+    -fx-hgap: 15;
+    -fx-vgap: 15;
+}
+
+Example for ID (?)
+#rechts-unten {
+    -fx-font-family:'serif';
+    -fx-font-size:30;
+}
+
+
+*/
+
+
+
 /* Base */
 .root {
     -fx-background-color: #05317f;
@@ -17,7 +57,7 @@
 -fx-font-size: 12px;
 }
 
-/* Table */
+/* TableView fx:id = "table" */
 .table-view {
     -fx-background-color: #c3cee0;
     -fx-border-color: transparent;
@@ -48,7 +88,7 @@
     -fx-background-radius: 6 6 0 0;
 }
 
-/* Rows / body */
+/* Rows */
 .table-view .virtual-flow {
     -fx-background-radius: 0 0 6 6; /* round bottom corners */
 }
@@ -59,15 +99,8 @@
 }
 
 .table-row-cell:selected {
-    -fx-background-color: #1F3F73;
-}
-
-
-table-style{
-    -fx-background-color: #fefefe;
-    -fx-border-color: #05317f;
-    -fx-font-size: 12px;
-    -fx-background-radius: 6 6 6 6;
+    -fx-background-color: red;
+    -fx-text-fill: white;
 }
 
 .table-row-cell:odd {
@@ -78,13 +111,24 @@ table-style{
     -fx-background-color: #fefefe;
 
 }
-.table-view .table-cell {
-    -fx-text-fill: #05317f;
-}
 
 .table-row-cell:last-child {
-    -fx-background-radius: 0 0 6 6; /* bottom-left and bottom-right */
+     -fx-background-radius: 0 0 6 6; /* bottom-left and bottom-right */
+ }
+
+table-style{
+    -fx-background-color: #fefefe;
+    -fx-border-color: #05317f;
+    -fx-font-size: 12px;
+    -fx-background-radius: 6 6 6 6;
 }
+
+.table-view .table-cell {
+    -fx-text-fill: #05317f;
+    -fx-background-color: transparent;
+}
+
+
 
 /* Buttons */
 .button {
