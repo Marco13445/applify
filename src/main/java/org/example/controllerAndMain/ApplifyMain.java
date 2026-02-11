@@ -33,6 +33,7 @@ public class ApplifyMain extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/applifyViewerStylish.fxml"));
+        //fxmlLoader.load() loads the scene graph defined in the fxml.file of which the parent node is a 'VBox'
         Scene scene = new Scene(fxmlLoader.load(), 943, 900);
         primaryStage.setTitle("Applify Dashboard");
         primaryStage.setScene(scene);

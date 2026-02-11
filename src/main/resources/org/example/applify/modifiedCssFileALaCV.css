@@ -4,9 +4,9 @@ https://javabeginners.de/Frameworks/JavaFX/Layout/JavaFX_mit_Stylesheets.php
 CSS - Cascading Style Sheets (CSS)
 
 Selector-1 [,[selector-2 ], ...]{
-    Property-1: Value-1;
+    -fx-Property-1: Value-1;
     ---
-    Property-n: Value-n [;]
+    -fx-Property-n: Value-n [;]
 }
 
 Possible selectors are type-selector, a CSS-class, or an ID or combinations of these
@@ -16,7 +16,7 @@ Label {
     -fx-background-color: #f31100;
 }
 
-Example for CSS-class aka style class (?)
+Example for CSS-class aka style class, it is accessed with a dot before
 .styleclass{
 ...
 }
@@ -33,25 +33,32 @@ Example for ID (?)
     -fx-font-size:30;
 }
 
+The properties from CSS get an '-fx-' at the beginning because it is a stylesheet for JavaFX scene graphs
+
+Pseudoclasses are state-dependent styles defined by a column before its name and after the styleClass.
+
+
 
 */
 
 
 
-/* Base */
+/*design the definition of the root node which is a VBox*/
 .root {
-    -fx-background-color: #05317f;
-    -fx-font-family: "Verdana", "Inter", sans-serif;
+    -fx-background-color: #05317f; /*Background colour of the whole scene, dark blue*/
+    -fx-font-family: "Verdana" /*Font fot the whole scene*/
+    /*-fx-base: #hexcolor; Eventually a base colour for all controls will be defined*/
 }
 
 /* Titles */
+/*Design of the main title in the primary stage*/
 .title-label {
 -fx-text-fill:  fefefe;
 -fx-font-size: 40px;
 -fx-font-weight: 900;
 }
 
-/* text */
+/* style of the text */
 .text-style{
 -fx-text-fill: fefefe;
 -fx-font-size: 12px;
@@ -116,7 +123,7 @@ Example for ID (?)
      -fx-background-radius: 0 0 6 6; /* bottom-left and bottom-right */
  }
 
-table-style{
+.table-style{
     -fx-background-color: #fefefe;
     -fx-border-color: #05317f;
     -fx-font-size: 12px;
