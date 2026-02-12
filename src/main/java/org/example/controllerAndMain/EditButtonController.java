@@ -7,14 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.JobApplication;
 import model.Status;
-import org.w3c.dom.Text;
-
-import java.util.Arrays;
 
 import static model.JobApplication.convertStatusToString;
-import static org.example.controllerAndMain.ApplifyController.selectedJobApplication;
+import static org.example.controllerAndMain.ControllerAppliedJobs.selectedJobApplication;
 
 public class EditButtonController {
 

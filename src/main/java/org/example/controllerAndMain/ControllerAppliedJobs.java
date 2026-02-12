@@ -16,12 +16,9 @@ import model.Status;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
-
-import static model.JobApplication.convertStatusToString;
 
 
-public class ApplifyController {
+public class ControllerAppliedJobs {
 
     //Field
     ArrayList<JobApplication> applicationList;
@@ -36,21 +33,21 @@ public class ApplifyController {
     private Button searchButton;
 
     @FXML
-    private TableView <JobApplication> table = new TableView<>();
+    private TableView <JobApplication> tableAppliedJobs = new TableView<>();
 
     @FXML
-    private TableColumn <JobApplication, Integer> table_id;
+    private TableColumn <JobApplication, Integer> column1;
 
     @FXML
-    private TableColumn <JobApplication, String> table_Posting_Name;
+    private TableColumn <JobApplication, String> column2;
     @FXML
-    private TableColumn <JobApplication, String> table_Company_Name;
+    private TableColumn <JobApplication, String> column3;
     @FXML
-    private TableColumn <JobApplication, String> table_Posting_Link;
+    private TableColumn <JobApplication, String> column4;
     @FXML
-    private TableColumn <JobApplication, LocalDate> table_Application_Date;
+    private TableColumn <JobApplication, LocalDate> column5;
     @FXML
-    private TableColumn <JobApplication, Status> table_Application_Status;
+    private TableColumn <JobApplication, Status> column6;
 
     @FXML
     private Button addButton;
@@ -83,18 +80,18 @@ public class ApplifyController {
 
 
         //connect id_column with field id
-        table_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        table_Posting_Name.setCellValueFactory(new PropertyValueFactory<>("postingName"));
-        table_Company_Name.setCellValueFactory(new PropertyValueFactory<>("company"));
-        table_Posting_Link.setCellValueFactory(new PropertyValueFactory<>("postingLink"));
-        table_Application_Date.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
-        table_Application_Status.setCellValueFactory(new PropertyValueFactory<>("applicationStatus"));
+        column1.setCellValueFactory(new PropertyValueFactory<>("id"));
+        column2.setCellValueFactory(new PropertyValueFactory<>("postingName"));
+        column3.setCellValueFactory(new PropertyValueFactory<>("company"));
+        column4.setCellValueFactory(new PropertyValueFactory<>("postingLink"));
+        column5.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
+        column6.setCellValueFactory(new PropertyValueFactory<>("applicationStatus"));
 
         //Fill list with data from search list this time, not from application list
         ObservableList<JobApplication> observableList = FXCollections.observableList(searchList);
 
         //view in table
-        table.setItems(observableList);
+        tableAppliedJobs.setItems(observableList);
 
 
     }
@@ -118,7 +115,7 @@ public class ApplifyController {
 
     public void editButtonOnAction(ActionEvent event) throws IOException{
         //JobApplication should be selected before new stage opens
-        selectedJobApplication = table.getSelectionModel().getSelectedItem();
+        selectedJobApplication = tableAppliedJobs.getSelectionModel().getSelectedItem();
 
         FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/editButtonViewer.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -137,18 +134,19 @@ public class ApplifyController {
         }
     }
     public void deleteButtonOnAction(ActionEvent event){
-        selectedJobApplication = table.getSelectionModel().getSelectedItem();
+        selectedJobApplication = tableAppliedJobs.getSelectionModel().getSelectedItem();
         ApplifyMain.getService().removeJobApplication(selectedJobApplication);
         refreshTableView();
     }
     public void initialize(){
         //initialise criteria dropdowns
-        criteriaDropDown.setValue("No criterion has currently been selected. ");
+    /**    criteriaDropDown.setValue("No criterion has currently been selected. ");
         criteriaDropDown.getItems().add("No criterion has currently been selected. ");
         criteriaDropDown.getItems().add("Show all applications that have a current invitation");
         criteriaDropDown.getItems().add("Show all applications from the last three weeks");
 
-        refreshTableView();
+    */    refreshTableView();
+        System.out.println("Test");
     }
 
     private void refreshTableView() {
@@ -157,20 +155,20 @@ public class ApplifyController {
         applicationList = (ArrayList<JobApplication>) ApplifyMain.getService().getApplicationList();
 
         //connect id_column with field id
-        table_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        table_Posting_Name.setCellValueFactory(new PropertyValueFactory<>("postingName"));
-        table_Company_Name.setCellValueFactory(new PropertyValueFactory<>("company"));
-        table_Posting_Link.setCellValueFactory(new PropertyValueFactory<>("postingLink"));
-        table_Application_Date.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
-        table_Application_Status.setCellValueFactory(new PropertyValueFactory<>("applicationStatus"));
+        column1.setCellValueFactory(new PropertyValueFactory<>("id"));
+        column2.setCellValueFactory(new PropertyValueFactory<>("postingName"));
+        column3.setCellValueFactory(new PropertyValueFactory<>("company"));
+        column4.setCellValueFactory(new PropertyValueFactory<>("postingLink"));
+        column5.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
+        column6.setCellValueFactory(new PropertyValueFactory<>("applicationStatus"));
 
         //Fill list with data
         ObservableList<JobApplication> observableList = FXCollections.observableList(applicationList);
 
         //view in table
-        table.setItems(observableList);
+        tableAppliedJobs.setItems(observableList);
 
-        criteriaDropDown.setValue("No criterion has currently been selected. ");
+      //  criteriaDropDown.setValue("No criterion has currently been selected. ");
     }
 
 
