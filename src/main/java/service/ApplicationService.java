@@ -75,16 +75,19 @@ public class ApplicationService {
 
 
     public void updateJobApplication(JobApplication jobApplication, String newPostingName, String newCompanyName,
-                                     String newPostingLink, String newApplicationStatus) {
+                                     String newPostingLink, String newApplicationStatus,
+                                     LocalDate newNextInterviewDate, String newNextInterviewLink, String newNextInterviewPlace,
+                                     String newContactPersonFullName, String newNotes) {
         //copy current database entries into list
         readJobApplicationsFromDatabase();
 
         //Check if jobApplication already in database / list
         for (var a : applicationList) {
-            //  if(a.getPostingName().equals(jobApplication.getPostingName()) && a.getCompany().equals(jobApplication.getCompany())){
             if (a.getId() == jobApplication.getId()) {
                 //For Java-FX
-                databaseHandler.updateDatabase(jobApplication, newPostingName, newCompanyName, newPostingLink, newApplicationStatus);
+                databaseHandler.updateDatabase(jobApplication, newPostingName, newCompanyName, newPostingLink, newApplicationStatus,
+                        newNextInterviewDate, newNextInterviewLink, newNextInterviewPlace,
+                        newContactPersonFullName, newNotes);
                 applicationList.clear();
                 return;
             }

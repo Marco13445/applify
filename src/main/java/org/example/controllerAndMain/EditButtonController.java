@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Status;
 
+import java.time.LocalDate;
+
 import static model.JobApplication.convertStatusToString;
 import static org.example.controllerAndMain.ControllerAppliedJobs.selectedJobApplication;
 
@@ -32,10 +34,17 @@ public class EditButtonController {
     @FXML
     ChoiceBox<String> applicationStatusChoiceBox;
 
-    public static String newPostingName;
-    public static String newCompanyName;
-    public static String newPostingLink;
-    public static String applicationStatus;
+    private static String newPostingName;
+    private static String newCompanyName;
+    private static String newPostingLink;
+    private static String applicationStatus;
+    private static LocalDate newNextInterviewDate;
+    private static String newNextInterviewLink;
+    private static String newNextInterviewPlace;
+    private static String newContactPersonFullName;
+    private static String newNotes;
+
+
 
     public void initialize(){
         for( Status a : Status.values()) {
@@ -43,17 +52,27 @@ public class EditButtonController {
         }
         applicationStatusChoiceBox.setValue(convertStatusToString(selectedJobApplication.getApplicationStatus()));
     }
-
+    /**
+     * stage for editbutton needs to be enhanced by new fields
+     */
     public void okButtonOnAction (ActionEvent e){
 
         newPostingName = newPostingNameField.getText();
         newCompanyName = newCompanyNameField.getText();
         newPostingLink = newPostingLinkField.getText();
         applicationStatus = applicationStatusChoiceBox.getValue();
+        newNextInterviewDate = null;
+        newNextInterviewLink = "";
+        newNextInterviewPlace = "";
+        newContactPersonFullName = "";
+        newNotes ="";
+
 
         //Execution through method
         ApplifyMain.getService().updateJobApplication(selectedJobApplication, newPostingName,
-                newCompanyName, newPostingLink, applicationStatus);
+                newCompanyName, newPostingLink, applicationStatus,
+                newNextInterviewDate, newNextInterviewLink, newNextInterviewPlace,
+                newContactPersonFullName, newNotes);
 
         //close secondary stage so that to turn back to primary stage
         //Here: to interrupt operation of making entries
