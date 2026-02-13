@@ -48,6 +48,16 @@ public class ControllerAppliedJobs {
     private TableColumn <JobApplication, LocalDate> column5;
     @FXML
     private TableColumn <JobApplication, Status> column6;
+    @FXML
+    private TableColumn <JobApplication, Status> column7;
+    @FXML
+    private TableColumn <JobApplication, Status> column8;
+    @FXML
+    private TableColumn <JobApplication, Status> column9;
+    @FXML
+    private TableColumn <JobApplication, Status> column10;
+    @FXML
+    private TableColumn <JobApplication, Status> column11;
 
     @FXML
     private Button addButton;
@@ -161,6 +171,11 @@ public class ControllerAppliedJobs {
         column4.setCellValueFactory(new PropertyValueFactory<>("postingLink"));
         column5.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
         column6.setCellValueFactory(new PropertyValueFactory<>("applicationStatus"));
+        column7.setCellValueFactory(new PropertyValueFactory<>("nextInterviewDate"));
+        column8.setCellValueFactory(new PropertyValueFactory<>("nextInterviewLink"));
+        column9.setCellValueFactory(new PropertyValueFactory<>("nextInterviewPlace"));
+        column10.setCellValueFactory(new PropertyValueFactory<>("contactPersonFullName"));
+        column11.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
         //Fill list with data
         ObservableList<JobApplication> observableList = FXCollections.observableList(applicationList);

@@ -166,7 +166,8 @@
                   <TableColumn fx:id="column7" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
                   <TableColumn fx:id="column8" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
                   <TableColumn fx:id="column9" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
-                  <TableColumn fx:id="column10" prefWidth="35.2000732421875" style="-fx-background-color: #02030A;" text="C1" />
+                 <TableColumn fx:id="column10" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
+                  <TableColumn fx:id="column11" prefWidth="35.0" style="-fx-background-color: #02030A;" text="C1" />
               </columns>
             </TableView>
             <HBox prefHeight="68.0" prefWidth="918.0" style="-fx-background-color: #02030A;">
