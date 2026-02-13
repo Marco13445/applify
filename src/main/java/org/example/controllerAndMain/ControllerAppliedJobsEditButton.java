@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Status;
@@ -12,9 +13,9 @@ import model.Status;
 import java.time.LocalDate;
 
 import static model.JobApplication.convertStatusToString;
-import static org.example.controllerAndMain.ControllerAppliedJobs.selectedJobApplication;
+import static org.example.controllerAndMain.ControllerAppliedJobsMainStage.selectedJobApplication;
 
-public class EditButtonController {
+public class ControllerAppliedJobsEditButton {
 
     @FXML
     Button okButton;
@@ -34,6 +35,21 @@ public class EditButtonController {
     @FXML
     ChoiceBox<String> applicationStatusChoiceBox;
 
+    @FXML
+    DatePicker newNextInterviewDatePicker;
+
+    @FXML
+    TextField newNextInterviewLinkField;
+
+    @FXML
+    TextField newNextInterviewPlaceField;
+
+    @FXML
+    TextField newContactPersonField;
+
+    @FXML
+    TextField newNotesField;
+
     private static String newPostingName;
     private static String newCompanyName;
     private static String newPostingLink;
@@ -47,10 +63,18 @@ public class EditButtonController {
 
 
     public void initialize(){
+
+
         for( Status a : Status.values()) {
             applicationStatusChoiceBox.getItems().add(convertStatusToString(a));
         }
-        applicationStatusChoiceBox.setValue(convertStatusToString(selectedJobApplication.getApplicationStatus()));
+
+        try {
+            applicationStatusChoiceBox.setValue(convertStatusToString(selectedJobApplication.getApplicationStatus()));
+        }
+        catch(NullPointerException e){
+            //System.out.println("Select a job application before pressing the 'edit'-button. ");
+        }
     }
     /**
      * stage for editbutton needs to be enhanced by new fields
@@ -61,11 +85,11 @@ public class EditButtonController {
         newCompanyName = newCompanyNameField.getText();
         newPostingLink = newPostingLinkField.getText();
         applicationStatus = applicationStatusChoiceBox.getValue();
-        newNextInterviewDate = null;
-        newNextInterviewLink = "";
-        newNextInterviewPlace = "";
-        newContactPersonFullName = "";
-        newNotes ="";
+        newNextInterviewDate = newNextInterviewDatePicker.getValue();
+        newNextInterviewLink = newNextInterviewLinkField.getText();
+        newNextInterviewPlace = newNextInterviewPlaceField.getText();
+        newContactPersonFullName = newContactPersonField.getText();
+        newNotes = newNotesField.getText();
 
 
         //Execution through method
@@ -76,12 +100,14 @@ public class EditButtonController {
 
         //close secondary stage so that to turn back to primary stage
         //Here: to interrupt operation of making entries
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        stage.close();
+        closeStage(e);
     }
     public void exitButtonOnAction (ActionEvent e){
         //close secondary stage so that to turn back to primary stage
         //Here: to interrupt operation of making entries
+        closeStage(e);
+    }
+    private void closeStage(ActionEvent e){
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         stage.close();
     }

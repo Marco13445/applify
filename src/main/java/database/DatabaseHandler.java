@@ -181,11 +181,11 @@ public class DatabaseHandler {
                 " company = ?," + //?-tag has to use the NEW company
                 " postingLink = ?, " +
                 " applicationDate = ?," +
-                " applicationStatus = ? " +
-                " nextInterviewDate = ? " +
-                " nextInterviewLink = ? " +
-                " nextInterviewPlace = ? " +
-                " contactPersonFullName = ? " +
+                " applicationStatus = ?, " +
+                " nextInterviewDate = ?, " +
+                " nextInterviewLink = ?, " +
+                " nextInterviewPlace = ?, " +
+                " contactPersonFullName = ?, " +
                 " notes = ? " +
                 " WHERE id = ? "; //here, the ?-tag has to use the selected ID
 
@@ -208,7 +208,8 @@ public class DatabaseHandler {
 
             //new attributes
             //to understand
-            statement.setDate(6, Date.valueOf(nextInterviewDate));
+            statement.setDate(6, new java.sql.Date(Date.from(jobApplication.getNextInterviewDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
+
             statement.setString(7, nextInterviewLink);
             statement.setString(8, nextInterviewPlace);
             statement.setString(9, contactPersonFullName);
