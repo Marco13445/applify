@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="800.0" prefWidth="1000.0" spacing="20.0" xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllerAndMain.ControllerAppliedJobs">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+        <children>
+            <Label fx:id="filterLabel" text="Filter"/>
+            <ChoiceBox fx:id="criteriaDropDown" onAction="#criteriaDropDownOnAction" prefWidth="150.0"/>
+            <Button fx:id="searchButton" alignment="CENTER_RIGHT" mnemonicParsing="false"
+                    onAction="#searchButtonOnAction" text="Search"/>
+        </children>
+    </HBox>
+    <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
+        <columns>
+            <TableColumn fx:id="table_id" prefWidth="75.0" text="id"/>
+            <TableColumn fx:id="table_Posting_Name" prefWidth="184.00001525878906" text="Posting Name"/>
+            <TableColumn fx:id="table_Company_Name" prefWidth="163.20001220703125" text="Company Name"/>
+            <TableColumn fx:id="table_Posting_Link" prefWidth="136.800048828125" text="Posting Link"/>
+            <TableColumn fx:id="table_Application_Date" prefWidth="212.7999267578125" text="Application Date"/>
+            <TableColumn fx:id="table_Application_Status" minWidth="0.0" prefWidth="149.5999755859375"
+                         text="Application Status"/>
+        </columns>
+    </TableView>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+        <children>
+            <Button fx:id="addButton" alignment="CENTER" mnemonicParsing="false" onAction="#addButtonOnAction"
+                    text="Add"/>
+            <Button fx:id="editButton" alignment="CENTER" mnemonicParsing="false" onAction="#editButtonOnAction"
+                    text="Edit"/>
+            <Button fx:id="deleteButton" alignment="BOTTOM_RIGHT" onAction="#deleteButtonOnAction" text="Delete"/>
+        </children>
+    </HBox>
+
+</VBox>
