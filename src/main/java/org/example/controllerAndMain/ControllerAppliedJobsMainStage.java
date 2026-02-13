@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class ControllerAppliedJobs {
+public class ControllerAppliedJobsMainStage {
 
     //Field
     ArrayList<JobApplication> applicationList;
@@ -127,7 +127,7 @@ public class ControllerAppliedJobs {
         //JobApplication should be selected before new stage opens
         selectedJobApplication = tableAppliedJobs.getSelectionModel().getSelectedItem();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/editButtonViewer.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/fxml_files/20260211_modernStyle/viewerAppliedJobsEditButton.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage secondaryStage = new Stage();
         secondaryStage.setTitle("Add information about applied Job to be edited");
@@ -156,7 +156,6 @@ public class ControllerAppliedJobs {
         criteriaDropDown.getItems().add("Show all applications from the last three weeks");
 
     */    refreshTableView();
-        System.out.println("Test");
     }
 
     private void refreshTableView() {
