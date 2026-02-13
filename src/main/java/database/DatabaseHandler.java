@@ -23,15 +23,10 @@ public class DatabaseHandler {
 
     //fields
     //database specific connection data
-    String url = "jdbc:mysql://localhost:3306/joblify-dashboard";
+    String url = "jdbc:mysql://localhost:3306/applify";
     String user = "root";
     String password = "4444";
 
-    //default constructor
-    public DatabaseHandler() {
-    }
-
-    ;
 
     /**
      * This method reads the current entries in the database and returns them in a List<JobApplication>
@@ -63,6 +58,13 @@ public class DatabaseHandler {
             LocalDate applicationDate = null;
             Status applicationStatus = null;
 
+            //new attributes for new columns / new fields
+            LocalDate nextInterviewDate = null;
+            String nextInterviewLink = "";
+            String nextInterviewPlace = "";
+            String contactPersonFullName = "";
+            String notes = "";
+
             //reading row per row of database to copy them into just declared attributes
             while (rs.next()) {
                 id = rs.getInt("id");
@@ -72,8 +74,16 @@ public class DatabaseHandler {
                 applicationDate = rs.getDate("applicationDate").toLocalDate();
                 applicationStatus = convertStringToStatus(rs.getString("applicationStatus"));
 
+                //new fields/attributes
+                nextInterviewDate = rs.getDate("nextInterviewDate").toLocalDate();
+                nextInterviewLink = rs.getString("nextInterviewLink");
+                nextInterviewPlace = rs.getString("nextInterviewPlace");
+                contactPersonFullName = rs.getString("contactPersonFullName");
+                notes = rs.getString("notes");
+
                 // Create an instance of JobApplication and add it to the list to be returned by this method
-                appliedJobsList.add(new JobApplication(id, postingName, company, postingLink, applicationDate, applicationStatus));
+                appliedJobsList.add(new JobApplication(id, postingName, company, postingLink, applicationDate, applicationStatus,
+                        nextInterviewDate, nextInterviewLink, nextInterviewPlace, contactPersonFullName, notes));
             }
 
         } catch (SQLException e) {
