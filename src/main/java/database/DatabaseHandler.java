@@ -99,8 +99,9 @@ public class DatabaseHandler {
     public void insertIntoDatabase(JobApplication jobApplication) {
 
         //sql connection
-        String sqlInsertCommand = "INSERT INTO appliedjobslist( postingName, company, postingLink, applicationDate, applicationStatus)" +
-                "VALUES (?,?,?,?,?)";
+        String sqlInsertCommand = "INSERT INTO appliedjobslist ( postingName, company, postingLink, applicationDate, applicationStatus, " +
+                "nextInterviewDate, nextInterviewLink, nextInterviewPlace, contactPersonFullName, notes)\n" +
+                "VALUES(?,?,?,?,?,?,?,?,?,?)";
 
         //create connection to Database
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
@@ -113,6 +114,12 @@ public class DatabaseHandler {
             statement.setString(3, jobApplication.getPostingLink());
             statement.setDate(4, new java.sql.Date(Date.from(jobApplication.getApplicationDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
             statement.setString(5, convertStatusToString(jobApplication.getApplicationStatus()));
+            //new attributes
+            statement.setDate(6, new java.sql.Date(Date.from(jobApplication.getNextInterviewDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
+            statement.setString(7, jobApplication.getNextInterviewLink());
+            statement.setString(8, jobApplication.getNextInterviewPlace());
+            statement.setString(9, jobApplication.getContactPersonFullName());
+            statement.setString(10, jobApplication.getNotes());
 
             //Execute statement, which is an 'Insert'-Statement
             statement.executeUpdate();
@@ -154,8 +161,19 @@ public class DatabaseHandler {
                 jobApplication.getCompany() + " has been removed from database. ");
     }
 
+    //We have to make sure that when no entry is made while editing an application
+    //the former value remains. Otherwise, the new value (which was entered by the user) is used.
+    //THese declarations are for the two methdos 'updateDatabase()' and 'antiNullUpdate()'
+    String postingName, companyName, postingLink, applicationStatus;
+    LocalDate nextInterviewDate;
+    String nextInterviewLink, nextInterviewPlace, contactPersonFullName, notes;
+
+
     public void updateDatabase(JobApplication jobApplication, String newPostingName, String newCompanyName,
-                               String newPostingLink, String newApplicationStatus) {
+                               String newPostingLink, String newApplicationStatus,
+                               LocalDate newNextInterviewDate, String newNextInterviewLink, String newNextInterviewPlace,
+                               String newContactPersonFullName, String newNotes)
+    {
 
         //sql command for update
         String sqlUpdateCommand = "UPDATE  appliedJobsList " +
@@ -164,11 +182,60 @@ public class DatabaseHandler {
                 " postingLink = ?, " +
                 " applicationDate = ?," +
                 " applicationStatus = ? " +
+                " nextInterviewDate = ? " +
+                " nextInterviewLink = ? " +
+                " nextInterviewPlace = ? " +
+                " contactPersonFullName = ? " +
+                " notes = ? " +
                 " WHERE id = ? "; //here, the ?-tag has to use the selected ID
 
-        //We have to make sure that when no entry is made while editing an application
-        //the former value remains. Otherwise, the new value (which was entered by the user) is used.
-        String postingName, companyName, postingLink, applicationStatus;
+        antiNullUpdate(jobApplication,  newPostingName,  newCompanyName,
+                     newPostingLink,  newApplicationStatus,
+                     newNextInterviewDate,  newNextInterviewLink,  newNextInterviewPlace,
+                     newContactPersonFullName,  newNotes);
+
+        //create connection
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            PreparedStatement statement = connection.prepareStatement(sqlUpdateCommand);
+
+            //substitute ?-tags with attributes of the parameter jobApplication
+            statement.setString(1, postingName);
+            statement.setString(2, companyName);
+            statement.setString(3, postingLink);
+            // to understand
+            statement.setDate(4, new java.sql.Date(Date.from(jobApplication.getApplicationDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
+            statement.setString(5, applicationStatus);
+
+            //new attributes
+            //to understand
+            statement.setDate(6, Date.valueOf(nextInterviewDate));
+            statement.setString(7, nextInterviewLink);
+            statement.setString(8, nextInterviewPlace);
+            statement.setString(9, contactPersonFullName);
+            statement.setString(10, notes);
+            //getId()
+            statement.setInt(11, jobApplication.getId());
+
+            //Execute statement, which is a 'Delete'-statement
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Connection to Database has not been successful. ");
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            System.out.println("An exception other than an SQL-Exception has occured. ");
+        }
+        System.out.println("Job application with posting name " + jobApplication.getPostingName() + " from company " +
+                jobApplication.getCompany() + " has been updated in database with new posting name "+ newPostingName +
+                " and new company name "+ newCompanyName + ". ");
+    }
+
+    //outsourced method used in 'updateDatabase()'
+    private void antiNullUpdate(JobApplication jobApplication,String newPostingName, String newCompanyName,
+                                String newPostingLink, String newApplicationStatus,
+                                LocalDate newNextInterviewDate, String newNextInterviewLink, String newNextInterviewPlace,
+                                String newContactPersonFullName, String newNotes) {
+
 
         if(newPostingName.equals("")){
             postingName = jobApplication.getPostingName();
@@ -190,31 +257,26 @@ public class DatabaseHandler {
         }else{
             applicationStatus = newApplicationStatus;
         }
-
-        //create connection
-        try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            PreparedStatement statement = connection.prepareStatement(sqlUpdateCommand);
-
-            //substitute ?-tags with attributes of the parameter jobApplication
-            statement.setString(1, postingName);
-            statement.setString(2, companyName);
-            statement.setString(3, postingLink);
-            // to understand
-            statement.setDate(4, new java.sql.Date(Date.from(jobApplication.getApplicationDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
-            statement.setString(5, applicationStatus);
-            statement.setInt(6, jobApplication.getId());
-
-            //Execute statement, which is a 'Delete'-statement
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Connection to Database has not been successful. ");
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-            System.out.println("An exception other than an SQL-Exception has occured. ");
+        if(newNextInterviewLink.equals("")){
+            nextInterviewLink = jobApplication.getNextInterviewLink();
+        }else{
+            nextInterviewLink = newNextInterviewLink;
         }
-        System.out.println("Job application with posting name " + jobApplication.getPostingName() + " from company " +
-                jobApplication.getCompany() + " has been updated in database with new posting name "+ newPostingName +
-                " and new company name "+ newCompanyName + ". ");
+        if(newNextInterviewPlace.equals("")){
+            nextInterviewPlace = jobApplication.getNextInterviewPlace();
+        }else{
+            nextInterviewPlace = newNextInterviewPlace;
+        }
+        if(newContactPersonFullName.equals("")){
+            contactPersonFullName= jobApplication.getContactPersonFullName();
+        }else{
+            contactPersonFullName = newContactPersonFullName;
+        }
+        if(newNotes.equals("")){
+            notes = jobApplication.getNotes();
+        }else{
+            notes = newNotes;
+        }
+
     }
 }

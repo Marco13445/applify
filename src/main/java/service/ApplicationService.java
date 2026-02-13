@@ -37,7 +37,7 @@ public class ApplicationService {
         //Check if the jobApplication to add is already in the list / database
         for (var a : applicationList) {
             //If the job application is already in the list/database --> return error
-            if (a.getPostingName().equals(jobApplication.getPostingName()) && a.getCompany().equals(jobApplication.getCompany())) {
+            if (a.getId() == jobApplication.getId()) {
                 //For Java-FX
                 System.out.println("This job application is already in the database. It can not be added to the database.");
                 applicationList.clear();
