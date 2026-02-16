@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.JobApplication;
-import model.Status;
+import model.JobApplication.Status;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -47,17 +47,17 @@ public class ControllerAppliedJobsMainStage {
     @FXML
     private TableColumn <JobApplication, LocalDate> column5;
     @FXML
-    private TableColumn <JobApplication, Status> column6;
+    private TableColumn <JobApplication, JobApplication.Status> column6;
     @FXML
-    private TableColumn <JobApplication, Status> column7;
+    private TableColumn <JobApplication, JobApplication.Status> column7;
     @FXML
-    private TableColumn <JobApplication, Status> column8;
+    private TableColumn <JobApplication, JobApplication.Status> column8;
     @FXML
-    private TableColumn <JobApplication, Status> column9;
+    private TableColumn <JobApplication, JobApplication.Status> column9;
     @FXML
-    private TableColumn <JobApplication, Status> column10;
+    private TableColumn <JobApplication, JobApplication.Status> column10;
     @FXML
-    private TableColumn <JobApplication, Status> column11;
+    private TableColumn <JobApplication, JobApplication.Status> column11;
 
     @FXML
     private Button addButton;

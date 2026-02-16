@@ -8,7 +8,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.JobApplication;
-import model.Status;
 import service.ApplicationService;
 
 import java.io.IOException;

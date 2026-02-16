@@ -1,7 +1,5 @@
 package model;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 
 import java.time.LocalDate;
 
@@ -12,6 +10,22 @@ import java.time.LocalDate;
  *
  */
 public class JobApplication {
+
+    /**
+     * This enum class defines five states (Status) of an application. It is relevant for the property 'applicationStatus'
+     * of the class 'jobApplication'.
+     *
+     * As it is a tiny class, experts recommend me to integrate in the large class 'JobApplication'. The model becomes more
+     * compact then.
+     */
+
+    public enum Status {
+        WaitingForReply,
+        Invitation,
+        Rejected,
+        Offer,
+        Withdrawn
+    }
 
     //fields
     private int id =-1;

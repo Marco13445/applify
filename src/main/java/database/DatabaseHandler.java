@@ -1,7 +1,7 @@
 package database;
 
 import model.JobApplication;
-import model.Status;
+//import model.Status;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -56,7 +56,7 @@ public class DatabaseHandler {
             String company = "";
             String postingLink = "";
             LocalDate applicationDate = null;
-            Status applicationStatus = null;
+            JobApplication.Status applicationStatus = null;
 
             //new attributes for new columns / new fields
             LocalDate nextInterviewDate = null;
@@ -99,7 +99,7 @@ public class DatabaseHandler {
     public void insertIntoDatabase(JobApplication jobApplication) {
 
         //sql connection
-        String sqlInsertCommand = "INSERT INTO appliedjobslist ( postingName, company, postingLink, applicationDate, applicationStatus, " +
+        String sqlInsertCommand = "INSERT INTO appliedjobslist (postingName, company, postingLink, applicationDate, applicationStatus, " +
                 "nextInterviewDate, nextInterviewLink, nextInterviewPlace, contactPersonFullName, notes)\n" +
                 "VALUES(?,?,?,?,?,?,?,?,?,?)";
 

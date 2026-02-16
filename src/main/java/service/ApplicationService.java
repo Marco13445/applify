@@ -2,7 +2,6 @@ package service;
 
 import database.DatabaseHandler;
 import model.JobApplication;
-import model.Status;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -108,7 +107,7 @@ public class ApplicationService {
 
             case 1: //show all applications with a current invitation
                 for (JobApplication application : applicationList) {
-                    if (application.getApplicationStatus().equals(Status.Invitation))
+                    if (application.getApplicationStatus().equals(JobApplication.Status.Invitation))
                         searchList.add(application);
                 }
                 break;

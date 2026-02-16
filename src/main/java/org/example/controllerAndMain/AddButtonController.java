@@ -9,7 +9,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.JobApplication;
-import model.Status;
+//import model.Status;
 
 import java.time.LocalDate;
 
@@ -54,7 +54,7 @@ public class AddButtonController {
         //Execution through method
         ApplifyMain.getService().addJobApplication(new JobApplication(-1, postingName,
                 companyName,postingLink,
-                applicationDate,Status.WaitingForReply));
+                applicationDate,JobApplication.Status.WaitingForReply));
 
         //close secondary stage so that to turn back to primary stage
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
