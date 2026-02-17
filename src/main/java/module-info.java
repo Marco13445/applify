@@ -6,6 +6,8 @@ module org.example.applify {
     requires java.sql;
     requires jdk.zipfs;
     requires java.net.http;
+    requires java.sql.rowset;
+    requires java.desktop;
     opens model to javafx.base;
     opens org.example.controllerAndMain to javafx.fxml;
     exports org.example.controllerAndMain;

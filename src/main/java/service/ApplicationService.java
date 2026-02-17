@@ -3,8 +3,11 @@ package service;
 import database.DatabaseHandler;
 import model.JobApplication;
 
+import javax.sql.rowset.Joinable;
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -97,18 +100,18 @@ public class ApplicationService {
                 "can not be updated in the database as it is not existent in the database. ");
     }
 
-    public ArrayList<JobApplication> searchJobApplication(int choice) {
-        ArrayList<JobApplication> searchList = new ArrayList<>();
+    public ArrayList<JobApplication> createFilterList(int filterCriterion) {
+        ArrayList<JobApplication> filterList = new ArrayList<>();
 
-        switch (choice) {
-            case 0:
-                searchList= (ArrayList<JobApplication>) applicationList;
+        switch (filterCriterion) {
+            case 0: //no filter, i.e. full list/applicationList
+                filterList= (ArrayList<JobApplication>) applicationList;
                 break;
 
             case 1: //show all applications with a current invitation
                 for (JobApplication application : applicationList) {
                     if (application.getApplicationStatus().equals(JobApplication.Status.Invitation))
-                        searchList.add(application);
+                        filterList.add(application);
                 }
                 break;
             case 2: //show all applications from the last 2-3 weeks
@@ -117,12 +120,46 @@ public class ApplicationService {
                     LocalDate today = LocalDate.now();
                     int numberOfweeks = 3;
                     if ( date.isAfter(today.minusWeeks(numberOfweeks)) && !date.isAfter(today)){
-                        searchList.add(application);
+                        filterList.add(application);
                     }
                 }
                 break;
         }
+        return filterList;
+    }
+
+    public ArrayList<JobApplication> createSearchList (String searchword) throws IllegalAccessException {
+        ArrayList<JobApplication> searchList = new ArrayList<>();
+
+        System.out.println("I am in the method 'createSearchList' with the searchword: "+ searchword);
+
+        if (searchword.equals("")){
+            System.out.println("There is no word to be looked for. ");
+            return null;
+        }
+
+        for (JobApplication application : applicationList) {
+            System.out.println("Iterating though applicationList. Here is the id: "+application.getId());
+            System.out.println(Arrays.toString(application.getClass().getDeclaredFields()));
+
+                for (Field field : application.getClass().getDeclaredFields()) {
+                field.setAccessible(true);
+                Object value = field.get(application);
+
+                    if (value instanceof String && ((String) value).toLowerCase().contains(searchword.toLowerCase())) {
+                        System.out.println("The field is accessed: "+ value);
+                        searchList.add(application);
+                        break;
+                    }
+
+            }
+        }
         return searchList;
+    }
+
+    public ArrayList<JobApplication> createJointList (ArrayList<JobApplication> filterList, ArrayList <JobApplication> searchList){
+     ArrayList<JobApplication> jointList = new ArrayList<>();
+     return jointList;
     }
 
     private Predicate<JobApplication> getPredicateFromChoice(int choice) {

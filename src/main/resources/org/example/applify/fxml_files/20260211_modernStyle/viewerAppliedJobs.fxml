@@ -38,6 +38,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -142,7 +143,7 @@
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <ChoiceBox fx:id="criteriaDropDown" onMouseClicked="#filter" onMousePressed="#filter" prefHeight="32.0" prefWidth="290.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-border-radius: 2em; -fx-background-radius: 5em;">
+                  <ChoiceBox fx:id="criteriaDropDown" onMouseClicked="#defineFilterNumber" onMousePressed="#defineFilterNumber" prefHeight="32.0" prefWidth="290.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-border-radius: 2em; -fx-background-radius: 5em;">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -150,18 +151,11 @@
                         <Insets left="150.0" top="25.0" />
                      </HBox.margin>
                   </ChoiceBox>
-                  <Label fx:id="btnSearch" graphicTextGap="0.0" prefHeight="32.0" prefWidth="290.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-background-radius: 5em; -fx-border-radius: 2em; -fx-text-fill: #808080;" text="search" textFill="GREY">
+                  <TextField fx:id="searchfield" onKeyTyped="#getSearchWord" prefHeight="32.0" prefWidth="290.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-border-radius: 2em; -fx-background-radius: 5em;">
                      <HBox.margin>
-                        <Insets left="150.0" top="25.0" />
+                        <Insets left="125.0" top="25.0" />
                      </HBox.margin>
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="23.0" preserveRatio="true" style="-fx-alignment: RIGHT;" translateX="248.0">
-                           <image>
-                              <Image url="@../../Icon/icons8-magnifying-glass-50.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Label>
+                  </TextField>
                </children>
             </HBox>
             <TableView fx:id="tableAppliedJobs" prefHeight="490.0" prefWidth="915.0" style="-fx-background-color: #02030A;">
