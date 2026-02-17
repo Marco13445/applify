@@ -4,14 +4,9 @@ import database.DatabaseHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.JobApplication;
 import service.ApplicationService;
-
 import java.io.IOException;
-import java.time.LocalDate;
 
 
 public class ApplifyMain extends Application {

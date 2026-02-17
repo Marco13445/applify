@@ -34,6 +34,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -43,7 +44,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="657.0" prefWidth="1140.0" style="-fx-background-color: #02030A; -fx-text-fill: #fefefe;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllerAndMain.ControllerAppliedJobsMainStage">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" style="-fx-background-color: #02030A; -fx-text-fill: #fefefe;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllerAndMain.ControllerAppliedJobsMainStage">
    <children>
       <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="222.0" style="-fx-background-color: #040921; -fx-text-fill: #fefefe;">
          <children>
@@ -54,7 +55,7 @@
                <image>
                   <Image url="@../../Profilbild/PhotographerPictureCropped.jpg" />
                </image></ImageView>
-            <Label fx:id="profilName" alignment="CENTER" style="-fx-background-color: #02030A; -fx-text-fill: #fefefe; -fx-alignment: LEFT;" text="Marco Lico" textFill="GREY">
+            <Label fx:id="profilName" alignment="CENTER" style="-fx-background-color: #02030A; -fx-text-fill: #fefefe;" text="Marco Lico" textFill="GREY">
                <VBox.margin>
                   <Insets left="65.0" top="10.0" />
                </VBox.margin></Label>
@@ -62,7 +63,7 @@
                <children>
                   <VBox prefHeight="325.0" prefWidth="218.0" style="-fx-background-color: #040921;">
                      <children>
-                        <Button fx:id="btnSavedJobs" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="224.0" style="-fx-background-color: #040921; -fx-alignment: LEFT; -fx-text-fill: #808080;" text="Saved Jobs" textFill="#fefefe">
+                        <Button fx:id="btnSavedJobs" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="224.0" style="-fx-background-color: #040921; -fx-text-fill: #808080;" text="Saved Jobs" textFill="#fefefe">
                            <VBox.margin>
                               <Insets top="10.0" />
                            </VBox.margin>
@@ -73,7 +74,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="btnAppliedJobs" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: #040921; -fx-alignment: LEFT; -fx-border-color: #fefefe; -fx-border-radius: 5em; -fx-text-fill: #fefefe;" text="Applied Jobs" textFill="#fefefe">
+                        <Button fx:id="btnAppliedJobs" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: #040921; -fx-border-color: #fefefe; -fx-border-radius: 5em; -fx-text-fill: #fefefe;" text="Applied Jobs" textFill="#fefefe">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -84,7 +85,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="btnStatistics" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: #040921; -fx-alignment: LEFT; -fx-text-fill: #808080;" text="Statistics" textFill="#fefefe">
+                        <Button fx:id="btnStatistics" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: #040921; -fx-text-fill: #808080;" text="Statistics" textFill="#fefefe">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -95,7 +96,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="btnApplicationDocuments" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" style="-fx-background-color: #040921; -fx-alignment: LEFT; -fx-text-fill: #808080;" text="Application Documents" textFill="#fefefe">
+                        <Button fx:id="btnApplicationDocuments" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="225.0" style="-fx-background-color: #040921; -fx-text-fill: #808080;" text="Application Documents" textFill="#fefefe">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -106,7 +107,7 @@
                                  </image>
                               </ImageView>
                            </graphic></Button>
-                        <Button fx:id="btnOnboardingDocuments" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="259.0" style="-fx-background-color: #040921; -fx-alignment: LEFT; -fx-text-fill: #808080;" text="Onboarding Documents" textFill="#fefefe">
+                        <Button fx:id="btnOnboardingDocuments" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="259.0" style="-fx-background-color: #040921; -fx-text-fill: #808080;" text="Onboarding Documents" textFill="#fefefe">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -126,9 +127,9 @@
             </HBox>
          </children>
       </VBox>
-      <VBox prefHeight="658.0" prefWidth="939.0" style="-fx-background-color: #02030A;">
+      <VBox prefHeight="800.0" prefWidth="1292.0" style="-fx-background-color: #02030A;">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="1159.0">
                <children>
                   <Label prefHeight="70.0" prefWidth="359.0" style="-fx-background-color: #02030A; -fx-text-fill: #fefefe;" text="Applied Jobs" textFill="#040921">
                      <font>
@@ -141,9 +142,17 @@
                         <Insets left="20.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="btnSearch" graphicTextGap="0.0" prefHeight="32.0" prefWidth="287.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-background-radius: 5em; -fx-border-radius: 2em; -fx-text-fill: #808080;" text="search" textFill="GREY">
+                  <ChoiceBox fx:id="criteriaDropDown" onMouseClicked="#filter" onMousePressed="#filter" prefHeight="32.0" prefWidth="290.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-border-radius: 2em; -fx-background-radius: 5em;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                      <HBox.margin>
-                        <Insets left="250.0" top="25.0" />
+                        <Insets left="150.0" top="25.0" />
+                     </HBox.margin>
+                  </ChoiceBox>
+                  <Label fx:id="btnSearch" graphicTextGap="0.0" prefHeight="32.0" prefWidth="290.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-background-radius: 5em; -fx-border-radius: 2em; -fx-text-fill: #808080;" text="search" textFill="GREY">
+                     <HBox.margin>
+                        <Insets left="150.0" top="25.0" />
                      </HBox.margin>
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="23.0" preserveRatio="true" style="-fx-alignment: RIGHT;" translateX="248.0">
@@ -157,7 +166,6 @@
             </HBox>
             <TableView fx:id="tableAppliedJobs" prefHeight="490.0" prefWidth="915.0" style="-fx-background-color: #02030A;">
               <columns>
-                <TableColumn fx:id="column1" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
                   <TableColumn fx:id="column2" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
                   <TableColumn fx:id="column3" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
                   <TableColumn fx:id="column4" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
@@ -168,6 +176,7 @@
                   <TableColumn fx:id="column9" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
                  <TableColumn fx:id="column10" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
                   <TableColumn fx:id="column11" prefWidth="35.0" style="-fx-background-color: #02030A;" text="C1" />
+                <TableColumn fx:id="column1" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
               </columns>
             </TableView>
             <HBox prefHeight="68.0" prefWidth="918.0" style="-fx-background-color: #02030A;">

@@ -103,6 +103,9 @@ public class DatabaseHandler {
                 "nextInterviewDate, nextInterviewLink, nextInterviewPlace, contactPersonFullName, notes)\n" +
                 "VALUES(?,?,?,?,?,?,?,?,?,?)";
 
+
+
+
         //create connection to Database
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             PreparedStatement statement = connection.prepareStatement(sqlInsertCommand);
@@ -112,10 +115,18 @@ public class DatabaseHandler {
             statement.setString(1, jobApplication.getPostingName());
             statement.setString(2, jobApplication.getCompany());
             statement.setString(3, jobApplication.getPostingLink());
-            statement.setDate(4, new java.sql.Date(Date.from(jobApplication.getApplicationDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
+            if(jobApplication.getApplicationDate() == null){
+                statement.setDate(4, Date.valueOf(LocalDate.now()));
+            }else{
+                statement.setDate(4, new java.sql.Date(Date.from(jobApplication.getApplicationDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
+            }
             statement.setString(5, convertStatusToString(jobApplication.getApplicationStatus()));
             //new attributes
-            statement.setDate(6, new java.sql.Date(Date.from(jobApplication.getNextInterviewDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
+            if(jobApplication.getNextInterviewDate() == null){
+                statement.setDate(6, Date.valueOf (LocalDate.of(1990,1,1)));
+            }else{
+                statement.setDate(6, new java.sql.Date(Date.from(jobApplication.getNextInterviewDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
+            }
             statement.setString(7, jobApplication.getNextInterviewLink());
             statement.setString(8, jobApplication.getNextInterviewPlace());
             statement.setString(9, jobApplication.getContactPersonFullName());
@@ -257,6 +268,11 @@ public class DatabaseHandler {
             applicationStatus = convertStatusToString(jobApplication.getApplicationStatus());
         }else{
             applicationStatus = newApplicationStatus;
+        }
+        if(newNextInterviewDate.equals(null)){
+            nextInterviewDate = jobApplication.getNextInterviewDate();
+        }else{
+            nextInterviewDate = newNextInterviewDate;
         }
         if(newNextInterviewLink.equals("")){
             nextInterviewLink = jobApplication.getNextInterviewLink();

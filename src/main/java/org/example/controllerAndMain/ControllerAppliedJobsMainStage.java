@@ -3,6 +3,7 @@ package org.example.controllerAndMain;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Modality;
@@ -72,22 +73,24 @@ public class ControllerAppliedJobsMainStage {
 
     private int selectedSearchCriterion;
 
-    public void criteriaDropDownOnAction(ActionEvent event){
+    @FXML
+    private void filter(Event e){
+        String selected = (String) criteriaDropDown.getSelectionModel().getSelectedItem();
 
+        if ("invitation".equals(selected)) {
+            selectedSearchCriterion = 1;
+        } else if ("last three weeks".equals(selected)) {
+            selectedSearchCriterion = 2;
+        } else {
+            selectedSearchCriterion = 0;
+        }
+        refreshTableView();
     }
-
-    public void searchButtonOnAction(ActionEvent event){
-        //define value of search criterion based on selected criterion
-                if (criteriaDropDown.getSelectionModel().getSelectedItem().equals("Show all applications that have a current invitation")){
-                    selectedSearchCriterion = 1;
-                }else if(criteriaDropDown.getSelectionModel().getSelectedItem().equals("Show all applications from the last three weeks")){
-                    selectedSearchCriterion = 2;
-                }else {
-                    selectedSearchCriterion = 0;
-                };
+    private void refreshTableView() {
+        //search without criterion
+        ApplifyMain.getService().readJobApplicationsFromDatabase();
 
         ArrayList<JobApplication> searchList = ApplifyMain.getService().searchJobApplication(selectedSearchCriterion);
-
 
         //connect id_column with field id
         column1.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -96,17 +99,22 @@ public class ControllerAppliedJobsMainStage {
         column4.setCellValueFactory(new PropertyValueFactory<>("postingLink"));
         column5.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
         column6.setCellValueFactory(new PropertyValueFactory<>("applicationStatus"));
+        column7.setCellValueFactory(new PropertyValueFactory<>("nextInterviewDate"));
+        column8.setCellValueFactory(new PropertyValueFactory<>("nextInterviewLink"));
+        column9.setCellValueFactory(new PropertyValueFactory<>("nextInterviewPlace"));
+        column10.setCellValueFactory(new PropertyValueFactory<>("contactPersonFullName"));
+        column11.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
         //Fill list with data from search list this time, not from application list
         ObservableList<JobApplication> observableList = FXCollections.observableList(searchList);
 
         //view in table
         tableAppliedJobs.setItems(observableList);
-
-
     }
+
+
     public void addButtonOnAction(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/addButtonViewer.fxml")
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/fxml_files/20260211_modernStyle/viewerAppliedJobsAddButton.fxml")
         );
         Scene scene = new Scene(fxmlLoader.load());
         Stage secondaryStage = new Stage();
@@ -149,41 +157,21 @@ public class ControllerAppliedJobsMainStage {
         refreshTableView();
     }
     public void initialize(){
+        //Fill choice box with options
+        criteriaDropDown.getItems().add("no filter");
+        criteriaDropDown.getItems().add("invitation");
+        criteriaDropDown.getItems().add("last three weeks");
         //initialise criteria dropdowns
-    /**    criteriaDropDown.setValue("No criterion has currently been selected. ");
-        criteriaDropDown.getItems().add("No criterion has currently been selected. ");
-        criteriaDropDown.getItems().add("Show all applications that have a current invitation");
-        criteriaDropDown.getItems().add("Show all applications from the last three weeks");
+        criteriaDropDown.setValue("no filter");
+        refreshTableView();
+        criteriaDropDown.setOnAction((actionEvent -> filter (actionEvent) ));
 
-    */    refreshTableView();
+
     }
 
-    private void refreshTableView() {
-        //search without criterion
-        ApplifyMain.getService().readJobApplicationsFromDatabase();
-        applicationList = (ArrayList<JobApplication>) ApplifyMain.getService().getApplicationList();
 
-        //connect id_column with field id
-        column1.setCellValueFactory(new PropertyValueFactory<>("id"));
-        column2.setCellValueFactory(new PropertyValueFactory<>("postingName"));
-        column3.setCellValueFactory(new PropertyValueFactory<>("company"));
-        column4.setCellValueFactory(new PropertyValueFactory<>("postingLink"));
-        column5.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
-        column6.setCellValueFactory(new PropertyValueFactory<>("applicationStatus"));
-        column7.setCellValueFactory(new PropertyValueFactory<>("nextInterviewDate"));
-        column8.setCellValueFactory(new PropertyValueFactory<>("nextInterviewLink"));
-        column9.setCellValueFactory(new PropertyValueFactory<>("nextInterviewPlace"));
-        column10.setCellValueFactory(new PropertyValueFactory<>("contactPersonFullName"));
-        column11.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
-        //Fill list with data
-        ObservableList<JobApplication> observableList = FXCollections.observableList(applicationList);
 
-        //view in table
-        tableAppliedJobs.setItems(observableList);
-
-      //  criteriaDropDown.setValue("No criterion has currently been selected. ");
-    }
 
 
 
