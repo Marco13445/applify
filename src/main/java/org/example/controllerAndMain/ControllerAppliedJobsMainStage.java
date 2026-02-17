@@ -148,7 +148,6 @@ public class ControllerAppliedJobsMainStage {
 
     public void getSearchWord(javafx.scene.input.KeyEvent keyEvent) {
         searchword = searchfield.getText();
-        System.out.println("sout in method 'getSearchWord(KeyEvent)'" + searchword);
         refreshTableView(filterNumber, searchword);
     }
 

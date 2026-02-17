@@ -105,7 +105,7 @@ public class ApplicationService {
 
         switch (filterCriterion) {
             case 0: //no filter, i.e. full list/applicationList
-                filterList= (ArrayList<JobApplication>) applicationList;
+                filterList = (ArrayList<JobApplication>) applicationList;
                 break;
 
             case 1: //show all applications with a current invitation
@@ -119,7 +119,7 @@ public class ApplicationService {
                     LocalDate date = application.getApplicationDate();
                     LocalDate today = LocalDate.now();
                     int numberOfweeks = 3;
-                    if ( date.isAfter(today.minusWeeks(numberOfweeks)) && !date.isAfter(today)){
+                    if (date.isAfter(today.minusWeeks(numberOfweeks)) && !date.isAfter(today)) {
                         filterList.add(application);
                     }
                 }
@@ -128,38 +128,41 @@ public class ApplicationService {
         return filterList;
     }
 
-    public ArrayList<JobApplication> createSearchList (String searchword) throws IllegalAccessException {
+    public ArrayList<JobApplication> createSearchList(String searchword) throws IllegalAccessException {
         ArrayList<JobApplication> searchList = new ArrayList<>();
-
-        System.out.println("I am in the method 'createSearchList' with the searchword: "+ searchword);
-
-        if (searchword.equals("")){
-            System.out.println("There is no word to be looked for. ");
+        if (searchword.equals("")) {
             return null;
         }
 
         for (JobApplication application : applicationList) {
-            System.out.println("Iterating though applicationList. Here is the id: "+application.getId());
-            System.out.println(Arrays.toString(application.getClass().getDeclaredFields()));
-
-                for (Field field : application.getClass().getDeclaredFields()) {
+            for (Field field : application.getClass().getDeclaredFields()) {
                 field.setAccessible(true);
                 Object value = field.get(application);
 
-                    if (value instanceof String && ((String) value).toLowerCase().contains(searchword.toLowerCase())) {
-                        System.out.println("The field is accessed: "+ value);
-                        searchList.add(application);
-                        break;
-                    }
-
+                if (value instanceof String && ((String) value).toLowerCase().contains(searchword.toLowerCase())) {
+                    searchList.add(application);
+                    break;
+                }
             }
         }
         return searchList;
     }
 
-    public ArrayList<JobApplication> createJointList (ArrayList<JobApplication> filterList, ArrayList <JobApplication> searchList){
-     ArrayList<JobApplication> jointList = new ArrayList<>();
-     return jointList;
+    public ArrayList<JobApplication> createJointList(ArrayList<JobApplication> filterList, ArrayList<JobApplication> searchList) {
+        ArrayList<JobApplication> jointList = new ArrayList<>();
+        if(searchList != null){
+            for(JobApplication filterJob : filterList ){
+                for(JobApplication searchJob: searchList){
+                    if(filterJob.getId() == searchJob.getId()){
+                        jointList.add(filterJob);
+                    }
+                }
+            }
+        }
+        else{
+            jointList = filterList;
+        }
+        return jointList;
     }
 
     private Predicate<JobApplication> getPredicateFromChoice(int choice) {
