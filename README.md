@@ -1,4 +1,4 @@
---- This project is currently under development. Feel free to explore the repository to see the ongoing progress. ---
+-- This project is currently under development. Feel free to explore the repository to see the ongoing progress. --
 
 Applify - Manage your job applications effortlessly 
 
