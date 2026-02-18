@@ -56,7 +56,7 @@ public class DatabaseHandler {
             String company = "";
             String postingLink = "";
             LocalDate applicationDate = null;
-            JobApplication.Status applicationStatus = null;
+            String applicationStatus = null;
 
             //new attributes for new columns / new fields
             LocalDate nextInterviewDate = null;
@@ -72,7 +72,7 @@ public class DatabaseHandler {
                 company = rs.getString("company");
                 postingLink = rs.getString("postingLink");
                 applicationDate = rs.getDate("applicationDate").toLocalDate();
-                applicationStatus = convertStringToStatus(rs.getString("applicationStatus"));
+                applicationStatus = rs.getString("applicationStatus");
 
                 //new fields/attributes
                 nextInterviewDate = rs.getDate("nextInterviewDate").toLocalDate();
@@ -120,7 +120,7 @@ public class DatabaseHandler {
             }else{
                 statement.setDate(4, new java.sql.Date(Date.from(jobApplication.getApplicationDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
             }
-            statement.setString(5, convertStatusToString(jobApplication.getApplicationStatus()));
+            statement.setString(5, jobApplication.getApplicationStatus());
             //new attributes
             if(jobApplication.getNextInterviewDate() == null){
                 statement.setDate(6, Date.valueOf (LocalDate.of(1990,1,1)));
@@ -265,7 +265,7 @@ public class DatabaseHandler {
             postingLink = newPostingLink;
         }
         if(newApplicationStatus.equals("")){
-            applicationStatus = convertStatusToString(jobApplication.getApplicationStatus());
+            applicationStatus = jobApplication.getApplicationStatus();
         }else{
             applicationStatus = newApplicationStatus;
         }

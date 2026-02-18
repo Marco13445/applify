@@ -70,7 +70,7 @@ public class ControllerAppliedJobsEditButton {
         }
 
         try {
-            applicationStatusChoiceBox.setValue(convertStatusToString(selectedJobApplication.getApplicationStatus()));
+            applicationStatusChoiceBox.setValue(selectedJobApplication.getApplicationStatus());
         }
         catch(NullPointerException e){
             //System.out.println("Select a job application before pressing the 'edit'-button. ");

@@ -31,7 +31,7 @@ public class JobApplication {
     private String company;
     private String postingLink;
     private LocalDate applicationDate;
-    private Status applicationStatus = Status.WaitingForReply;
+    private String applicationStatus = convertStatusToString(Status.WaitingForReply);
 
     //new fields because of new columns
     private LocalDate nextInterviewDate;
@@ -59,7 +59,7 @@ public class JobApplication {
      * NEW PARAMS need to be added with description
      *
      */
-    public JobApplication(int id, String postingName, String company, String postingLink, LocalDate applicationDate, Status applicationStatus){
+    public JobApplication(int id, String postingName, String company, String postingLink, LocalDate applicationDate, String applicationStatus){
         this.id = id;
         this.postingName=postingName;
         this.company=company;
@@ -69,7 +69,7 @@ public class JobApplication {
     }
 
     //Constructor for new, larger table which had been introduced in 13.02.2026
-    public JobApplication(int id, String postingName, String company, String postingLink, LocalDate applicationDate, Status applicationStatus, LocalDate nextInterviewDate, String nextInterviewLink, String nextInterviewPlace, String contactPersonFullName, String notes) {
+    public JobApplication(int id, String postingName, String company, String postingLink, LocalDate applicationDate, String applicationStatus, LocalDate nextInterviewDate, String nextInterviewLink, String nextInterviewPlace, String contactPersonFullName, String notes) {
         this.id = id;
         this.postingName = postingName;
         this.company = company;
@@ -169,11 +169,11 @@ public class JobApplication {
         this.applicationDate = applicationDate;
     }
 
-    public Status getApplicationStatus() {
+    public String getApplicationStatus() {
         return applicationStatus;
     }
 
-    public void setApplicationStatus(Status applicationStatus) {
+    public void setApplicationStatus(String applicationStatus) {
         this.applicationStatus = applicationStatus;
     }
 

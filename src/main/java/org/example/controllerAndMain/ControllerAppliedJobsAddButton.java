@@ -77,7 +77,7 @@ public class ControllerAppliedJobsAddButton {
         //Execution through method
         ApplifyMain.getService().addJobApplication(new JobApplication(-1, postingName,
                 companyName,postingLink,
-                applicationDate,JobApplication.Status.WaitingForReply,
+                applicationDate,JobApplication.convertStatusToString(JobApplication.Status.WaitingForReply),
                 nextInterviewDate, nextInterviewLink, nextInterviewPlace,
                 contactPerson, notes));
 
