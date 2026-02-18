@@ -144,17 +144,27 @@ public class ApplicationService {
 
                 System.out.println("Field");
 
+                // search in fields that are of type String such as postingName or notes
                 if (value instanceof String && ((String) value).toLowerCase().contains(searchword.toLowerCase())) {
                     System.out.println("string");
                     searchList.add(application);
                     break;
-                } else if (value instanceof LocalDate && (((LocalDate) value).format(formatterGerman).contains(searchword) ||
+
+                }
+                // search in fields that are of type LocalDate such as application or interview date
+                else if (value instanceof LocalDate && (((LocalDate) value).format(formatterGerman).contains(searchword) ||
                         ((LocalDate) value).format(formatterEnglish).contains(searchword))) {
-                    System.out.println("LocalDate: " + value + "searchword: " +searchword);
                     searchList.add(application);
                     break;
                 }
 
+                // search in fields that are of type Status i.e. the applicationStatus
+                else if (value instanceof JobApplication.Status &&
+                        JobApplication.convertStatusToString((JobApplication.Status) value).toLowerCase().contains(searchword.toLowerCase())) {
+                    System.out.println("application Status: " + value + " searchword: " +searchword);
+                    searchList.add(application);
+                    break;
+                }
             }
         }
 
