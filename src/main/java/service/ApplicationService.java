@@ -157,14 +157,6 @@ public class ApplicationService {
                     searchList.add(application);
                     break;
                 }
-
-                // search in fields that are of type Status i.e. the applicationStatus
-                else if (value instanceof JobApplication.Status &&
-                        JobApplication.convertStatusToString((JobApplication.Status) value).toLowerCase().contains(searchword.toLowerCase())) {
-                    System.out.println("application Status: " + value + " searchword: " +searchword);
-                    searchList.add(application);
-                    break;
-                }
             }
         }
 
