@@ -85,7 +85,12 @@ public class ControllerAppliedJobsEditButton {
         newCompanyName = newCompanyNameField.getText();
         newPostingLink = newPostingLinkField.getText();
         applicationStatus = applicationStatusChoiceBox.getValue();
-        newNextInterviewDate = newNextInterviewDatePicker.getValue();
+        Object newNextInterviewDate;
+        if(newNextInterviewDatePicker.getValue() == null){
+            newNextInterviewDate = "";
+        }else{
+            newNextInterviewDate = newNextInterviewDatePicker.getValue();
+        }
         newNextInterviewLink = newNextInterviewLinkField.getText();
         newNextInterviewPlace = newNextInterviewPlaceField.getText();
         newContactPersonFullName = newContactPersonField.getText();

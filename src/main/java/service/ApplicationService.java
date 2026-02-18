@@ -79,7 +79,7 @@ public class ApplicationService {
 
     public void updateJobApplication(JobApplication jobApplication, String newPostingName, String newCompanyName,
                                      String newPostingLink, String newApplicationStatus,
-                                     LocalDate newNextInterviewDate, String newNextInterviewLink, String newNextInterviewPlace,
+                                     Object newNextInterviewDate, String newNextInterviewLink, String newNextInterviewPlace,
                                      String newContactPersonFullName, String newNotes) {
         //copy current database entries into list
         readJobApplicationsFromDatabase();

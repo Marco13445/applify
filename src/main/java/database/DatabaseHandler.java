@@ -59,7 +59,7 @@ public class DatabaseHandler {
             String applicationStatus = null;
 
             //new attributes for new columns / new fields
-            LocalDate nextInterviewDate = null;
+            Object nextInterviewDate = null;
             String nextInterviewLink = "";
             String nextInterviewPlace = "";
             String contactPersonFullName = "";
@@ -75,7 +75,11 @@ public class DatabaseHandler {
                 applicationStatus = rs.getString("applicationStatus");
 
                 //new fields/attributes
-                nextInterviewDate = rs.getDate("nextInterviewDate").toLocalDate();
+                if(rs.getDate("nextInterviewDate").equals(Date.valueOf("0001-01-01"))){
+                    nextInterviewDate = "";
+                }else{
+                    nextInterviewDate = rs.getDate("nextInterviewDate").toLocalDate();
+                }
                 nextInterviewLink = rs.getString("nextInterviewLink");
                 nextInterviewPlace = rs.getString("nextInterviewPlace");
                 contactPersonFullName = rs.getString("contactPersonFullName");
@@ -103,9 +107,6 @@ public class DatabaseHandler {
                 "nextInterviewDate, nextInterviewLink, nextInterviewPlace, contactPersonFullName, notes)\n" +
                 "VALUES(?,?,?,?,?,?,?,?,?,?)";
 
-
-
-
         //create connection to Database
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             PreparedStatement statement = connection.prepareStatement(sqlInsertCommand);
@@ -122,10 +123,10 @@ public class DatabaseHandler {
             }
             statement.setString(5, jobApplication.getApplicationStatus());
             //new attributes
-            if(jobApplication.getNextInterviewDate() == null){
+            if(jobApplication.getNextInterviewDate() == ""){
                 statement.setDate(6, Date.valueOf (LocalDate.of(0,1,1)));
             }else{
-                statement.setDate(6, new java.sql.Date(Date.from(jobApplication.getNextInterviewDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
+                statement.setDate(6, new java.sql.Date(Date.from( ((LocalDate) jobApplication.getNextInterviewDate()).atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
             }
             statement.setString(7, jobApplication.getNextInterviewLink());
             statement.setString(8, jobApplication.getNextInterviewPlace());
@@ -176,13 +177,13 @@ public class DatabaseHandler {
     //the former value remains. Otherwise, the new value (which was entered by the user) is used.
     //THese declarations are for the two methdos 'updateDatabase()' and 'antiNullUpdate()'
     String postingName, companyName, postingLink, applicationStatus;
-    LocalDate nextInterviewDate;
+    Date nextInterviewDate;
     String nextInterviewLink, nextInterviewPlace, contactPersonFullName, notes;
 
 
     public void updateDatabase(JobApplication jobApplication, String newPostingName, String newCompanyName,
                                String newPostingLink, String newApplicationStatus,
-                               LocalDate newNextInterviewDate, String newNextInterviewLink, String newNextInterviewPlace,
+                               Object newNextInterviewDate, String newNextInterviewLink, String newNextInterviewPlace,
                                String newContactPersonFullName, String newNotes)
     {
 
@@ -219,8 +220,7 @@ public class DatabaseHandler {
 
             //new attributes
             //to understand
-            statement.setDate(6, new java.sql.Date(Date.from(jobApplication.getNextInterviewDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
-
+            statement.setDate(6, nextInterviewDate);
             statement.setString(7, nextInterviewLink);
             statement.setString(8, nextInterviewPlace);
             statement.setString(9, contactPersonFullName);
@@ -245,7 +245,7 @@ public class DatabaseHandler {
     //outsourced method used in 'updateDatabase()'
     private void antiNullUpdate(JobApplication jobApplication,String newPostingName, String newCompanyName,
                                 String newPostingLink, String newApplicationStatus,
-                                LocalDate newNextInterviewDate, String newNextInterviewLink, String newNextInterviewPlace,
+                                Object newNextInterviewDate, String newNextInterviewLink, String newNextInterviewPlace,
                                 String newContactPersonFullName, String newNotes) {
 
 
@@ -269,10 +269,10 @@ public class DatabaseHandler {
         }else{
             applicationStatus = newApplicationStatus;
         }
-        if(newNextInterviewDate == null){
-            nextInterviewDate = jobApplication.getNextInterviewDate();
+        if(newNextInterviewDate == ""){
+            nextInterviewDate = Date.valueOf (LocalDate.of(0,1,1));
         }else{
-            nextInterviewDate = newNextInterviewDate;
+            nextInterviewDate = new java.sql.Date(Date.from( ((LocalDate) jobApplication.getNextInterviewDate()).atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime());
         }
         if(newNextInterviewLink.equals("")){
             nextInterviewLink = jobApplication.getNextInterviewLink();

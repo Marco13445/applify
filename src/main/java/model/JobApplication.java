@@ -34,7 +34,7 @@ public class JobApplication {
     private String applicationStatus = convertStatusToString(Status.WaitingForReply);
 
     //new fields because of new columns
-    private LocalDate nextInterviewDate;
+    private Object nextInterviewDate;
     private String nextInterviewLink;
     private String nextInterviewPlace;
     private String contactPersonFullName;
@@ -69,7 +69,7 @@ public class JobApplication {
     }
 
     //Constructor for new, larger table which had been introduced in 13.02.2026
-    public JobApplication(int id, String postingName, String company, String postingLink, LocalDate applicationDate, String applicationStatus, LocalDate nextInterviewDate, String nextInterviewLink, String nextInterviewPlace, String contactPersonFullName, String notes) {
+    public JobApplication(int id, String postingName, String company, String postingLink, LocalDate applicationDate, String applicationStatus, Object nextInterviewDate, String nextInterviewLink, String nextInterviewPlace, String contactPersonFullName, String notes) {
         this.id = id;
         this.postingName = postingName;
         this.company = company;
@@ -181,11 +181,11 @@ public class JobApplication {
         this.postingLink = postingLink;
     }
 
-    public LocalDate getNextInterviewDate() {
+    public Object getNextInterviewDate() {
         return nextInterviewDate;
     }
 
-    public void setNextInterviewDate(LocalDate nextInterviewDate) {
+    public void setNextInterviewDate(Object nextInterviewDate) {
         this.nextInterviewDate = nextInterviewDate;
     }
 

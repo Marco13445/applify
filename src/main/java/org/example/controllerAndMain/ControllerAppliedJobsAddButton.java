@@ -68,7 +68,12 @@ public class ControllerAppliedJobsAddButton {
         String companyName = AddCompanyField.getText();
         String postingLink = AddPostingLinkField.getText();
         LocalDate applicationDate = AddApplicationDatePicker.getValue();
-        LocalDate nextInterviewDate = AddNextInterviewDatePicker.getValue();
+        Object nextInterviewDate;
+        if(AddNextInterviewDatePicker.getValue() == null){
+            nextInterviewDate = "";
+        }else{
+            nextInterviewDate = AddNextInterviewDatePicker.getValue();
+        }
         String nextInterviewLink = AddNextInterviewLinkField.getText();
         String nextInterviewPlace = AddNextInterviewPlaceField.getText();
         String contactPerson = AddContactPersonField.getText();
