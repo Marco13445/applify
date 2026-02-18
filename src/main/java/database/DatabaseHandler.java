@@ -269,7 +269,7 @@ public class DatabaseHandler {
         }else{
             applicationStatus = newApplicationStatus;
         }
-        if(newNextInterviewDate.equals(null)){
+        if(newNextInterviewDate == null){
             nextInterviewDate = jobApplication.getNextInterviewDate();
         }else{
             nextInterviewDate = newNextInterviewDate;

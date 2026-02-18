@@ -6,6 +6,7 @@ import model.JobApplication;
 import javax.sql.rowset.Joinable;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -130,6 +131,8 @@ public class ApplicationService {
 
     public ArrayList<JobApplication> createSearchList(String searchword) throws IllegalAccessException {
         ArrayList<JobApplication> searchList = new ArrayList<>();
+        DateTimeFormatter formatterGerman = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        DateTimeFormatter formatterEnglish = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         if (searchword.equals("")) {
             return null;
         }
@@ -139,27 +142,36 @@ public class ApplicationService {
                 field.setAccessible(true);
                 Object value = field.get(application);
 
+                System.out.println("Field");
+
                 if (value instanceof String && ((String) value).toLowerCase().contains(searchword.toLowerCase())) {
+                    System.out.println("string");
+                    searchList.add(application);
+                    break;
+                } else if (value instanceof LocalDate && (((LocalDate) value).format(formatterGerman).contains(searchword) ||
+                        ((LocalDate) value).format(formatterEnglish).contains(searchword))) {
+                    System.out.println("LocalDate: " + value + "searchword: " +searchword);
                     searchList.add(application);
                     break;
                 }
+
             }
         }
+
         return searchList;
     }
 
     public ArrayList<JobApplication> createJointList(ArrayList<JobApplication> filterList, ArrayList<JobApplication> searchList) {
         ArrayList<JobApplication> jointList = new ArrayList<>();
-        if(searchList != null){
-            for(JobApplication filterJob : filterList ){
-                for(JobApplication searchJob: searchList){
-                    if(filterJob.getId() == searchJob.getId()){
+        if (searchList != null) {
+            for (JobApplication filterJob : filterList) {
+                for (JobApplication searchJob : searchList) {
+                    if (filterJob.getId() == searchJob.getId()) {
                         jointList.add(filterJob);
                     }
                 }
             }
-        }
-        else{
+        } else {
             jointList = filterList;
         }
         return jointList;
