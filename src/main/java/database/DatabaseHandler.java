@@ -123,7 +123,7 @@ public class DatabaseHandler {
             statement.setString(5, jobApplication.getApplicationStatus());
             //new attributes
             if(jobApplication.getNextInterviewDate() == null){
-                statement.setDate(6, Date.valueOf (LocalDate.of(1990,1,1)));
+                statement.setDate(6, Date.valueOf (LocalDate.of(0,1,1)));
             }else{
                 statement.setDate(6, new java.sql.Date(Date.from(jobApplication.getNextInterviewDate().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()));
             }
