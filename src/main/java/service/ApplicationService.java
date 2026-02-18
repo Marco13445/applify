@@ -111,7 +111,7 @@ public class ApplicationService {
 
             case 1: //show all applications with a current invitation
                 for (JobApplication application : applicationList) {
-                    if (application.getApplicationStatus().equals(JobApplication.Status.Invitation))
+                    if (application.getApplicationStatus().equals(JobApplication.convertStatusToString(JobApplication.Status.Invitation)))
                         filterList.add(application);
                 }
                 break;
@@ -142,11 +142,8 @@ public class ApplicationService {
                 field.setAccessible(true);
                 Object value = field.get(application);
 
-                System.out.println("Field");
-
                 // search in fields that are of type String such as postingName or notes
                 if (value instanceof String && ((String) value).toLowerCase().contains(searchword.toLowerCase())) {
-                    System.out.println("string");
                     searchList.add(application);
                     break;
 
