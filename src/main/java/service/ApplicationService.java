@@ -2,10 +2,12 @@ package service;
 
 import database.DatabaseHandler;
 import model.JobApplication;
-import model.Status;
 
+import javax.sql.rowset.Joinable;
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -37,7 +39,7 @@ public class ApplicationService {
         //Check if the jobApplication to add is already in the list / database
         for (var a : applicationList) {
             //If the job application is already in the list/database --> return error
-            if (a.getPostingName().equals(jobApplication.getPostingName()) && a.getCompany().equals(jobApplication.getCompany())) {
+            if (a.getId() == jobApplication.getId()) {
                 //For Java-FX
                 System.out.println("This job application is already in the database. It can not be added to the database.");
                 applicationList.clear();
@@ -75,16 +77,19 @@ public class ApplicationService {
 
 
     public void updateJobApplication(JobApplication jobApplication, String newPostingName, String newCompanyName,
-                                     String newPostingLink, String newApplicationStatus) {
+                                     String newPostingLink, String newApplicationStatus,
+                                     LocalDate newNextInterviewDate, String newNextInterviewLink, String newNextInterviewPlace,
+                                     String newContactPersonFullName, String newNotes) {
         //copy current database entries into list
         readJobApplicationsFromDatabase();
 
         //Check if jobApplication already in database / list
         for (var a : applicationList) {
-            //  if(a.getPostingName().equals(jobApplication.getPostingName()) && a.getCompany().equals(jobApplication.getCompany())){
             if (a.getId() == jobApplication.getId()) {
                 //For Java-FX
-                databaseHandler.updateDatabase(jobApplication, newPostingName, newCompanyName, newPostingLink, newApplicationStatus);
+                databaseHandler.updateDatabase(jobApplication, newPostingName, newCompanyName, newPostingLink, newApplicationStatus,
+                        newNextInterviewDate, newNextInterviewLink, newNextInterviewPlace,
+                        newContactPersonFullName, newNotes);
                 applicationList.clear();
                 return;
             }
@@ -95,18 +100,18 @@ public class ApplicationService {
                 "can not be updated in the database as it is not existent in the database. ");
     }
 
-    public ArrayList<JobApplication> searchJobApplication(int choice) {
-        ArrayList<JobApplication> searchList = new ArrayList<>();
+    public ArrayList<JobApplication> createFilterList(int filterCriterion) {
+        ArrayList<JobApplication> filterList = new ArrayList<>();
 
-        switch (choice) {
-            case 0:
-                searchList= (ArrayList<JobApplication>) applicationList;
+        switch (filterCriterion) {
+            case 0: //no filter, i.e. full list/applicationList
+                filterList = (ArrayList<JobApplication>) applicationList;
                 break;
 
             case 1: //show all applications with a current invitation
                 for (JobApplication application : applicationList) {
-                    if (application.getApplicationStatus().equals(Status.Invitation))
-                        searchList.add(application);
+                    if (application.getApplicationStatus().equals(JobApplication.Status.Invitation))
+                        filterList.add(application);
                 }
                 break;
             case 2: //show all applications from the last 2-3 weeks
@@ -114,13 +119,50 @@ public class ApplicationService {
                     LocalDate date = application.getApplicationDate();
                     LocalDate today = LocalDate.now();
                     int numberOfweeks = 3;
-                    if ( date.isAfter(today.minusWeeks(numberOfweeks)) && !date.isAfter(today)){
-                        searchList.add(application);
+                    if (date.isAfter(today.minusWeeks(numberOfweeks)) && !date.isAfter(today)) {
+                        filterList.add(application);
                     }
                 }
                 break;
         }
+        return filterList;
+    }
+
+    public ArrayList<JobApplication> createSearchList(String searchword) throws IllegalAccessException {
+        ArrayList<JobApplication> searchList = new ArrayList<>();
+        if (searchword.equals("")) {
+            return null;
+        }
+
+        for (JobApplication application : applicationList) {
+            for (Field field : application.getClass().getDeclaredFields()) {
+                field.setAccessible(true);
+                Object value = field.get(application);
+
+                if (value instanceof String && ((String) value).toLowerCase().contains(searchword.toLowerCase())) {
+                    searchList.add(application);
+                    break;
+                }
+            }
+        }
         return searchList;
+    }
+
+    public ArrayList<JobApplication> createJointList(ArrayList<JobApplication> filterList, ArrayList<JobApplication> searchList) {
+        ArrayList<JobApplication> jointList = new ArrayList<>();
+        if(searchList != null){
+            for(JobApplication filterJob : filterList ){
+                for(JobApplication searchJob: searchList){
+                    if(filterJob.getId() == searchJob.getId()){
+                        jointList.add(filterJob);
+                    }
+                }
+            }
+        }
+        else{
+            jointList = filterList;
+        }
+        return jointList;
     }
 
     private Predicate<JobApplication> getPredicateFromChoice(int choice) {

@@ -1,8 +1,4 @@
 package model;
-
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-
 import java.time.LocalDate;
 
 /**
@@ -13,6 +9,22 @@ import java.time.LocalDate;
  */
 public class JobApplication {
 
+    /**
+     * This enum class defines five states (Status) of an application. It is relevant for the property 'applicationStatus'
+     * of the class 'jobApplication'.
+     *
+     * As it is a tiny class, experts recommend me to integrate in the large class 'JobApplication'. The model becomes more
+     * compact then.
+     */
+
+    public enum Status {
+        WaitingForReply,
+        Invitation,
+        Rejected,
+        Offer,
+        Withdrawn
+    }
+
     //fields
     private int id =-1;
     private String postingName;
@@ -20,6 +32,13 @@ public class JobApplication {
     private String postingLink;
     private LocalDate applicationDate;
     private Status applicationStatus = Status.WaitingForReply;
+
+    //new fields because of new columns
+    private LocalDate nextInterviewDate;
+    private String nextInterviewLink;
+    private String nextInterviewPlace;
+    private String contactPersonFullName;
+    private String notes;
 
     /**
      * CONSTRUCTOR for creating an applied job entry
@@ -36,6 +55,9 @@ public class JobApplication {
      * @param applicationStatus: the applicationStatus is by default "WaitingForReply" because this is the first thing to happen
      *                         when just applied. Afterwards, the status can change between a predefined list of Status
      *                         which are defined in the enum class 'Status'
+     *
+     * NEW PARAMS need to be added with description
+     *
      */
     public JobApplication(int id, String postingName, String company, String postingLink, LocalDate applicationDate, Status applicationStatus){
         this.id = id;
@@ -44,6 +66,21 @@ public class JobApplication {
         this.postingLink=postingLink;
         this.applicationDate= applicationDate;
         this.applicationStatus = applicationStatus;
+    }
+
+    //Constructor for new, larger table which had been introduced in 13.02.2026
+    public JobApplication(int id, String postingName, String company, String postingLink, LocalDate applicationDate, Status applicationStatus, LocalDate nextInterviewDate, String nextInterviewLink, String nextInterviewPlace, String contactPersonFullName, String notes) {
+        this.id = id;
+        this.postingName = postingName;
+        this.company = company;
+        this.postingLink = postingLink;
+        this.applicationDate = applicationDate;
+        this.applicationStatus = applicationStatus;
+        this.nextInterviewDate = nextInterviewDate;
+        this.nextInterviewLink = nextInterviewLink;
+        this.nextInterviewPlace = nextInterviewPlace;
+        this.contactPersonFullName = contactPersonFullName;
+        this.notes = notes;
     }
 
     //Methods
@@ -136,8 +173,51 @@ public class JobApplication {
         return applicationStatus;
     }
 
-    //make a drop down menu
     public void setApplicationStatus(Status applicationStatus) {
         this.applicationStatus = applicationStatus;
+    }
+
+    public void setPostingLink(String postingLink) {
+        this.postingLink = postingLink;
+    }
+
+    public LocalDate getNextInterviewDate() {
+        return nextInterviewDate;
+    }
+
+    public void setNextInterviewDate(LocalDate nextInterviewDate) {
+        this.nextInterviewDate = nextInterviewDate;
+    }
+
+    public String getNextInterviewLink() {
+        return nextInterviewLink;
+    }
+
+    public void setNextInterviewLink(String nextInterviewLink) {
+        this.nextInterviewLink = nextInterviewLink;
+    }
+
+    public String getNextInterviewPlace() {
+        return nextInterviewPlace;
+    }
+
+    public void setNextInterviewPlace(String nextInterviewPlace) {
+        this.nextInterviewPlace = nextInterviewPlace;
+    }
+
+    public String getContactPersonFullName() {
+        return contactPersonFullName;
+    }
+
+    public void setContactPersonFullName(String contactPersonFullName) {
+        this.contactPersonFullName = contactPersonFullName;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

@@ -1,3 +1,29 @@
+.button {
+    -fx-background-color: #02030A;
+    -fx-button-text-fill: #fefefe
+}
+.button:hover{
+    -fx-background-color: #10165F;
+}
+.button:pressed{
+-fx-background-color: #1620A1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Former style.css */
+
+
 /* Root background */
 .root {
     -fx-background-color: linear-gradient(to bottom right, #1e1e2f, #2c2c44);
