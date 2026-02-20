@@ -28,6 +28,7 @@ public class ApplifyMain extends Application {
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/org/example/applify/fxml_files/20260211_modernStyle/viewerAppliedJobs.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1500, 800);
+        // scene.getStylesheets().add(getClass().getResource("/org/example/applify/fxml_files/20260211_modernStyle/styleAppliedJobs.css").toExternalForm());
         primaryStage.setTitle("Applify Dashboard");
         primaryStage.setScene(scene);
         primaryStage.show();

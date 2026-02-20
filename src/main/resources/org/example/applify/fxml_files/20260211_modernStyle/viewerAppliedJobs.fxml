@@ -45,7 +45,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" style="-fx-background-color: #02030A; -fx-text-fill: #fefefe;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllerAndMain.ControllerAppliedJobsMainStage">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" stylesheets="/org/example/applify/fxml_files/20260211_modernStyle/styleAppliedJobs.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllerAndMain.ControllerAppliedJobsMainStage">
    <children>
       <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="222.0" style="-fx-background-color: #040921; -fx-text-fill: #fefefe;">
          <children>
@@ -137,61 +137,100 @@
                         <Font size="48.0" />
                      </font>
                      <HBox.margin>
-                        <Insets />
+                        <Insets bottom="30.0" top="30.0" />
                      </HBox.margin>
-                     <padding>
-                        <Insets left="20.0" />
-                     </padding>
                   </Label>
-                  <ChoiceBox fx:id="criteriaDropDown" onMouseClicked="#defineFilterNumber" onMousePressed="#defineFilterNumber" prefHeight="32.0" prefWidth="290.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-border-radius: 2em; -fx-background-radius: 5em;">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets right="10.0" top="30.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../../Icon/icons8-filter-50.png" />
+                           </image>
+                        </ImageView>
+                        <ChoiceBox fx:id="criteriaDropDown" onMouseClicked="#defineFilterNumber" onMousePressed="#defineFilterNumber" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-border-radius: 2em; -fx-background-radius: 5em; -fx-text-fill: #fefefe;" styleClass="choice-box">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <HBox.margin>
+                              <Insets right="10.0" top="25.0" />
+                           </HBox.margin>
+                        </ChoiceBox>
+                     </children>
                      <HBox.margin>
-                        <Insets left="150.0" top="25.0" />
+                        <Insets bottom="30.0" top="30.0" />
                      </HBox.margin>
-                  </ChoiceBox>
-                  <TextField fx:id="searchfield" onKeyTyped="#getSearchWord" prefHeight="32.0" prefWidth="290.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-border-radius: 2em; -fx-background-radius: 5em;">
+                  </HBox>
+                  <HBox prefHeight="70.0" prefWidth="250.0" translateX="70.0">
+                     <children>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets right="10.0" top="30.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../../Icon/icons8-magnifying-glass-50.png" />
+                           </image>
+                        </ImageView>
+                        <TextField fx:id="searchfield" onKeyTyped="#getSearchWord" prefHeight="30.0" prefWidth="220.0" promptText="  search" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-border-radius: 2em; -fx-background-radius: 5em; -fx-text-fill: #fefefe " styleClass="search">
+                           <HBox.margin>
+                              <Insets right="30.0" top="25.0" />
+                           </HBox.margin>
+                           <padding>
+                              <Insets right="30.0" />
+                           </padding>
+                        </TextField>
+                     </children>
                      <HBox.margin>
-                        <Insets left="125.0" top="25.0" />
+                        <Insets bottom="30.0" top="30.0" />
                      </HBox.margin>
-                  </TextField>
+                  </HBox>
+                  <HBox prefHeight="70.0" prefWidth="208.0" translateX="150.0">
+                     <children>
+                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonOnAction" prefHeight="30.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-background-radius: 5em; -fx-border-radius: 2em; -fx-text-fill: #fefefe" text="Add">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" top="25.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="editButton" mnemonicParsing="false" onAction="#editButtonOnAction" prefHeight="30.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-background-radius: 5em; -fx-border-radius: 2em; -fx-text-fill: #fefefe" text="Edit">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" top="25.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonOnAction" prefHeight="30.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-background-radius: 5em; -fx-border-radius: 2em; -fx-text-fill: #fefefe" text="Delete">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" top="25.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="30.0" top="30.0" />
+                     </HBox.margin>
+                  </HBox>
                </children>
+               <padding>
+                  <Insets bottom="15.0" left="30.0" right="30.0" top="15.0" />
+               </padding>
             </HBox>
-            <TableView fx:id="tableAppliedJobs" prefHeight="490.0" prefWidth="915.0" style="-fx-background-color: #02030A;">
+            <TableView fx:id="tableAppliedJobs" prefHeight="705.0" prefWidth="1278.0" style="-fx-background-color: #02030A;" styleClass="table-view">
               <columns>
-                  <TableColumn fx:id="column2" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
-                  <TableColumn fx:id="column3" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
-                  <TableColumn fx:id="column4" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
-                  <TableColumn fx:id="column5" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
-                  <TableColumn fx:id="column6" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
-                  <TableColumn fx:id="column7" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
-                  <TableColumn fx:id="column8" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
-                  <TableColumn fx:id="column9" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
-                 <TableColumn fx:id="column10" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
-                  <TableColumn fx:id="column11" prefWidth="35.0" style="-fx-background-color: #02030A;" text="C1" />
-                <TableColumn fx:id="column1" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" />
+                  <TableColumn fx:id="column2" prefWidth="75.0" style="-fx-background-color: #02030A;" text="Title" />
+                  <TableColumn fx:id="column3" prefWidth="75.0" style="-fx-background-color: #02030A;" text="Company" />
+                  <TableColumn fx:id="column4" prefWidth="75.0" style="-fx-background-color: #02030A;" text="Link" />
+                  <TableColumn fx:id="column5" prefWidth="75.0" style="-fx-background-color: #02030A;" text="Application Date" />
+                  <TableColumn fx:id="column6" prefWidth="75.0" style="-fx-background-color: #02030A;" text="Application Status" />
+                  <TableColumn fx:id="column7" prefWidth="75.0" style="-fx-background-color: #02030A;" text="Interview Date" />
+                  <TableColumn fx:id="column8" prefWidth="75.0" style="-fx-background-color: #02030A;" text="Interview link" />
+                  <TableColumn fx:id="column9" prefWidth="75.0" style="-fx-background-color: #02030A;" text="Interview place" />
+                 <TableColumn fx:id="column10" prefWidth="75.0" style="-fx-background-color: #02030A;" text="Contact person" />
+                  <TableColumn fx:id="column11" prefWidth="35.0" style="-fx-background-color: #02030A;" text="Notes" />
+                <!-- <TableColumn fx:id="column1" prefWidth="75.0" style="-fx-background-color: #02030A;" text="C1" /> -->
               </columns>
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
             </TableView>
-            <HBox prefHeight="68.0" prefWidth="918.0" style="-fx-background-color: #02030A;">
-               <children>
-                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#addButtonOnAction" text="Add" translateX="700.0">
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="editButton" mnemonicParsing="false" onAction="#editButtonOnAction" text="Edit" translateX="700.0">
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteButtonOnAction" text="Delete" translateX="700.0">
-                     <HBox.margin>
-                        <Insets left="25.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
          </children>
       </VBox>
    </children>

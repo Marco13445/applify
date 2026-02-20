@@ -71,7 +71,6 @@ public class ControllerAppliedJobsMainStage {
 
     @FXML
     private TextField searchfield;
-
     public static JobApplication selectedJobApplication;
     public int filterNumber;
     public String searchword = "";
@@ -154,7 +153,7 @@ public class ControllerAppliedJobsMainStage {
     //show table based on created list from search and/or filter and/or full list
     private void showTable(ArrayList<JobApplication> list) {
         //connect id_column with field id
-        column1.setCellValueFactory(new PropertyValueFactory<>("id"));
+        //column1.setCellValueFactory(new PropertyValueFactory<>("id"));
         column2.setCellValueFactory(new PropertyValueFactory<>("postingName"));
         column3.setCellValueFactory(new PropertyValueFactory<>("company"));
         column4.setCellValueFactory(new PropertyValueFactory<>("postingLink"));
@@ -171,6 +170,8 @@ public class ControllerAppliedJobsMainStage {
         ObservableList<JobApplication> observableList = FXCollections.observableList(list);
         //view in table
         tableAppliedJobs.setItems(observableList);
+        //fills the whole predefined space in the stage
+        tableAppliedJobs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
 

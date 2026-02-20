@@ -1,0 +1,60 @@
+/*choice box*/
+/*color of the choice box label is white*/
+.choice-box > .label {
+    -fx-text-fill: #fefefe;
+}
+/*text in the menu items is white*/
+.choice-box .menu-item > .label {
+    -fx-text-fill: #fefefe;
+}
+/*choice-box context menu background color is set to black*/
+.choice-box .context-menu {
+    -fx-background-color: #02030A;
+}
+
+/*searchfield*/
+.search {
+    -fx-text-fill: #fefefe;
+    -fx-prompt-text-fill: #fefefe;
+}
+
+
+/*whole table*/
+.table-view{
+   /* -fx-border-color: red; /*outer border of the whole table*/
+}
+.table-view .column-header{
+    -fx-background-color: #fefefe;
+    -fx-border-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+
+}
+/*This styles the entire header bar */
+.table-view .column-header-background {
+    -fx-background-color: #fefefe;
+    -fx-text-fill: #02030A;
+    -fx-border-color: transparent;
+}
+
+/* This targets the text labels inside each column header.*/
+.table-view .column-header-background .label {
+   -fx-background-color: #fefefe; /*and the background of the label node itself (not the full header cell)*/
+   -fx-text-fill: #02030A; /*the header text color (-fx-text-fill)*/
+}
+
+.table-view .filler {
+    -fx-background-color: #fefefe;
+    -fx-border-color: transparent;
+
+}
+
+/* Targets all cells inside a TableView */
+.table-cell{
+    -fx-text-fill: #fefefe; /* the entire text in the table has to be white */
+}
+/* accesses the row cell */
+.table-row-cell{
+    -fx-border-color: transparent #02030A transparent #02030A; /*outer border line of rows: top | right | bottom | left */
+    -fx-table-cell-border-color: transparent; /*vertical border line of rows */
+}
