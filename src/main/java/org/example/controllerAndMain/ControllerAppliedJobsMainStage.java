@@ -131,10 +131,29 @@ public class ControllerAppliedJobsMainStage {
         }
     }
 
-    public void deleteButtonOnAction(ActionEvent event) {
+    public void deleteButtonOnAction(ActionEvent event) throws IOException {
         selectedJobApplication = tableAppliedJobs.getSelectionModel().getSelectedItem();
-        ApplifyMain.getService().removeJobApplication(selectedJobApplication);
-        refreshTableView(filterNumber, searchword);
+        //If any job application has been selected
+        if (selectedJobApplication != null) {
+            ApplifyMain.getService().removeJobApplication(selectedJobApplication);
+            refreshTableView(filterNumber, searchword);
+        }else{
+            //If NOT any job application has been selected.
+            FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource(
+                    "/org/example/applify/fxml_files/20260211_modernStyle/viewerAppliedJobsDeleteButtonAlert.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage editAlertStage = new Stage();
+            editAlertStage.setTitle("Advise");
+            editAlertStage.setScene(scene);
+
+            //block primary stage while secondary stage is open
+            editAlertStage.initOwner((Stage) ((Button) event.getSource()).getScene().getWindow()); // block the primary stage
+            editAlertStage.initModality(Modality.WINDOW_MODAL); // modal to owner
+
+            editAlertStage.showAndWait();
+
+            System.out.println("A job application must be selected before the delete Button is clicked. ");
+        }
     }
 
     public void initialize() {
