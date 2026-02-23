@@ -60,6 +60,8 @@
 /*choice box*/
 .choice-box {
     -fx-background-color: #fefefe;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
 }
 
 /*color of the choice box label is black*/
