@@ -100,7 +100,7 @@ public class ControllerAppliedJobsMainStage {
                 "/org/example/applify/fxml_files/20260211_modernStyle/viewerAppliedJobsEditButton.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage secondaryStage = new Stage();
-        secondaryStage.setTitle("Add information about applied Job to be edited");
+        secondaryStage.setTitle("Add information about applied job to be edited");
         secondaryStage.setScene(scene);
 
         //block primary stage while secondary stage is open

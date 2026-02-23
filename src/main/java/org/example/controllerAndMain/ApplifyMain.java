@@ -11,7 +11,6 @@ import java.io.IOException;
 
 public class ApplifyMain extends Application {
 
-    //Fields
     private static DatabaseHandler databaseHandler = new DatabaseHandler();
     private static ApplicationService service = new ApplicationService(databaseHandler);
 

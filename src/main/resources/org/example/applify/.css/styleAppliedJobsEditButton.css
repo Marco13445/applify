@@ -1,0 +1,76 @@
+/* design of stage when 'add'-Button is clicked */
+.root{
+ -fx-background-color: #02030A
+}
+.label{
+    -fx-text-fill: #fefefe;
+}
+.text-field, .text-area {
+    -fx-text-fill: #02030A;
+    -fx-background-color: #fefefe;
+    -fx-border-color: #fefefe;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+}
+.text-area .content {
+    -fx-background-color: #fefefe;
+}
+
+/* DATE PICKER */
+.date-picker {
+    -fx-text-fill: #fefefe;
+    -fx-background-color: #02030A;
+    -fx-border-color: #fefefe;
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+}
+
+.date-picker .arrow-button { /*'button' that shows calender. When pressed, date can be selected.*/
+    -fx-background-color: #02030A;
+}
+
+.date-picker .arrow-button .arrow { /* calendar icon on the button */
+    -fx-background-color: #fefefe;
+}
+
+.date-picker-popup { /*background and the border of the date picker*/
+    -fx-background-color: #808184;
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #1a1a1a; /* month-year-pane  */
+}
+
+.date-picker-popup .label { /*label of month-year-pane*/
+    -fx-text-fill: #fefefe;
+}
+
+.date-picker-popup .day-cell { /*cells of the calendar showing DAYS*/
+    -fx-text-fill: #02030A;
+    -fx-background-color: transparent;
+}
+.date-picker-popup .day-cell:hover { /* background color when hovered over cells */
+    -fx-background-color: #808184;
+}
+.date-picker-popup .day-cell.today { /* the current day is highlighted in red */
+    -fx-border-color: red;
+    -fx-text-fill: red;
+}
+
+/*choice box*/
+.choice-box {
+    -fx-background-color: #fefefe;
+}
+
+/*color of the choice box label is black*/
+.choice-box > .label {
+    -fx-text-fill: #02030A;
+}
+/*text in the menu items is black*/
+.choice-box .menu-item > .label {
+    -fx-text-fill: #02030A;
+}
+/*choice-box context menu background color is set to white*/
+.choice-box .context-menu {
+    -fx-background-color: #fefefe;
+}
