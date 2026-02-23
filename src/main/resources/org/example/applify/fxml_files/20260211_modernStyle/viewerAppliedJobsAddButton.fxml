@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllerAndMain.ControllerAppliedJobsAddButton">
+<Pane stylesheets="/org/example/applify/.css/styleAppliedJobsAddButton.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="815.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllerAndMain.ControllerAppliedJobsAddButton">
     <children>
         <GridPane prefHeight="800.0" prefWidth="600.0">
             <columnConstraints>
@@ -56,12 +56,14 @@
 
                 <HBox prefHeight="39.0" prefWidth="608.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
                     <children>
-                        <Button fx:id="okButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#okButtonOnAction" text="OK">
+                        <Button fx:id="okButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#okButtonOnAction" text="OK"
+                                style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-background-radius: 5em; -fx-border-radius: 2em; -fx-text-fill: #fefefe">
                             <HBox.margin>
                                 <Insets left="50.0" right="200.0" />
                             </HBox.margin>
                         </Button>
-                        <Button fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitButtonOnAction" text="Exit">
+                        <Button fx:id="exitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#exitButtonOnAction" text="Exit"
+                                style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-background-radius: 5em; -fx-border-radius: 2em; -fx-text-fill: #fefefe">
                             <HBox.margin>
                                 <Insets left="50.0" right="200.0" />
                             </HBox.margin>

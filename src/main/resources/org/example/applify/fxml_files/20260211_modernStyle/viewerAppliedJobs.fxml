@@ -45,7 +45,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" stylesheets="/org/example/applify/fxml_files/20260211_modernStyle/styleAppliedJobs.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllerAndMain.ControllerAppliedJobsMainStage">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" stylesheets="/org/example/applify/.css/styleAppliedJobs.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllerAndMain.ControllerAppliedJobsMainStage">
    <children>
       <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="222.0" style="-fx-background-color: #040921; -fx-text-fill: #fefefe;">
          <children>
