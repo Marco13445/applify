@@ -96,7 +96,8 @@ public class ControllerAppliedJobsMainStage {
         //JobApplication should be selected before new stage opens
         selectedJobApplication = tableAppliedJobs.getSelectionModel().getSelectedItem();
 
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/fxml_files/20260211_modernStyle/viewerAppliedJobsEditButton.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource(
+                "/org/example/applify/fxml_files/20260211_modernStyle/viewerAppliedJobsEditButton.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage secondaryStage = new Stage();
         secondaryStage.setTitle("Add information about applied Job to be edited");
@@ -105,11 +106,28 @@ public class ControllerAppliedJobsMainStage {
         //block primary stage while secondary stage is open
         secondaryStage.initOwner((Stage) ((Button) event.getSource()).getScene().getWindow()); // block the primary stage
         secondaryStage.initModality(Modality.WINDOW_MODAL); // modal to owner
+
+        //If any job application has been selected
         if (selectedJobApplication != null) {
             secondaryStage.showAndWait();
             refreshTableView(filterNumber, searchword);
         } else {
+            //If NOT any job application has been selected.
+            fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource(
+                    "/org/example/applify/fxml_files/20260211_modernStyle/viewerAppliedJobsEditButtonAlert.fxml"));
+            scene = new Scene(fxmlLoader.load());
+            Stage editAlertStage = new Stage();
+            editAlertStage.setTitle("Advise");
+            editAlertStage.setScene(scene);
+
+            //block primary stage while secondary stage is open
+            editAlertStage.initOwner((Stage) ((Button) event.getSource()).getScene().getWindow()); // block the primary stage
+            editAlertStage.initModality(Modality.WINDOW_MODAL); // modal to owner
+
+            editAlertStage.showAndWait();
+
             System.out.println("A job application must be selected before the edit Button is clicked. ");
+
         }
     }
 
