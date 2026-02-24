@@ -1,6 +1,7 @@
 package service;
 
 import database.DatabaseHandler;
+import javafx.scene.control.DatePicker;
 import model.JobApplication;
 
 import javax.sql.rowset.Joinable;
@@ -79,7 +80,7 @@ public class ApplicationService {
 
     public void updateJobApplication(JobApplication jobApplication, String newPostingName, String newCompanyName,
                                      String newPostingLink, String newApplicationStatus,
-                                     Object newNextInterviewDate, String newNextInterviewLink, String newNextInterviewPlace,
+                                     Object newNextInterviewDate, DatePicker datepicker, String newNextInterviewLink, String newNextInterviewPlace,
                                      String newContactPersonFullName, String newNotes) {
         //copy current database entries into list
         readJobApplicationsFromDatabase();
@@ -89,7 +90,7 @@ public class ApplicationService {
             if (a.getId() == jobApplication.getId()) {
                 //For Java-FX
                 databaseHandler.updateDatabase(jobApplication, newPostingName, newCompanyName, newPostingLink, newApplicationStatus,
-                        newNextInterviewDate, newNextInterviewLink, newNextInterviewPlace,
+                        newNextInterviewDate, datepicker, newNextInterviewLink, newNextInterviewPlace,
                         newContactPersonFullName, newNotes);
                 applicationList.clear();
                 return;

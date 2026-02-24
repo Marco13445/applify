@@ -1,6 +1,8 @@
 package database;
 
+import javafx.scene.control.DatePicker;
 import model.JobApplication;
+import org.example.controllerAndMain.ControllerAppliedJobsEditButton;
 //import model.Status;
 
 import java.sql.*;
@@ -9,8 +11,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
-import static model.JobApplication.convertStatusToString;
-import static model.JobApplication.convertStringToStatus;
+import static model.JobApplication.*;
 
 /**
  * This is only class directly accessing the database (through methods with sql-queries).
@@ -183,7 +184,7 @@ public class DatabaseHandler {
 
     public void updateDatabase(JobApplication jobApplication, String newPostingName, String newCompanyName,
                                String newPostingLink, String newApplicationStatus,
-                               Object newNextInterviewDate, String newNextInterviewLink, String newNextInterviewPlace,
+                               Object newNextInterviewDate, DatePicker datePicker, String newNextInterviewLink, String newNextInterviewPlace,
                                String newContactPersonFullName, String newNotes)
     {
 
@@ -203,7 +204,7 @@ public class DatabaseHandler {
 
         antiNullUpdate(jobApplication,  newPostingName,  newCompanyName,
                      newPostingLink,  newApplicationStatus,
-                     newNextInterviewDate,  newNextInterviewLink,  newNextInterviewPlace,
+                     newNextInterviewDate, datePicker,  newNextInterviewLink,  newNextInterviewPlace,
                      newContactPersonFullName,  newNotes);
 
         //create connection
@@ -243,9 +244,9 @@ public class DatabaseHandler {
     }
 
     //outsourced method used in 'updateDatabase()'
-    private void antiNullUpdate(JobApplication jobApplication,String newPostingName, String newCompanyName,
+    private void antiNullUpdate(JobApplication jobApplication, String newPostingName, String newCompanyName,
                                 String newPostingLink, String newApplicationStatus,
-                                Object newNextInterviewDate, String newNextInterviewLink, String newNextInterviewPlace,
+                                Object newNextInterviewDate, DatePicker datePicker, String newNextInterviewLink, String newNextInterviewPlace,
                                 String newContactPersonFullName, String newNotes) {
 
 
@@ -272,7 +273,7 @@ public class DatabaseHandler {
         if(newNextInterviewDate == ""){
             nextInterviewDate = Date.valueOf (LocalDate.of(0,1,1));
         }else{
-            nextInterviewDate = new java.sql.Date(Date.from( ((LocalDate) jobApplication.getNextInterviewDate()).atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime());
+            nextInterviewDate = new java.sql.Date(Date.from( (updateDate(jobApplication.getNextInterviewDate(),datePicker)).atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime());
         }
         if(newNextInterviewLink.equals("")){
             nextInterviewLink = jobApplication.getNextInterviewLink();
@@ -296,4 +297,20 @@ public class DatabaseHandler {
         }
 
     }
+
+    private LocalDate updateDate (Object currentValue, DatePicker newValue) {
+        if ((currentValue == null || currentValue.toString().isEmpty()) && "".equals(newValue)) {
+            return LocalDate.of(0, 1, 1);
+        }else if( (currentValue == null || currentValue.toString().isEmpty()) && (newValue!=null)){
+            return newValue.getValue();
+        }else if ( (currentValue != null ) && "".equals(newValue)){
+            return (LocalDate) currentValue;
+        }else { //( (currentValue != null ) && (newValue!=null) ){
+            return newValue.getValue();
+        }
+    }
 }
+
+
+
+
