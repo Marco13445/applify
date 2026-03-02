@@ -58,3 +58,15 @@
     -fx-border-color: transparent #02030A transparent #02030A; /*outer border line of rows: top | right | bottom | left */
     -fx-table-cell-border-color: transparent; /*vertical border line of rows */
 }
+.table-view .table-row-cell:hover .table-cell {
+    -fx-text-fill: #ff0000;
+    -fx-border-color: transparent; /*outer border line of rows: top | right | bottom | left */
+    -fx-table-cell-border-color: transparent; /*vertical border line of rows */
+}
+
+.table-view .table-row-cell:selected {
+    -fx-text-fill: #ff0000;
+    -fx-border-color: #ff0000 transparent #ff0000 #02030A; /*outer border line of rows: top | right | bottom | left */
+    -fx-table-cell-border-color: transparent; /*vertical border line of rows */
+
+}

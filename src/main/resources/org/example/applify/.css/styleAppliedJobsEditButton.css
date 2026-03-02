@@ -24,6 +24,7 @@
     -fx-border-color: #fefefe;
     -fx-background-radius: 6;
     -fx-border-radius: 6;
+    -fx-prompt-text-fill:  #808084;
 }
 
 .date-picker .arrow-button { /*'button' that shows calender. When pressed, date can be selected.*/
@@ -68,6 +69,7 @@
 /*color of the choice box label is black*/
 .choice-box > .label {
     -fx-text-fill: #02030A;
+
 }
 /*text in the menu items is black*/
 .choice-box .menu-item > .label {
