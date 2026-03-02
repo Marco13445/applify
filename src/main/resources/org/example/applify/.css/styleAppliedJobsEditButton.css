@@ -11,6 +11,7 @@
     -fx-border-color: #fefefe;
     -fx-background-radius: 6;
     -fx-border-radius: 6;
+    -fx-prompt-text-fill:  #808084;
 }
 .text-area .content {
     -fx-background-color: #fefefe;
