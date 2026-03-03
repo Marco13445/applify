@@ -4,12 +4,9 @@ package org.example.controllerAndMain;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.JobApplication;
-import javafx.scene.control.TextArea;
 
 
 import java.time.LocalDate;
@@ -66,7 +63,7 @@ public class ControllerAppliedJobsAddButton {
         //Fields to be entered by user
         String postingName = AddPostingNameField.getText();
         String companyName = AddCompanyField.getText();
-        String postingLink = AddPostingLinkField.getText();
+        Hyperlink postingLink = new Hyperlink( AddPostingLinkField.getText());
         LocalDate applicationDate = AddApplicationDatePicker.getValue();
         Object nextInterviewDate;
         if(AddNextInterviewDatePicker.getValue() == null){

@@ -1,6 +1,7 @@
 package model;
 
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Hyperlink;
 import org.example.controllerAndMain.ControllerAppliedJobsAddButton;
 import org.example.controllerAndMain.ControllerAppliedJobsEditButton;
 
@@ -33,7 +34,7 @@ public class JobApplication {
     private int id = -1;
     private String postingName;
     private String company;
-    private String postingLink;
+    private Hyperlink postingLink;
     private LocalDate applicationDate;
     private String applicationStatus = convertStatusToString(Status.WaitingForReply);
 
@@ -63,7 +64,7 @@ public class JobApplication {
      *                           <p>
      *                           NEW PARAMS need to be added with description
      */
-    public JobApplication(int id, String postingName, String company, String postingLink, LocalDate applicationDate, String applicationStatus) {
+    public JobApplication(int id, String postingName, String company, Hyperlink postingLink, LocalDate applicationDate, String applicationStatus) {
         this.id = id;
         this.postingName = postingName;
         this.company = company;
@@ -73,7 +74,7 @@ public class JobApplication {
     }
 
     //Constructor for new, larger table which had been introduced in 13.02.2026
-    public JobApplication(int id, String postingName, String company, String postingLink, LocalDate applicationDate, String applicationStatus, Object nextInterviewDate, String nextInterviewLink, String nextInterviewPlace, String contactPersonFullName, String notes) {
+    public JobApplication(int id, String postingName, String company, Hyperlink postingLink, LocalDate applicationDate, String applicationStatus, Object nextInterviewDate, String nextInterviewLink, String nextInterviewPlace, String contactPersonFullName, String notes) {
         this.id = id;
         this.postingName = postingName;
         this.company = company;
@@ -157,11 +158,11 @@ public class JobApplication {
         this.company = company;
     }
 
-    public String getPostingLink() {
+    public Hyperlink getPostingLink() {
         return postingLink;
     }
 
-    public void setPostingLinks(String postingLinks) {
+    public void setPostingLinks(Hyperlink postingLinks) {
         this.postingLink = postingLinks;
     }
 
@@ -181,7 +182,7 @@ public class JobApplication {
         this.applicationStatus = applicationStatus;
     }
 
-    public void setPostingLink(String postingLink) {
+    public void setPostingLink(Hyperlink postingLink) {
         this.postingLink = postingLink;
     }
 

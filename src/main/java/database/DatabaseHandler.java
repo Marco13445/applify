@@ -1,6 +1,7 @@
 package database;
 
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Hyperlink;
 import model.JobApplication;
 import org.example.controllerAndMain.ControllerAppliedJobsEditButton;
 //import model.Status;
@@ -55,7 +56,7 @@ public class DatabaseHandler {
             int id = -2;
             String postingName = "";
             String company = "";
-            String postingLink = "";
+            Hyperlink postingLink = new Hyperlink();
             LocalDate applicationDate = null;
             String applicationStatus = null;
 
@@ -71,7 +72,7 @@ public class DatabaseHandler {
                 id = rs.getInt("id");
                 postingName = rs.getString("postingName");
                 company = rs.getString("company");
-                postingLink = rs.getString("postingLink");
+                postingLink = new Hyperlink( rs.getString("postingLink"));
                 applicationDate = rs.getDate("applicationDate").toLocalDate();
                 applicationStatus = rs.getString("applicationStatus");
 
@@ -116,7 +117,7 @@ public class DatabaseHandler {
             //statement.setInt(1, jobApplication.getId());
             statement.setString(1, jobApplication.getPostingName());
             statement.setString(2, jobApplication.getCompany());
-            statement.setString(3, jobApplication.getPostingLink());
+            statement.setString(3, jobApplication.getPostingLink().toString());
             if(jobApplication.getApplicationDate() == null){
                 statement.setDate(4, Date.valueOf(LocalDate.now()));
             }else{
@@ -261,7 +262,7 @@ public class DatabaseHandler {
             companyName = newCompanyName;
         }
         if(newPostingLink.equals("")){
-            postingLink = jobApplication.getPostingLink();
+            postingLink = jobApplication.getPostingLink().toString();
         }else{
             postingLink = newPostingLink;
         }

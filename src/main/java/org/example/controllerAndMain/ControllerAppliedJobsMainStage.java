@@ -202,6 +202,7 @@ public class ControllerAppliedJobsMainStage {
         column10.setCellValueFactory(new PropertyValueFactory<>("contactPersonFullName"));
         column11.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
+        //convert 'String-Links' in list to hyperlinks
 
         //Fill list with data from search list this time, not from application list
         ObservableList<JobApplication> observableList = FXCollections.observableList(list);

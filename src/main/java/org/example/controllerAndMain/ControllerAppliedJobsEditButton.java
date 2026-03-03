@@ -72,7 +72,7 @@ public class ControllerAppliedJobsEditButton {
             //Fill Textfields with current value
             newPostingNameField.setPromptText(selectedJobApplication.getPostingName());
             newCompanyNameField.setPromptText(selectedJobApplication.getCompany());
-            newPostingLinkField.setPromptText(selectedJobApplication.getPostingLink());
+            newPostingLinkField.setPromptText(selectedJobApplication.getPostingLink().toString());
 
             //Fill Choice Box
             for (JobApplication.Status a : JobApplication.Status.values()) {
