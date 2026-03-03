@@ -63,7 +63,7 @@ public class ControllerAppliedJobsAddButton {
         //Fields to be entered by user
         String postingName = AddPostingNameField.getText();
         String companyName = AddCompanyField.getText();
-        Hyperlink postingLink = new Hyperlink( AddPostingLinkField.getText());
+        String postingLink = AddPostingLinkField.getText();
         LocalDate applicationDate = AddApplicationDatePicker.getValue();
         Object nextInterviewDate;
         if(AddNextInterviewDatePicker.getValue() == null){

@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -74,6 +75,10 @@ public class ControllerAppliedJobsMainStage {
     public static JobApplication selectedJobApplication;
     public int filterNumber;
     public String searchword = "";
+
+    public void hyperlinkPressed(ActionEvent event){
+        System.out.println("hyperlink");
+    }
 
 
     public void addButtonOnAction(ActionEvent event) throws IOException {
@@ -202,7 +207,37 @@ public class ControllerAppliedJobsMainStage {
         column10.setCellValueFactory(new PropertyValueFactory<>("contactPersonFullName"));
         column11.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
-        //convert 'String-Links' in list to hyperlinks
+        column4.setCellFactory(col -> new TableCell<>() {
+                    private final Hyperlink link = new Hyperlink();
+
+                    {
+                        link.setOnAction(e -> {
+                            String url = getItem();
+                            if (url != null && !url.isEmpty()) {
+                                try {
+                                    java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+                                } catch (Exception ex) {
+                                    ex.printStackTrace();
+                                }
+                            }
+                        });
+                        link.setMaxWidth(Double.MAX_VALUE);
+                        link.setAlignment(Pos.CENTER_LEFT);
+                    }
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null || item.isEmpty()) {
+                    setGraphic(null);
+                } else {
+                    link.setText(item);
+                    setGraphic(link);
+                    setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                    setAlignment(Pos.CENTER_LEFT);
+                }
+            }
+                });
 
         //Fill list with data from search list this time, not from application list
         ObservableList<JobApplication> observableList = FXCollections.observableList(list);
@@ -238,5 +273,7 @@ public class ControllerAppliedJobsMainStage {
             iae.printStackTrace();
         }
     }
+
+
 
 }

@@ -51,7 +51,8 @@
 
 /* Targets all cells inside a TableView */
 .table-cell{
-    -fx-text-fill: #fefefe; /* the entire text in the table has to be white */
+   /* -fx-text-fill: #fefefe;*/ /* the entire text in the table has to be white */
+   -fx-alignment: CENTER-LEFT;
 }
 /* accesses the row cell */
 .table-row-cell{
@@ -59,14 +60,29 @@
     -fx-table-cell-border-color: transparent; /*vertical border line of rows */
 }
 .table-view .table-row-cell:hover .table-cell {
-    -fx-text-fill: #ff0000;
-    -fx-border-color: transparent; /*outer border line of rows: top | right | bottom | left */
+
+    -fx-border-color: #ff0000 transparent #ff0000 #02030A; /*outer border line of rows: top | right | bottom | left */
     -fx-table-cell-border-color: transparent; /*vertical border line of rows */
 }
 
-.table-view .table-row-cell:selected {
+/*selected table rows should become red*/
+.table-view .table-row-cell:selected .table-cell {
     -fx-text-fill: #ff0000;
-    -fx-border-color: #ff0000 transparent #ff0000 #02030A; /*outer border line of rows: top | right | bottom | left */
+    -fx-border-color: #ff0000 transparent #ff0000 #02030A; ; /*outer border line of rows: top | right | bottom | left */
     -fx-table-cell-border-color: transparent; /*vertical border line of rows */
+}
+/* Selected row Hyperlinks */
+.table-view .table-row-cell:selected .table-cell .hyperlink {
+    -fx-text-fill: red; /* your selected color */
+}
 
+
+/* default table rows */
+.table-view .table-row-cell .table-cell {
+    -fx-text-fill: #fefefe;
+}
+
+/* Unselected row hyperlinks */
+.table-view .table-row-cell .table-cell .hyperlink {
+    -fx-text-fill: #fefefe;
 }

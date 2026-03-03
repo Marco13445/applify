@@ -56,7 +56,7 @@ public class DatabaseHandler {
             int id = -2;
             String postingName = "";
             String company = "";
-            Hyperlink postingLink = new Hyperlink();
+            String postingLink = "";
             LocalDate applicationDate = null;
             String applicationStatus = null;
 
@@ -72,7 +72,7 @@ public class DatabaseHandler {
                 id = rs.getInt("id");
                 postingName = rs.getString("postingName");
                 company = rs.getString("company");
-                postingLink = new Hyperlink( rs.getString("postingLink"));
+                postingLink = rs.getString("postingLink");
                 applicationDate = rs.getDate("applicationDate").toLocalDate();
                 applicationStatus = rs.getString("applicationStatus");
 
