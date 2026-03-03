@@ -53,7 +53,7 @@ public class ControllerAppliedJobsMainStage {
     @FXML
     private TableColumn<JobApplication, JobApplication.Status> column7;
     @FXML
-    private TableColumn<JobApplication, JobApplication.Status> column8;
+    private TableColumn<JobApplication, String> column8;
     @FXML
     private TableColumn<JobApplication, JobApplication.Status> column9;
     @FXML
@@ -208,22 +208,23 @@ public class ControllerAppliedJobsMainStage {
         column11.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
         column4.setCellFactory(col -> new TableCell<>() {
-                    private final Hyperlink link = new Hyperlink();
+            private final Hyperlink link = new Hyperlink();
 
-                    {
-                        link.setOnAction(e -> {
-                            String url = getItem();
-                            if (url != null && !url.isEmpty()) {
-                                try {
-                                    java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
-                                } catch (Exception ex) {
-                                    ex.printStackTrace();
-                                }
-                            }
-                        });
-                        link.setMaxWidth(Double.MAX_VALUE);
-                        link.setAlignment(Pos.CENTER_LEFT);
+            {
+                link.setOnAction(e -> {
+                    String url = getItem();
+                    if (url != null && !url.isEmpty()) {
+                        try {
+                            java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
                     }
+                });
+                link.setMaxWidth(Double.MAX_VALUE);
+                link.setAlignment(Pos.CENTER_LEFT);
+            }
+
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -237,7 +238,40 @@ public class ControllerAppliedJobsMainStage {
                     setAlignment(Pos.CENTER_LEFT);
                 }
             }
+        });
+
+        column8.setCellFactory(col -> new TableCell<>() {
+            private final Hyperlink link = new Hyperlink();
+
+            {
+                link.setOnAction(e -> {
+                    String url = getItem();
+                    if (url != null && !url.isEmpty()) {
+                        try {
+                            java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
+                    }
                 });
+                link.setMaxWidth(Double.MAX_VALUE);
+                link.setAlignment(Pos.CENTER_LEFT);
+            }
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null || item.isEmpty()) {
+                    setGraphic(null);
+                } else {
+                    link.setText(item);
+                    setGraphic(link);
+                    setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                    setAlignment(Pos.CENTER_LEFT);
+                }
+            }
+        });
 
         //Fill list with data from search list this time, not from application list
         ObservableList<JobApplication> observableList = FXCollections.observableList(list);
