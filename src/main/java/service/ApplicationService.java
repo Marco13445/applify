@@ -134,6 +134,7 @@ public class ApplicationService {
         ArrayList<JobApplication> searchList = new ArrayList<>();
         DateTimeFormatter formatterGerman = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         DateTimeFormatter formatterEnglish = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
         if (searchword.equals("")) {
             return null;
         }
@@ -147,7 +148,6 @@ public class ApplicationService {
                 if (value instanceof String && ((String) value).toLowerCase().contains(searchword.toLowerCase())) {
                     searchList.add(application);
                     break;
-
                 }
                 // search in fields that are of type LocalDate such as application or interview date
                 else if (value instanceof LocalDate && (((LocalDate) value).format(formatterGerman).contains(searchword) ||
