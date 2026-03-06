@@ -7,6 +7,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -69,6 +70,13 @@ public class ControllerAppliedJobsMainStage {
 
     @FXML
     private Button deleteButton;
+
+    @FXML
+    private Button btnSavedJobsApplJobs;
+
+    @FXML
+    private Button btnAppliedJobsStat;
+
 
     @FXML
     private TextField searchfield;
@@ -308,6 +316,19 @@ public class ControllerAppliedJobsMainStage {
         }
     }
 
+    @FXML
+    private void btnAppliedJobsStat(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/org/example/applify/fxml_files/20260211_modernStyle/viewerStatistics.fxml")
+        );
+
+        Parent root = loader.load();
+
+        Stage stage = (Stage) btnAppliedJobsStat.getScene().getWindow();
+        stage.setTitle("Applify - Statistics");
+        stage.setScene(new Scene(root));
+    }
 
 
 }
