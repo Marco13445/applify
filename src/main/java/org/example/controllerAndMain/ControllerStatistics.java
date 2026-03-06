@@ -12,8 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import model.JobApplication;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ControllerStatistics {
@@ -21,8 +23,6 @@ public class ControllerStatistics {
 
     @FXML
     private Button btnStatisticsAppliedJobs;;
-
-
 
     @FXML
     private CategoryAxis xAxis;
@@ -35,6 +35,15 @@ public class ControllerStatistics {
 
     @FXML
     private BarChart<String, Number> barChart;
+
+    double numberOfApplications = 0;
+    double offer = 0;
+    double withdrawn = 0;
+    double rejection = 0;
+    double invitation =0;
+
+    Number invitationPercentage, offerPercentage, withdrawnPercentage, rejectionPercentage = 0;;
+
 
 
     public void initialize(){
@@ -51,13 +60,50 @@ public class ControllerStatistics {
 
         XYChart.Series <String, Number> series1 = new XYChart.Series<>();
 
+        count();
+
         //series1.getData().add(new XYChart.Data<>("Total number of applied Jobs [#]", 10));
-        series1.getData().add(new XYChart.Data<>("Percentage of invitations [%]", 10));
-        series1.getData().add(new XYChart.Data<>("Percentage of rejections [%]", 10));
-        series1.getData().add(new XYChart.Data<>("Percentage of withdrawn applications [%]", 10));
-        series1.getData().add(new XYChart.Data<>("Percentage of offers [%]", 10));
+        series1.getData().add(new XYChart.Data<>("Percentage of invitations [%]", invitationPercentage));
+        series1.getData().add(new XYChart.Data<>("Percentage of rejections [%]", rejectionPercentage));
+        series1.getData().add(new XYChart.Data<>("Percentage of withdrawn applications [%]", withdrawnPercentage));
+        series1.getData().add(new XYChart.Data<>("Percentage of offers [%]", offerPercentage));
 
         barChart.getData().add(series1);
+    }
+
+    private void count(){
+        ApplifyMain.getService().readJobApplicationsFromDatabase(); //reads database and fills the (full) applicationlist
+        ArrayList<JobApplication> fullList = (ArrayList<JobApplication>) ApplifyMain.getService().getApplicationList(); //gets the full applicationlist
+
+
+        //counting
+        for (JobApplication application : fullList){
+            if(application.getApplicationStatus().equalsIgnoreCase("Offer")){
+                offer++;
+            }
+            else if(application.getApplicationStatus().equalsIgnoreCase("Withdrawn")){
+                withdrawn++;
+            }
+            else if(application.getApplicationStatus().equalsIgnoreCase("Rejected")){
+                rejection++;
+            }
+            else if(application.getApplicationStatus().equalsIgnoreCase("Invitation")){
+                invitation++;
+            }
+            numberOfApplications++;
+        }
+        //calculating percentages
+        invitationPercentage = Math.round ((invitation/numberOfApplications)*100);
+        rejectionPercentage = Math.round((rejection/numberOfApplications)*100);
+        withdrawnPercentage = Math.round  ((withdrawn/numberOfApplications)*100);
+        offerPercentage = Math.round(  (offer/numberOfApplications)*100);
+
+        System.out.println("Offer: "+offerPercentage);
+        System.out.println("Withdrawn: "+ withdrawnPercentage);
+        System.out.println("Rejected: "+  rejectionPercentage);
+        System.out.println("Invitation: "+invitationPercentage);
+
+
     }
 
     @FXML
