@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS `applify`.`appliedJobsList` (
   `postingLink` VARCHAR(500) NULL,
   `applicationDate` DATE NOT NULL,
   `applicationStatus` VARCHAR(45) NOT NULL,
-  `appliedJobsListcol` VARCHAR(45) NOT NULL,
   `nextInterviewDate` DATE NOT NULL,
   `nextInterviewLink` VARCHAR(500) NULL,
   `nextInterviewPlace` VARCHAR(500) NULL,
