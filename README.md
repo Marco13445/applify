@@ -1,5 +1,4 @@
 -- This project is currently under development. Feel free to explore the repository to see the ongoing progress. --
--- Latest updates (as of 24.02.2026) full funcionality and frontend design has been adapted to all stages -- 
 
 Applify - Manage your job applications effortlessly 
 
