@@ -61,8 +61,8 @@ Update the database configuration in the following classes:
 1) src/main/java/database/appliedJobs/DatabaseHandler.java
 2) src/main/java/database/savedJobs/DatabaseHandler.java
 
+As an example:
 ```
-//As an example
 String url = "jdbc:mysql://localhost:3306/applify";
 ```
 
@@ -70,21 +70,28 @@ String url = "jdbc:mysql://localhost:3306/applify";
 
 ### Windows
 Command Prompt
+```
 set DB_USER=applify_user
 set DB_PASSWORD=yourpassword
+```
 
 Power Shell
+```
 setx DB_USER "applify_user"
 setx DB_PASSWORD "yourpassword"
+```
 
 ### MACOS/LINUX:
 Open terminal and run:
+```
 export DB_USER=applify_user
 export DB_PASSWORD=yourpassword
-
+```
 
 
 # Run the application
 
 Clone or download the repository and run:
+```
 mvn clean javafx:run
+```
