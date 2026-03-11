@@ -7,7 +7,7 @@ Seeking a good position, job searches can take a long time. Applify provides a c
 Unlike typical web-based solutions, Applify is a standalone application that runs locally, independently, and reliably—giving you long-term control over your job application management. 
 
 
-## Requirements
+# Requirements
 
 - Java 24+
 - Maven 3.9+
@@ -20,7 +20,7 @@ mvn -version
 mysql --version  
 
 
-## Database Setup
+# Database Setup
 
 1. Start your MySQL server.
 
@@ -86,7 +86,7 @@ export DB_PASSWORD=yourpassword
 
 
 
-## Run the application
+# Run the application
 
 Clone or download the repository and run:
 
