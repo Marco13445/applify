@@ -4,7 +4,7 @@
 - Maven 3.9+
 - MySQL 8+
 
-## Check installations:  
+## Check installations
 ### Windows / MACOS / LINUX:
 ```
 java -version  
