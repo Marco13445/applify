@@ -4,12 +4,16 @@
 - Maven 3.9+
 - MySQL 8+
 
-Check installations:  
+## Check installations:  
+### Windows
+Command Prompt
 ```
 java -version  
 mvn -version  
 mysql --version  
 ```
+### MACOS/LINUX:
+Open terminal and run:
 
 # Database Setup
 
