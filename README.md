@@ -5,10 +5,11 @@
 - MySQL 8+
 
 Check installations:  
+```
 java -version  
 mvn -version  
 mysql --version  
-
+```
 
 # Database Setup
 
