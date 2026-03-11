@@ -18,10 +18,13 @@ mysql --version
 ## 2. Create the schema `applify` with two tables:
 - appliedJobsList
 - savedJobsList
+
+
 ```
 -- Schema applify
 CREATE SCHEMA IF NOT EXISTS `applify` DEFAULT CHARACTER SET utf8 ;
 USE `applify` ;
+```
 
 -- Table `applify`.`appliedJobsList`
 CREATE TABLE IF NOT EXISTS `applify`.`appliedJobsList` (
@@ -47,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `applify`.`savedJobsList` (
   `contactPersonFullName` VARCHAR(100) NULL,
   `notes` VARCHAR(1000) NULL,
   PRIMARY KEY (`id`));
-```
+
 
 ## 3. Update the database configuration in the project.
 
