@@ -26,7 +26,7 @@ mysql --version
 
 2. Create the schema `applify` with two tables:
 - appliedJobsList
-- savedJobsList
+* savedJobsList
 
 -- Schema applify
 CREATE SCHEMA IF NOT EXISTS `applify` DEFAULT CHARACTER SET utf8 ;
