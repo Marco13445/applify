@@ -11,4 +11,10 @@ module org.example.applify {
     opens model to javafx.base;
     opens org.example.controllerAndMain to javafx.fxml;
     exports org.example.controllerAndMain;
+    exports org.example.controllerAndMain.appliedJobs;
+    opens org.example.controllerAndMain.appliedJobs to javafx.fxml;
+    exports org.example.controllerAndMain.savedJobs;
+    opens org.example.controllerAndMain.savedJobs to javafx.fxml;
+    exports org.example.controllerAndMain.statistics;
+    opens org.example.controllerAndMain.statistics to javafx.fxml;
 }

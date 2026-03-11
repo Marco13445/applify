@@ -1,11 +1,9 @@
-package org.example.controllerAndMain;
+package org.example.controllerAndMain.appliedJobs;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
-import java.awt.event.ActionEvent;
 
 public class ControllerAppliedJobsEditButtonAlert {
 

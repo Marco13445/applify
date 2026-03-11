@@ -47,7 +47,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToWidth="true" hbarPolicy="ALWAYS" style="-fx-background: #02030A; -fx-background-color: #02030A;" stylesheets="/org/example/applify/.css/styleAppliedJobs.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllerAndMain.ControllerStatistics">
+<ScrollPane fitToWidth="true" hbarPolicy="ALWAYS" style="-fx-background: #02030A; -fx-background-color: #02030A;" stylesheets="/org/example/applify/.css/appliedJobs/styleAppliedJobs.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllerAndMain.statistics.ControllerStatistics">
     <content>
 
             <HBox>
@@ -59,7 +59,7 @@
                                     <Insets left="50.0" top="70.0" />
                                 </VBox.margin>
                                 <image>
-                                    <Image url="@../../Profilbild/PhotographerPictureCropped.jpg" />
+                                    <Image url="@../../../Profilbild/PhotographerPictureCropped.jpg" />
                                 </image>
                             </ImageView>
                             <Label fx:id="profilName" alignment="CENTER" style="-fx-background-color: #02030A; -fx-text-fill: #fefefe;" text="Marco Lico" textFill="GREY">
@@ -71,26 +71,26 @@
                                 <children>
                                     <VBox prefHeight="700.0" prefWidth="247.0" style="-fx-background-color: #02030A;">
                                         <children>
-                                            <Button fx:id="btnSavedJobs" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="224.0" style="-fx-background-color: #02030A; -fx-text-fill: #808080;" text="Saved Jobs" textFill="#fefefe">
+                                            <Button fx:id="btnStatisticsSavedJobs" onAction="#btnStatisticsSavedJobsPressed" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="224.0" style="-fx-background-color: #02030A; -fx-text-fill: #808080;" text="Saved Jobs" textFill="#fefefe">
                                                 <VBox.margin>
                                                     <Insets top="10.0" />
                                                 </VBox.margin>
                                                 <graphic>
                                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                         <image>
-                                                            <Image url="@../../Icon/icons8-save-all-50.png" />
+                                                            <Image url="@../../../Icon/icons8-save-all-50.png" />
                                                         </image>
                                                     </ImageView>
                                                 </graphic>
                                             </Button>
-                                            <Button fx:id="btnStatisticsAppliedJobs" onAction = "#btnStatisticsAppliedJobsPressed" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: #02030A; -fx-text-fill: #808080;" text="Applied Jobs" textFill="#fefefe">
+                                            <Button fx:id="btnStatisticsAppliedJobs" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" onAction="#btnStatisticsAppliedJobsPressed" prefHeight="50.0" prefWidth="230.0" style="-fx-background-color: #02030A; -fx-text-fill: #808080;" text="Applied Jobs" textFill="#fefefe">
                                                 <VBox.margin>
                                                     <Insets />
                                                 </VBox.margin>
                                                 <graphic>
                                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                         <image>
-                                                            <Image url="@../../Icon/icons8-letter-30%20(1).png" />
+                                                            <Image url="@../../../Icon/icons8-letter-30%20(1).png" />
                                                         </image>
                                                     </ImageView>
                                                 </graphic>
@@ -102,7 +102,7 @@
                                                 <graphic>
                                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                         <image>
-                                                            <Image url="@../../Icon/icons8-statistic-24.png" />
+                                                            <Image url="@../../../Icon/icons8-statistic-24.png" />
                                                         </image>
                                                     </ImageView>
                                                 </graphic>
@@ -114,7 +114,7 @@
                                                 <graphic>
                                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                         <image>
-                                                            <Image url="@../../Icon/file_really-grey.png" />
+                                                            <Image url="@../../../Icon/file_really-grey.png" />
                                                         </image>
                                                     </ImageView>
                                                 </graphic>
@@ -126,7 +126,7 @@
                                                 <graphic>
                                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                         <image>
-                                                            <Image url="@../../Icon/ship_grey.png" />
+                                                            <Image url="@../../../Icon/ship_grey.png" />
                                                         </image>
                                                     </ImageView>
                                                 </graphic>
@@ -137,7 +137,7 @@
                                                 <graphic>
                                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                         <image>
-                                                            <Image url="@../../Icon/20260302_logout_grey.png" />
+                                                            <Image url="@../../../Icon/20260302_logout_grey.png" />
                                                         </image>
                                                     </ImageView>
                                                 </graphic>

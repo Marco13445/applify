@@ -48,9 +48,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fitToWidth="true" hbarPolicy="ALWAYS" style="-fx-background: #02030A; -fx-background-color: #02030A;" stylesheets="/org/example/applify/.css/styleAppliedJobs.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllerAndMain.ControllerAppliedJobsMainStage">
+<ScrollPane fitToWidth="true" hbarPolicy="ALWAYS" style="-fx-background: #02030A; -fx-background-color: #02030A;" stylesheets="/org/example/applify/.css/appliedJobs/styleAppliedJobs.css" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllerAndMain.appliedJobs.ControllerAppliedJobsMainStage">
     <content>
-
             <HBox>
                 <children>
                     <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="222.0" style="-fx-background-color: #02030A; -fx-text-fill: #fefefe;">
@@ -60,7 +59,7 @@
                                     <Insets left="50.0" top="70.0" />
                                 </VBox.margin>
                                 <image>
-                                    <Image url="@../../Profilbild/PhotographerPictureCropped.jpg" />
+                                    <Image url="@../../../Profilbild/PhotographerPictureCropped.jpg" />
                                 </image>
                             </ImageView>
                             <Label fx:id="profilName" alignment="CENTER" style="-fx-background-color: #02030A; -fx-text-fill: #fefefe;" text="Marco Lico" textFill="GREY">
@@ -72,14 +71,14 @@
                                 <children>
                                     <VBox prefHeight="700.0" prefWidth="247.0" style="-fx-background-color: #02030A;">
                                         <children>
-                                            <Button fx:id="btnSavedJobsApplJobs"  alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="224.0" style="-fx-background-color: #02030A; -fx-text-fill: #808080;" text="Saved Jobs" textFill="#fefefe">
+                                            <Button fx:id="btnSavedJobsApplJobs" onAction="#btnSavedJobsApplJobs" alignment="BASELINE_LEFT" graphicTextGap="15.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="224.0" style="-fx-background-color: #02030A; -fx-text-fill: #808080;" text="Saved Jobs" textFill="#fefefe">
                                                 <VBox.margin>
                                                     <Insets top="10.0" />
                                                 </VBox.margin>
                                                 <graphic>
                                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                         <image>
-                                                            <Image url="@../../Icon/icons8-save-all-50.png" />
+                                                            <Image url="@../../../Icon/icons8-save-all-50.png" />
                                                         </image>
                                                     </ImageView>
                                                 </graphic>
@@ -91,7 +90,7 @@
                                                 <graphic>
                                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                         <image>
-                                                            <Image url="@../../Icon/icons8-letter-30.png" />
+                                                            <Image url="@../../../Icon/icons8-letter-30.png" />
                                                         </image>
                                                     </ImageView>
                                                 </graphic>
@@ -103,7 +102,7 @@
                                                 <graphic>
                                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                         <image>
-                                                            <Image url="@../../Icon/statistic_grey.png" />
+                                                            <Image url="@../../../Icon/statistic_grey.png" />
                                                         </image>
                                                     </ImageView>
                                                 </graphic>
@@ -115,7 +114,7 @@
                                                 <graphic>
                                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                         <image>
-                                                            <Image url="@../../Icon/file_really-grey.png" />
+                                                            <Image url="@../../../Icon/file_really-grey.png" />
                                                         </image>
                                                     </ImageView>
                                                 </graphic>
@@ -127,7 +126,7 @@
                                                 <graphic>
                                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                         <image>
-                                                            <Image url="@../../Icon/ship_grey.png" />
+                                                            <Image url="@../../../Icon/ship_grey.png" />
                                                         </image>
                                                     </ImageView>
                                                 </graphic>
@@ -138,7 +137,7 @@
                                                 <graphic>
                                                     <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                                         <image>
-                                                            <Image url="@../../Icon/20260302_logout_grey.png" />
+                                                            <Image url="@../../../Icon/20260302_logout_grey.png" />
                                                         </image>
                                                     </ImageView>
                                                 </graphic>
@@ -167,7 +166,7 @@
                                         <children>
                                             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@../../Icon/icons8-filter-50.png" />
+                                                    <Image url="@../../../Icon/icons8-filter-50.png" />
                                                 </image>
                                             </ImageView>
                                             <ChoiceBox fx:id="criteriaDropDown" onMouseClicked="#defineFilterNumber" onMousePressed="#defineFilterNumber" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-border-radius: 2em; -fx-background-radius: 5em; -fx-text-fill: #fefefe;" styleClass="choice-box">
@@ -181,7 +180,7 @@
                                             <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
 
                                                 <image>
-                                                    <Image url="@../../Icon/icons8-magnifying-glass-50.png" />
+                                                    <Image url="@../../../Icon/icons8-magnifying-glass-50.png" />
                                                 </image>
                                             </ImageView>
                                             <TextField fx:id="searchfield" onKeyTyped="#getSearchWord" prefHeight="30.0" prefWidth="220.0" promptText="search" style="-fx-background-color: #02030A; -fx-border-color: #fefefe; -fx-border-radius: 2em; -fx-background-radius: 5em; -fx-text-fill: #fefefe " styleClass="search">

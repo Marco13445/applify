@@ -1,4 +1,4 @@
-package org.example.controllerAndMain;
+package org.example.controllerAndMain.savedJobs;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,20 +8,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.JobApplication;
+import org.example.controllerAndMain.ApplifyMain;
 
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class ControllerAppliedJobsMainStage {
+public class ControllerMainStage {
 
     //Field
     ArrayList<JobApplication> applicationList;
@@ -36,7 +36,7 @@ public class ControllerAppliedJobsMainStage {
     private Button searchButton;
 
     @FXML
-    private TableView<JobApplication> tableAppliedJobs = new TableView<>();
+    private TableView<JobApplication> tableSavedJobs = new TableView<>();
 
     @FXML
     private TableColumn<JobApplication, Integer> column1;
@@ -47,16 +47,7 @@ public class ControllerAppliedJobsMainStage {
     private TableColumn<JobApplication, String> column3;
     @FXML
     private TableColumn<JobApplication, String> column4;
-    @FXML
-    private TableColumn<JobApplication, LocalDate> column5;
-    @FXML
-    private TableColumn<JobApplication, JobApplication.Status> column6;
-    @FXML
-    private TableColumn<JobApplication, JobApplication.Status> column7;
-    @FXML
-    private TableColumn<JobApplication, String> column8;
-    @FXML
-    private TableColumn<JobApplication, JobApplication.Status> column9;
+
     @FXML
     private TableColumn<JobApplication, JobApplication.Status> column10;
     @FXML
@@ -77,10 +68,13 @@ public class ControllerAppliedJobsMainStage {
     @FXML
     private Button btnAppliedJobsStat;
 
+    @FXML
+    private Button btnSavedJobsStat;
+
 
     @FXML
     private TextField searchfield;
-    public static JobApplication selectedJobApplication;
+    public static JobApplication selectedSavedJob;
     public int filterNumber;
     public String searchword = "";
 
@@ -90,30 +84,31 @@ public class ControllerAppliedJobsMainStage {
 
 
     public void addButtonOnAction(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/fxml_files/20260211_modernStyle/viewerAppliedJobsAddButton.fxml")
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/fxml_files/modernStyle/savedJobs/viewerAddButton.fxml")
         );
         Scene scene = new Scene(fxmlLoader.load());
         Stage secondaryStage = new Stage();
-        secondaryStage.setTitle("Add information about applied Job");
+        secondaryStage.setTitle("Add information about saved Job");
         secondaryStage.setScene(scene);
 
         //block primary stage while secondary stage is open
         secondaryStage.initOwner((Stage) ((Button) event.getSource()).getScene().getWindow()); // block the primary stage
         secondaryStage.initModality(Modality.WINDOW_MODAL); // modal to owner
-        secondaryStage.showAndWait();                    // 🔒 blocks the primary stage
+        secondaryStage.showAndWait();                    // blocks the primary stage
 
-        refreshTableView(filterNumber, searchword);
+        refreshTableView(searchword);
+
     }
 
     public void editButtonOnAction(ActionEvent event) throws IOException {
         //JobApplication should be selected before new stage opens
-        selectedJobApplication = tableAppliedJobs.getSelectionModel().getSelectedItem();
+        selectedSavedJob = tableSavedJobs.getSelectionModel().getSelectedItem();
 
         FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource(
-                "/org/example/applify/fxml_files/20260211_modernStyle/viewerAppliedJobsEditButton.fxml"));
+                "/org/example/applify/fxml_files/modernStyle/savedJobs/viewerEditButton.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage secondaryStage = new Stage();
-        secondaryStage.setTitle("Add information about applied job to be edited");
+        secondaryStage.setTitle("Add information about saved job to be edited");
         secondaryStage.setScene(scene);
 
         //block primary stage while secondary stage is open
@@ -121,13 +116,14 @@ public class ControllerAppliedJobsMainStage {
         secondaryStage.initModality(Modality.WINDOW_MODAL); // modal to owner
 
         //If any job application has been selected
-        if (selectedJobApplication != null) {
+        if (selectedSavedJob != null) {
+            System.out.println("ID of selected saved job: " + selectedSavedJob.getId());
             secondaryStage.showAndWait();
-            refreshTableView(filterNumber, searchword);
+            refreshTableView(searchword);
         } else {
             //If NOT any job application has been selected.
             fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource(
-                    "/org/example/applify/fxml_files/20260211_modernStyle/viewerAppliedJobsEditButtonAlert.fxml"));
+                    "/org/example/applify/fxml_files/modernStyle/savedJobs/viewerEditButtonAlert.fxml"));
             scene = new Scene(fxmlLoader.load());
             Stage editAlertStage = new Stage();
             editAlertStage.setTitle("Advise");
@@ -139,21 +135,21 @@ public class ControllerAppliedJobsMainStage {
 
             editAlertStage.showAndWait();
 
-            System.out.println("A job application must be selected before the edit Button is clicked. ");
+            System.out.println("A saved application must be selected before the edit Button is clicked. ");
 
         }
     }
 
     public void deleteButtonOnAction(ActionEvent event) throws IOException {
-        selectedJobApplication = tableAppliedJobs.getSelectionModel().getSelectedItem();
+        selectedSavedJob = tableSavedJobs.getSelectionModel().getSelectedItem();
         //If any job application has been selected
-        if (selectedJobApplication != null) {
-            ApplifyMain.getService().removeJobApplication(selectedJobApplication);
-            refreshTableView(filterNumber, searchword);
+        if (selectedSavedJob != null) {
+            ApplifyMain.getServiceSavedJobs().removeSavedJob(selectedSavedJob);
+            refreshTableView(searchword);
         }else{
             //If NOT any job application has been selected.
             FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource(
-                    "/org/example/applify/fxml_files/20260211_modernStyle/viewerAppliedJobsDeleteButtonAlert.fxml"));
+                    "/org/example/applify/fxml_files/modernStyle/savedJobs/viewerDeleteButtonAlert.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage editAlertStage = new Stage();
             editAlertStage.setTitle("Advise");
@@ -165,20 +161,13 @@ public class ControllerAppliedJobsMainStage {
 
             editAlertStage.showAndWait();
 
-            System.out.println("A job application must be selected before the delete Button is clicked. ");
+            System.out.println("A saved application must be selected before the delete Button is clicked. ");
         }
     }
 
     public void initialize() {
-        //Fill choice box with options
-        criteriaDropDown.getItems().add("no filter");
-        criteriaDropDown.getItems().add("invitation");
-        criteriaDropDown.getItems().add("last three weeks");
-        //initialise criteria dropdowns
-        criteriaDropDown.setValue("no filter");
-        refreshTableView(0, ""); //default table should be generated based on the full list, i.e. no filter, no search word
-        criteriaDropDown.setOnAction((actionEvent -> defineFilterNumber(actionEvent))); //if any option is chose on the dropdownmenu,
-        //an action is triggered which again triggers the method 'defineFilterNumber' which again refreshes the TableView
+
+        refreshTableView( ""); //default table should be generated based on the full list, i.e. no filter, no search word
 
     }
 
@@ -192,12 +181,12 @@ public class ControllerAppliedJobsMainStage {
         } else {
             filterNumber = 0;
         }
-        refreshTableView(filterNumber, searchword);
+        refreshTableView(searchword);
     }
 
     public void getSearchWord(javafx.scene.input.KeyEvent keyEvent) {
         searchword = searchfield.getText();
-        refreshTableView(filterNumber, searchword);
+        refreshTableView(searchword);
     }
 
     //show table based on created list from search and/or filter and/or full list
@@ -207,11 +196,6 @@ public class ControllerAppliedJobsMainStage {
         column2.setCellValueFactory(new PropertyValueFactory<>("postingName"));
         column3.setCellValueFactory(new PropertyValueFactory<>("company"));
         column4.setCellValueFactory(new PropertyValueFactory<>("postingLink"));
-        column5.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
-        column6.setCellValueFactory(new PropertyValueFactory<>("applicationStatus"));
-        column7.setCellValueFactory(new PropertyValueFactory<>("nextInterviewDate"));
-        column8.setCellValueFactory(new PropertyValueFactory<>("nextInterviewLink"));
-        column9.setCellValueFactory(new PropertyValueFactory<>("nextInterviewPlace"));
         column10.setCellValueFactory(new PropertyValueFactory<>("contactPersonFullName"));
         column11.setCellValueFactory(new PropertyValueFactory<>("notes"));
 
@@ -248,66 +232,29 @@ public class ControllerAppliedJobsMainStage {
             }
         });
 
-        column8.setCellFactory(col -> new TableCell<>() {
-            private final Hyperlink link = new Hyperlink();
 
-            {
-                link.setOnAction(e -> {
-                    String url = getItem();
-                    if (url != null && !url.isEmpty()) {
-                        try {
-                            java.awt.Desktop.getDesktop().browse(new java.net.URI(url));
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                });
-                link.setMaxWidth(Double.MAX_VALUE);
-                link.setAlignment(Pos.CENTER_LEFT);
-            }
-
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (empty || item == null || item.isEmpty()) {
-                    setGraphic(null);
-                } else {
-                    link.setText(item);
-                    setGraphic(link);
-                    setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-                    setAlignment(Pos.CENTER_LEFT);
-                }
-            }
-        });
 
         //Fill list with data from search list this time, not from application list
         ObservableList<JobApplication> observableList = FXCollections.observableList(list);
         //view in table
-        tableAppliedJobs.setItems(observableList);
+        tableSavedJobs.setItems(observableList);
         //fills the whole predefined space in the stage
-        tableAppliedJobs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableSavedJobs.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     }
 
-    private void refreshTableView(int filternumber, String searchword) {
+    private void refreshTableView(String searchword) {
         ArrayList<JobApplication> list = new ArrayList<>();
 
         try {
-            ApplifyMain.getService().readJobApplicationsFromDatabase(); //reads database and fills the (full) applicationlist
-            ArrayList<JobApplication> fullList = (ArrayList<JobApplication>) ApplifyMain.getService().getApplicationList(); //gets the full applicationlist
-            ArrayList<JobApplication> filterList = ApplifyMain.getService().createFilterList(filternumber); //creates a list based on the filter criterion
-            ArrayList<JobApplication> searchList = ApplifyMain.getService().createSearchList(searchword); //creates a list based on the typed searchword
-            ArrayList<JobApplication> jointList = ApplifyMain.getService().createJointList(filterList, searchList); //creates a jointlist out of the filterlist and searchlist
+            ApplifyMain.getServiceSavedJobs().readSavedJobsFromDatabase(); //reads database and fills the (full) applicationlist
+            ArrayList<JobApplication> fullList = (ArrayList<JobApplication>) ApplifyMain.getServiceSavedJobs().getSavedJobsList(); //gets the full applicationlist
+            ArrayList<JobApplication> searchList = ApplifyMain.getServiceSavedJobs().createSearchList(searchword); //creates a list based on the typed searchword
             //in case both functions are activated
-            if (filternumber == 0 && searchword == "") {
+            if (searchword == "") {
                 list = fullList;
-            } else if (filternumber != 0 && searchword == "") {
-                list = filterList;
-            } else if (filternumber == 0 && searchword != "") {
+            } else if (searchword != "") {
                 list = searchList;
-            } else if (filternumber != 0 && searchword != "") {
-                list = jointList;
             }
             //based on the list as parameter the filter/search/full - list is shown
             showTable(list);
@@ -317,18 +264,32 @@ public class ControllerAppliedJobsMainStage {
     }
 
     @FXML
-    private void btnAppliedJobsStat(ActionEvent event) throws IOException {
+    private void btnSavedJobsStat(ActionEvent event) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/org/example/applify/fxml_files/20260211_modernStyle/viewerStatistics.fxml")
+                getClass().getResource("/org/example/applify/fxml_files/modernStyle/statistics/viewerStatistics.fxml")
         );
 
         Parent root = loader.load();
 
-        Stage stage = (Stage) btnAppliedJobsStat.getScene().getWindow();
+
+        Stage stage = (Stage) btnSavedJobsStat.getScene().getWindow();
         stage.setTitle("Applify - Statistics");
-        stage.setScene(new Scene(root));
+        stage.setScene(new Scene(root, 1500, 700));
     }
 
+    @FXML
+    private void btnSavedJobsApplJobs (ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/org/example/applify/fxml_files/modernStyle/appliedJobs/viewerAppliedJobs.fxml")
+        );
+
+        Parent root = loader.load();
+
+        Stage stage = (Stage) btnSavedJobsApplJobs.getScene().getWindow();
+        stage.setTitle("Applify - Applied Jobs");
+        stage.setScene(new Scene(root, 1500, 700));
+    }
 
 }

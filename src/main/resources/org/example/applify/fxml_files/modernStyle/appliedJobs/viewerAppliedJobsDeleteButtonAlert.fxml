@@ -11,7 +11,7 @@
             alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #02030A;"
             xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.example.controllerAndMain.ControllerAppliedJobsDeleteButtonAlert">
+            fx:controller="org.example.controllerAndMain.appliedJobs.ControllerAppliedJobsDeleteButtonAlert">
     <children>
         <Label alignment="CENTER" contentDisplay="CENTER" style="-fx-text-fill: #fefefe; -fx-alignment: CENTER;" text="Please select a job application before pressing the 'Delete'-Button." textAlignment="CENTER" wrapText="true">
             <VBox.margin>

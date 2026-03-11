@@ -1,9 +1,7 @@
-package database;
+package database.appliedJobs;
 
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Hyperlink;
 import model.JobApplication;
-import org.example.controllerAndMain.ControllerAppliedJobsEditButton;
 //import model.Status;
 
 import java.sql.*;
@@ -11,8 +9,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
-
-import static model.JobApplication.*;
 
 /**
  * This is only class directly accessing the database (through methods with sql-queries).

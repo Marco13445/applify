@@ -1,13 +1,16 @@
 
-package org.example.controllerAndMain;
+package org.example.controllerAndMain.savedJobs;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.JobApplication;
-
+import org.example.controllerAndMain.ApplifyMain;
 
 import java.time.LocalDate;
 
@@ -16,13 +19,14 @@ import java.time.LocalDate;
 /**
  * Controller for the "Add Button" view.
  *
- * This controller is linked to {@code viewerAppliedJobsAddButton.fxml}.
+ * This controller is linked to
+ *
  * It contains the logic for the stage that is opened
  * when the user clicks the "Add" button.
  */
 
 
-public class ControllerAppliedJobsAddButton {
+public class ControllerAddButton {
 
     @FXML
     private TextField AddPostingNameField;
@@ -64,24 +68,12 @@ public class ControllerAppliedJobsAddButton {
         String postingName = AddPostingNameField.getText();
         String companyName = AddCompanyField.getText();
         String postingLink = AddPostingLinkField.getText();
-        LocalDate applicationDate = AddApplicationDatePicker.getValue();
-        Object nextInterviewDate;
-        if(AddNextInterviewDatePicker.getValue() == null){
-            nextInterviewDate = "";
-        }else{
-            nextInterviewDate = AddNextInterviewDatePicker.getValue();
-        }
-        String nextInterviewLink = AddNextInterviewLinkField.getText();
-        String nextInterviewPlace = AddNextInterviewPlaceField.getText();
         String contactPerson = AddContactPersonField.getText();
         String notes = AddNotesField.getText();
 
         //Execution through method
-        ApplifyMain.getService().addJobApplication(new JobApplication(-1, postingName,
-                companyName,postingLink,
-                applicationDate,JobApplication.convertStatusToString(JobApplication.Status.WaitingForReply),
-                nextInterviewDate, nextInterviewLink, nextInterviewPlace,
-                contactPerson, notes));
+        ApplifyMain.getServiceSavedJobs().addSavedJob(new JobApplication(-1, postingName,
+                companyName,postingLink, contactPerson, notes));
 
         //close secondary stage so that to turn back to primary stage
         closeStage(e);

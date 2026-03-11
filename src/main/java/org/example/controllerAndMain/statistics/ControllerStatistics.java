@@ -1,4 +1,4 @@
-package org.example.controllerAndMain;
+package org.example.controllerAndMain.statistics;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,10 +9,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.JobApplication;
+import org.example.controllerAndMain.ApplifyMain;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,7 +21,10 @@ public class ControllerStatistics {
 
 
     @FXML
-    private Button btnStatisticsAppliedJobs;;
+    private Button btnStatisticsAppliedJobs;
+
+    @FXML
+    private Button btnStatisticsSavedJobs;
 
     @FXML
     private CategoryAxis xAxis;
@@ -110,13 +112,28 @@ public class ControllerStatistics {
     private void btnStatisticsAppliedJobsPressed (ActionEvent e) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/org/example/applify/fxml_files/20260211_modernStyle/viewerAppliedJobs.fxml")
+                getClass().getResource("/org/example/applify/fxml_files/modernStyle/appliedJobs/viewerAppliedJobs.fxml")
         );
 
         Parent root = loader.load();
 
         Stage stage = (Stage) btnStatisticsAppliedJobs.getScene().getWindow();
         stage.setTitle("Applify - Applied Jobs");
-        stage.setScene(new Scene(root));
+        stage.setScene(new Scene(root, 1500, 700));
+    }
+
+    @FXML
+    private void btnStatisticsSavedJobsPressed (ActionEvent e) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/org/example/applify/fxml_files/modernStyle/savedJobs/viewerSavedJobs.fxml")
+        );
+
+        Parent root = loader.load();
+
+        Stage stage = (Stage) btnStatisticsSavedJobs.getScene().getWindow();
+        stage.setTitle("Applify - Applied Jobs");
+        stage.setScene(new Scene(root, 1500, 700));
+
     }
 }

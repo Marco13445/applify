@@ -1,15 +1,13 @@
-package service;
+package service.appliedJobs;
 
-import database.DatabaseHandler;
+import database.appliedJobs.DatabaseHandler;
 import javafx.scene.control.DatePicker;
 import model.JobApplication;
 
-import javax.sql.rowset.Joinable;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -89,8 +87,9 @@ public class ApplicationService {
         for (var a : applicationList) {
             if (a.getId() == jobApplication.getId()) {
                 //For Java-FX
-                databaseHandler.updateDatabase(jobApplication, newPostingName, newCompanyName, newPostingLink, newApplicationStatus,
-                        newNextInterviewDate, datepicker, newNextInterviewLink, newNextInterviewPlace,
+                databaseHandler.updateDatabase(jobApplication, newPostingName, newCompanyName, newPostingLink,
+                        newApplicationStatus,
+                        newNextInterviewDate,  datepicker,  newNextInterviewLink,  newNextInterviewPlace,
                         newContactPersonFullName, newNotes);
                 applicationList.clear();
                 return;

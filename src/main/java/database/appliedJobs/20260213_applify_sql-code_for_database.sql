@@ -15,9 +15,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema applify
 -- -----------------------------------------------------
 
--- -----------------------------------------------------
--- Schema applify
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `applify` DEFAULT CHARACTER SET utf8 ;
 USE `applify` ;
 
@@ -38,6 +35,8 @@ CREATE TABLE IF NOT EXISTS `applify`.`appliedJobsList` (
   `notes` VARCHAR(1000) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
+
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

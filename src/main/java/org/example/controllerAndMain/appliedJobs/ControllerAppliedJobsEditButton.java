@@ -1,23 +1,21 @@
-package org.example.controllerAndMain;
+package org.example.controllerAndMain.appliedJobs;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.JobApplication;
+import org.example.controllerAndMain.ApplifyMain;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
 import static model.JobApplication.convertStatusToString;
-import static org.example.controllerAndMain.ControllerAppliedJobsMainStage.selectedJobApplication;
+import static org.example.controllerAndMain.appliedJobs.ControllerAppliedJobsMainStage.selectedJobApplication;
 
 public class ControllerAppliedJobsEditButton {
 
