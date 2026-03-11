@@ -2,6 +2,7 @@ package database.appliedJobs;
 
 import javafx.scene.control.DatePicker;
 import model.JobApplication;
+import org.w3c.dom.ls.LSOutput;
 //import model.Status;
 
 import java.sql.*;
@@ -22,8 +23,10 @@ public class DatabaseHandler {
     //fields
     //database specific connection data
     String url = "jdbc:mysql://localhost:3306/applify";
-    String user = "root";
-    String password = "4444";
+    public static final  String user =
+            System.getenv().getOrDefault("DB_USER", "root");
+    public static final String password = System.getenv("DB_PASSWORD");
+
 
 
     /**
@@ -34,6 +37,11 @@ public class DatabaseHandler {
 
         //SQL Command reading the whole table
         String sqlSelectCommand = "SELECT * FROM appliedjobslist";
+
+        //Preventing crashes by checking anti-null of credentials
+        if (user == null || password == null) {
+            throw new RuntimeException("Database environment variables not set. Please configure DB_USER and DB_PASSWORD.");
+        };
 
         // Wenn Datenbank nicht existiert, gibt leere Liste zurück // später implementieren
         /*if (!File.Exists(filePath))
@@ -105,6 +113,11 @@ public class DatabaseHandler {
                 "nextInterviewDate, nextInterviewLink, nextInterviewPlace, contactPersonFullName, notes)\n" +
                 "VALUES(?,?,?,?,?,?,?,?,?,?)";
 
+        //Preventing crashes by checking anti-null of credentials
+        if (user == null || password == null) {
+            throw new RuntimeException("Database environment variables not set. Please configure DB_USER and DB_PASSWORD.");
+        };
+
         //create connection to Database
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             PreparedStatement statement = connection.prepareStatement(sqlInsertCommand);
@@ -149,6 +162,11 @@ public class DatabaseHandler {
     public void deleteFromDatabase(JobApplication jobApplication) {
         //sql command for deletion
         String sqlDeleteCommand = "DELETE FROM appliedJobsList WHERE id = ?";
+
+        //Preventing crashes by checking anti-null of credentials
+        if (user == null || password == null) {
+            throw new RuntimeException("Database environment variables not set. Please configure DB_USER and DB_PASSWORD.");
+        };
 
         //create connection
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
@@ -198,6 +216,11 @@ public class DatabaseHandler {
                 " contactPersonFullName = ?, " +
                 " notes = ? " +
                 " WHERE id = ? "; //here, the ?-tag has to use the selected ID
+
+        //Preventing crashes by checking anti-null of credentials
+        if (user == null || password == null) {
+            throw new RuntimeException("Database environment variables not set. Please configure DB_USER and DB_PASSWORD.");
+        };
 
         antiNullUpdate(jobApplication,  newPostingName,  newCompanyName,
                      newPostingLink,  newApplicationStatus,

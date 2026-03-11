@@ -23,8 +23,9 @@ public class DatabaseHandler {
     //fields
     //database specific connection data
     String url = "jdbc:mysql://localhost:3306/applify";
-    String user = "root";
-    String password = "4444";
+    public static final String user = System.getenv().getOrDefault("DB_USER", "root");
+    public static final String password = System.getenv("DB_PASSWORD");
+
 
 
     /**
@@ -42,6 +43,11 @@ public class DatabaseHandler {
         */
         //Wenn tabelle leer, dann leere Liste zurück
         //Creating connection to local database
+
+        //Preventing crashes by checking anti-null of credentials
+        if (user == null || password == null) {
+            throw new RuntimeException("Database environment variables not set. Please configure DB_USER and DB_PASSWORD.");
+        };
 
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
             Statement stmt = conn.createStatement();
@@ -105,6 +111,11 @@ public class DatabaseHandler {
                 "contactPersonFullName, notes)\n" +
                 "VALUES(?,?,?,?,?)";
 
+        //Preventing crashes by checking anti-null of credentials
+        if (user == null || password == null) {
+            throw new RuntimeException("Database environment variables not set. Please configure DB_USER and DB_PASSWORD.");
+        };
+
         //create connection to Database
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             PreparedStatement statement = connection.prepareStatement(sqlInsertCommand);
@@ -135,6 +146,12 @@ public class DatabaseHandler {
     public void deleteFromDatabase(JobApplication jobApplication) {
         //sql command for deletion
         String sqlDeleteCommand = "DELETE FROM savedJobsList WHERE id = ?";
+
+        //Preventing crashes by checking anti-null of credentials
+        if (user == null || password == null) {
+            throw new RuntimeException("Database environment variables not set. Please configure DB_USER and DB_PASSWORD.");
+        };
+
 
         //create connection
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
@@ -177,6 +194,11 @@ public class DatabaseHandler {
                 " contactPersonFullName = ?, " +
                 " notes = ? " +
                 " WHERE id = ? "; //here, the ?-tag has to use the selected ID
+
+        //Preventing crashes by checking anti-null of credentials
+        if (user == null || password == null) {
+            throw new RuntimeException("Database environment variables not set. Please configure DB_USER and DB_PASSWORD.");
+        };
 
         antiNullUpdate(jobApplication,  newPostingName,  newCompanyName,
                      newPostingLink, newContactPersonFullName,  newNotes);
