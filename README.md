@@ -25,18 +25,14 @@ mysql --version
 1. Start your MySQL server.
 
 2. Create the schema `applify` with two tables:
-- appliedJobsList
-- savedJobsList
+  - appliedJobsList
+  - savedJobsList
 
--- -----------------------------------------------------
 -- Schema applify
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `applify` DEFAULT CHARACTER SET utf8 ;
 USE `applify` ;
 
--- -----------------------------------------------------
 -- Table `applify`.`appliedJobsList`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `applify`.`appliedJobsList` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `postingName` VARCHAR(100) NOT NULL,
@@ -51,9 +47,7 @@ CREATE TABLE IF NOT EXISTS `applify`.`appliedJobsList` (
   `notes` VARCHAR(1000) NULL,
   PRIMARY KEY (`id`));
 
--- -----------------------------------------------------
 -- Table `applify`.`savedJobsList`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `applify`.`savedJobsList` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `postingName` VARCHAR(100) NOT NULL,
