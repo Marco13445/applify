@@ -18,7 +18,7 @@ mysql --version
 ## 2. Create the schema `applify` with two tables:
 - appliedJobsList
 - savedJobsList
-
+```
 -- Schema applify
 CREATE SCHEMA IF NOT EXISTS `applify` DEFAULT CHARACTER SET utf8 ;
 USE `applify` ;
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `applify`.`savedJobsList` (
   `contactPersonFullName` VARCHAR(100) NULL,
   `notes` VARCHAR(1000) NULL,
   PRIMARY KEY (`id`));
-
+```
 
 ## 3. Update the database configuration in the project.
 
@@ -55,9 +55,10 @@ Update the database configuration in the following classes:
 1) src/main/java/database/appliedJobs/DatabaseHandler.java
 2) src/main/java/database/savedJobs/DatabaseHandler.java
 
-As an example:
+```
+//As an example
 String url = "jdbc:mysql://localhost:3306/applify";
-
+```
 
 ## 4. Set the environment variables
 
