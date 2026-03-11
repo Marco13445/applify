@@ -5,15 +5,13 @@
 - MySQL 8+
 
 ## Check installations:  
-### Windows
-Command Prompt
+### Windows / MACOS / LINUX:
 ```
 java -version  
 mvn -version  
 mysql --version  
 ```
-### MACOS/LINUX:
-Open terminal and run:
+
 
 # Database Setup
 
