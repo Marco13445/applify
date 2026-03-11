@@ -15,10 +15,9 @@ Unlike typical web-based solutions, Applify is a standalone application that run
 
 Check installations:
 
-java -version
-mvn -version
-mysql --version
-
+java -version  
+mvn -version  
+mysql --version  
 
 
 ## Database Setup
