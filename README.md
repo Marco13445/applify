@@ -96,3 +96,5 @@ Clone or download the repository and run:
 ```
 mvn clean javafx:run
 ```
+
+Note: Code simplification and error corrections are planned as part of upcoming optimizations.
