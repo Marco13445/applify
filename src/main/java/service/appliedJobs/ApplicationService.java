@@ -1,6 +1,6 @@
 package service.appliedJobs;
 
-import database.appliedJobs.DatabaseHandler;
+import database.appliedJobs.DatabaseHandlerAppliedJobs;
 import javafx.scene.control.DatePicker;
 import model.JobApplication;
 
@@ -19,17 +19,17 @@ import java.util.function.Predicate;
 public class ApplicationService {
     //Fields
     private List<JobApplication> applicationList;
-    private final DatabaseHandler databaseHandler;
+    private final DatabaseHandlerAppliedJobs databaseHandlerAppliedJobs;
 
     //constructor with dependency injection
-    public ApplicationService(DatabaseHandler databaseHandler) {
-        this.databaseHandler = databaseHandler;
+    public ApplicationService(DatabaseHandlerAppliedJobs databaseHandlerAppliedJobs) {
+        this.databaseHandlerAppliedJobs = databaseHandlerAppliedJobs;
     }
 
     //methods
     public void readJobApplicationsFromDatabase() {
         //read job applications from database and save them into application list
-        applicationList = databaseHandler.readDatabase();
+        applicationList = databaseHandlerAppliedJobs.readDatabase();
     }
 
     public void addJobApplication(JobApplication jobApplication) {
@@ -47,7 +47,7 @@ public class ApplicationService {
             }
         }
         //if the job application is not in the list/database --> call method insertIntoDatabase
-        databaseHandler.insertIntoDatabase(jobApplication);
+        databaseHandlerAppliedJobs.insertIntoDatabase(jobApplication);
 
         //Delete application list
         applicationList.clear();
@@ -63,7 +63,7 @@ public class ApplicationService {
             // if in database, call delete method
             if (a.getId() == jobApplication.getId()) {
                 //For Java-FX
-                databaseHandler.deleteFromDatabase(jobApplication);
+                databaseHandlerAppliedJobs.deleteFromDatabase(jobApplication);
                 applicationList.clear();
                 return;
             }
@@ -87,9 +87,8 @@ public class ApplicationService {
         for (var a : applicationList) {
             if (a.getId() == jobApplication.getId()) {
                 //For Java-FX
-                databaseHandler.updateDatabase(jobApplication, newPostingName, newCompanyName, newPostingLink,
-                        newApplicationStatus,
-                        newNextInterviewDate,  datepicker,  newNextInterviewLink,  newNextInterviewPlace,
+                databaseHandlerAppliedJobs.updateDatabase(jobApplication, newPostingName, newCompanyName, newPostingLink,
+                        newApplicationStatus,newNextInterviewDate,  datepicker,  newNextInterviewLink,  newNextInterviewPlace,
                         newContactPersonFullName, newNotes);
                 applicationList.clear();
                 return;
@@ -181,8 +180,8 @@ public class ApplicationService {
     }
 
     // Getters and Setters
-    public DatabaseHandler getDatabaseHandler() {
-        return databaseHandler;
+    public DatabaseHandlerAppliedJobs getDatabaseHandler() {
+        return databaseHandlerAppliedJobs;
     }
 
     public List<JobApplication> getApplicationList() {

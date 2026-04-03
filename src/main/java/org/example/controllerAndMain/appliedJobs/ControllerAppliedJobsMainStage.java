@@ -91,7 +91,7 @@ public class ControllerAppliedJobsMainStage {
 
 
     public void addButtonOnAction(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/fxml_files/modernStyle/appliedJobs/viewerAddButton.fxml")
+        FXMLLoader fxmlLoader = new FXMLLoader(ApplifyMain.class.getResource("/org/example/applify/fxml_files/modernStyle/appliedJobs/viewerAppliedJobsAddButton.fxml")
         );
         Scene scene = new Scene(fxmlLoader.load());
         Stage secondaryStage = new Stage();

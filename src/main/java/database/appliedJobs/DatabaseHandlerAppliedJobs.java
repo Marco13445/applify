@@ -1,8 +1,8 @@
 package database.appliedJobs;
 
+import database.DatabaseHandler;
 import javafx.scene.control.DatePicker;
 import model.JobApplication;
-import org.w3c.dom.ls.LSOutput;
 //import model.Status;
 
 import java.sql.*;
@@ -18,20 +18,13 @@ import java.util.List;
  */
 
 
-public class DatabaseHandler {
-
-    //fields
-    //database specific connection data
-    String url = "jdbc:mysql://localhost:3306/applify";
-    public static final  String user =
-            System.getenv().getOrDefault("DB_USER", "root");
-    public static final String password = System.getenv("DB_PASSWORD");
-
-
+public class DatabaseHandlerAppliedJobs extends DatabaseHandler {
 
     /**
-     * This method reads the current entries in the database and returns them in a List<JobApplication>
+     * This method reads the current entries in the database table 'appliedJobsList' and
+     * returns them in a List<JobApplication>
      */
+    @Override
     public List<JobApplication> readDatabase() {
         List<JobApplication> appliedJobsList = new ArrayList<JobApplication>();
 
@@ -43,13 +36,7 @@ public class DatabaseHandler {
             throw new RuntimeException("Database environment variables not set. Please configure DB_USER and DB_PASSWORD.");
         };
 
-        // Wenn Datenbank nicht existiert, gibt leere Liste zurück // später implementieren
-        /*if (!File.Exists(filePath))
-            return animals;
-        */
-        //Wenn tabelle leer, dann leere Liste zurück
         //Creating connection to local database
-
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sqlSelectCommand);
@@ -106,6 +93,11 @@ public class DatabaseHandler {
         return appliedJobsList;
     }
 
+    /**
+     * Insert a jobApplication into the respective database table
+     * @param jobApplication
+     */
+    @Override
     public void insertIntoDatabase(JobApplication jobApplication) {
 
         //sql connection
@@ -159,6 +151,11 @@ public class DatabaseHandler {
         System.out.println("Applied Job successfully added to Database. ");
     }
 
+    /**
+     * Delete respective job application from respective database table
+     * @param jobApplication
+     */
+    @Override
     public void deleteFromDatabase(JobApplication jobApplication) {
         //sql command for deletion
         String sqlDeleteCommand = "DELETE FROM appliedJobsList WHERE id = ?";
@@ -189,9 +186,12 @@ public class DatabaseHandler {
                 jobApplication.getCompany() + " has been removed from database. ");
     }
 
+    /**
     //We have to make sure that when no entry is made while editing an application
     //the former value remains. Otherwise, the new value (which was entered by the user) is used.
     //THese declarations are for the two methdos 'updateDatabase()' and 'antiNullUpdate()'
+    */
+
     String postingName, companyName, postingLink, applicationStatus;
     Date nextInterviewDate;
     String nextInterviewLink, nextInterviewPlace, contactPersonFullName, notes;
@@ -199,7 +199,7 @@ public class DatabaseHandler {
 
     public void updateDatabase(JobApplication jobApplication, String newPostingName, String newCompanyName,
                                String newPostingLink, String newApplicationStatus,
-                               Object newNextInterviewDate, DatePicker datePicker, String newNextInterviewLink, String newNextInterviewPlace,
+                               Object newNextInterviewDate,  DatePicker datePicker, String newNextInterviewLink, String newNextInterviewPlace,
                                String newContactPersonFullName, String newNotes)
     {
 
@@ -224,8 +224,8 @@ public class DatabaseHandler {
 
         antiNullUpdate(jobApplication,  newPostingName,  newCompanyName,
                      newPostingLink,  newApplicationStatus,
-                     newNextInterviewDate, datePicker,  newNextInterviewLink,  newNextInterviewPlace,
-                     newContactPersonFullName,  newNotes);
+                newNextInterviewDate, datePicker,  newNextInterviewLink,  newNextInterviewPlace,
+                newContactPersonFullName, newNotes   );
 
         //create connection
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
@@ -264,10 +264,11 @@ public class DatabaseHandler {
     }
 
     //outsourced method used in 'updateDatabase()'
-    private void antiNullUpdate(JobApplication jobApplication, String newPostingName, String newCompanyName,
-                                String newPostingLink, String newApplicationStatus,
-                                Object newNextInterviewDate, DatePicker datePicker, String newNextInterviewLink, String newNextInterviewPlace,
-                                String newContactPersonFullName, String newNotes) {
+
+    protected void antiNullUpdate(JobApplication jobApplication, String newPostingName, String newCompanyName,
+                                  String newPostingLink, String newApplicationStatus,
+                                  Object newNextInterviewDate,  DatePicker datePicker, String newNextInterviewLink, String newNextInterviewPlace,
+                                  String newContactPersonFullName, String newNotes) {
 
 
         if(newPostingName.equals("")){
@@ -318,7 +319,16 @@ public class DatabaseHandler {
 
     }
 
-    private LocalDate updateDate (Object currentValue, DatePicker newValue) {
+    /**
+     * This method makes sure that if in the Date Picker the user chooses no date,
+     * a default date in the year 0 is used or the respective current date value.
+     *
+     * @param currentValue
+     * @param newValue
+     * @return
+     */
+    @Override
+    protected LocalDate updateDate(Object currentValue, DatePicker newValue) {
         if ((currentValue == null || currentValue.toString().isEmpty()) && "".equals(newValue)) {
             return LocalDate.of(0, 1, 1);
         }else if( (currentValue == null || currentValue.toString().isEmpty()) && (newValue!=null)){
