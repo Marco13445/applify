@@ -1,7 +1,6 @@
 package service.savedJobs;
 
-import database.savedJobs.DatabaseHandler;
-import javafx.scene.control.DatePicker;
+import database.savedJobs.DatabaseHandlerSavedJobs;
 import model.JobApplication;
 
 import java.lang.reflect.Field;
@@ -19,11 +18,11 @@ import java.util.function.Predicate;
 public class ApplicationService {
     //Fields
     private List<JobApplication> savedJobsList;
-    private final database.savedJobs.DatabaseHandler databaseHandlerSavedJobs;
+    private final DatabaseHandlerSavedJobs databaseHandlerSavedJobs;
 
     //constructor with dependency injection
-    public ApplicationService(database.savedJobs.DatabaseHandler databaseHandler) {
-        this.databaseHandlerSavedJobs = databaseHandler;
+    public ApplicationService(DatabaseHandlerSavedJobs databaseHandlerSavedJobs) {
+        this.databaseHandlerSavedJobs = databaseHandlerSavedJobs;
     }
 
     //methods
@@ -163,7 +162,7 @@ public class ApplicationService {
     }
 
     // Getters and Setters
-    public DatabaseHandler getDatabaseHandlerSavedJobs() {
+    public DatabaseHandlerSavedJobs getDatabaseHandlerSavedJobs() {
         return databaseHandlerSavedJobs;
     }
 

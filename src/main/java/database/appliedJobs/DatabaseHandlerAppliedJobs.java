@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is only class directly accessing the database (through methods with sql-queries).
- * So it results into a clear localisation of methods with this specific purpose.
- *  It is called 'Data-Access-Object'-Layer (DAO).
+ * This class inherits from the abstract class DatabaseHandler
+ * implementing specific methods.
+ *  This class accesses the table 'applify.appliedJobsList'
  */
 
 

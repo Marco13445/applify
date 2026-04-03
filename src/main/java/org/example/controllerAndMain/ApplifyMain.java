@@ -1,6 +1,7 @@
 package org.example.controllerAndMain;
 
 import database.appliedJobs.DatabaseHandlerAppliedJobs;
+import database.savedJobs.DatabaseHandlerSavedJobs;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,7 +24,7 @@ public class ApplifyMain extends Application {
         ApplifyMain.service = service;
     }
 
-    private static database.savedJobs.DatabaseHandler databaseHandlerSavedJobs = new database.savedJobs.DatabaseHandler();
+    private static DatabaseHandlerSavedJobs databaseHandlerSavedJobs = new DatabaseHandlerSavedJobs();
     private static service.savedJobs.ApplicationService serviceSavedJobs = new service.savedJobs.ApplicationService(databaseHandlerSavedJobs);
     public static service.savedJobs.ApplicationService getServiceSavedJobs(){
         return serviceSavedJobs;
