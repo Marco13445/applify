@@ -7,7 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import service.appliedJobs.ApplicationService;
+import service.appliedJobs.ApplicationServiceAppliedJobs;
+import service.savedJobs.ApplicationServiceSavedJobs;
+
 import java.io.IOException;
 
 import static javafx.application.Application.launch;
@@ -16,20 +18,20 @@ import static javafx.application.Application.launch;
 public class ApplifyMain extends Application {
 
     private static DatabaseHandlerAppliedJobs databaseHandlerAppliedJobs = new DatabaseHandlerAppliedJobs();
-    private static ApplicationService service = new ApplicationService(databaseHandlerAppliedJobs);
-    public static ApplicationService getService() {
+    private static ApplicationServiceAppliedJobs service = new ApplicationServiceAppliedJobs(databaseHandlerAppliedJobs);
+    public static ApplicationServiceAppliedJobs getService() {
         return service;
     }
-    public static void setService(ApplicationService service) {
+    public static void setService(ApplicationServiceAppliedJobs service) {
         ApplifyMain.service = service;
     }
 
     private static DatabaseHandlerSavedJobs databaseHandlerSavedJobs = new DatabaseHandlerSavedJobs();
-    private static service.savedJobs.ApplicationService serviceSavedJobs = new service.savedJobs.ApplicationService(databaseHandlerSavedJobs);
-    public static service.savedJobs.ApplicationService getServiceSavedJobs(){
+    private static ApplicationServiceSavedJobs serviceSavedJobs = new ApplicationServiceSavedJobs(databaseHandlerSavedJobs);
+    public static ApplicationServiceSavedJobs getServiceSavedJobs(){
         return serviceSavedJobs;
     }
-    public static void setServiceSavedJobs(service.savedJobs.ApplicationService serviceSavedJobs){
+    public static void setServiceSavedJobs(ApplicationServiceSavedJobs serviceSavedJobs){
         ApplifyMain.serviceSavedJobs= serviceSavedJobs;
     }
 

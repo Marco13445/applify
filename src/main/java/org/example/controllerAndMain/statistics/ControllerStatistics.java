@@ -74,7 +74,7 @@ public class ControllerStatistics {
     }
 
     private void count(){
-        ApplifyMain.getService().readJobApplicationsFromDatabase(); //reads database and fills the (full) applicationlist
+        ApplifyMain.getService().readJobsFromDatabase(); //reads database and fills the (full) applicationlist
         ArrayList<JobApplication> fullList = (ArrayList<JobApplication>) ApplifyMain.getService().getApplicationList(); //gets the full applicationlist
 
 

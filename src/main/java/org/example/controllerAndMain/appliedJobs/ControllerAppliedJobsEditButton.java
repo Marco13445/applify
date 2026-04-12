@@ -116,7 +116,7 @@ public class ControllerAppliedJobsEditButton {
 
 
         //Execution through method
-        ApplifyMain.getService().updateJobApplication(selectedJobApplication, newPostingName,
+        ApplifyMain.getService().updateJob(selectedJobApplication, newPostingName,
                 newCompanyName, newPostingLink, applicationStatus,
                 newNextInterviewDate, newNextInterviewDatePicker, newNextInterviewLink, newNextInterviewPlace,
                 newContactPersonFullName, newNotes);

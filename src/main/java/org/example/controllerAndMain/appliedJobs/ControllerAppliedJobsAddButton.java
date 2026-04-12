@@ -77,7 +77,7 @@ public class ControllerAppliedJobsAddButton {
         String notes = AddNotesField.getText();
 
         //Execution through method
-        ApplifyMain.getService().addJobApplication(new JobApplication(-1, postingName,
+        ApplifyMain.getService().addJob(new JobApplication(-1, postingName,
                 companyName,postingLink,
                 applicationDate,JobApplication.convertStatusToString(JobApplication.Status.WaitingForReply),
                 nextInterviewDate, nextInterviewLink, nextInterviewPlace,

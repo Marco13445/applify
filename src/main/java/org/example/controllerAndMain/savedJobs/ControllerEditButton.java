@@ -8,13 +8,11 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.JobApplication;
 import org.example.controllerAndMain.ApplifyMain;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
-import static model.JobApplication.convertStatusToString;
 import static org.example.controllerAndMain.savedJobs.ControllerMainStage.selectedSavedJob;
 
 
@@ -91,7 +89,7 @@ public class ControllerEditButton {
 
 
         //Execution through method
-        ApplifyMain.getServiceSavedJobs().updateSavedJob(selectedSavedJob, newPostingName,
+        ApplifyMain.getServiceSavedJobs().updateJob(selectedSavedJob, newPostingName,
                 newCompanyName, newPostingLink, newContactPersonFullName, newNotes);
 
         //close secondary stage so that to turn back to primary stage

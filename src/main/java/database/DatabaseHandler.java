@@ -3,6 +3,7 @@ package database;
 import javafx.scene.control.DatePicker;
 import model.JobApplication;
 
+import javax.print.attribute.standard.JobKOctets;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -38,6 +39,12 @@ public abstract class DatabaseHandler {
      * @param jobApplication
      */
     public abstract void deleteFromDatabase(JobApplication jobApplication);
+
+    /**
+     * 'update database(...)' is due to different parameters child-specific,
+     * and thus, not defined here in the abstract parent class
+     */
+
 
     /**
      *

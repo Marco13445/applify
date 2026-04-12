@@ -17,7 +17,6 @@ import model.JobApplication;
 import org.example.controllerAndMain.ApplifyMain;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -144,7 +143,7 @@ public class ControllerMainStage {
         selectedSavedJob = tableSavedJobs.getSelectionModel().getSelectedItem();
         //If any job application has been selected
         if (selectedSavedJob != null) {
-            ApplifyMain.getServiceSavedJobs().removeSavedJob(selectedSavedJob);
+            ApplifyMain.getServiceSavedJobs().removeJob(selectedSavedJob);
             refreshTableView(searchword);
         }else{
             //If NOT any job application has been selected.
@@ -247,7 +246,7 @@ public class ControllerMainStage {
         ArrayList<JobApplication> list = new ArrayList<>();
 
         try {
-            ApplifyMain.getServiceSavedJobs().readSavedJobsFromDatabase(); //reads database and fills the (full) applicationlist
+            ApplifyMain.getServiceSavedJobs().readJobsFromDatabase(); //reads database and fills the (full) applicationlist
             ArrayList<JobApplication> fullList = (ArrayList<JobApplication>) ApplifyMain.getServiceSavedJobs().getSavedJobsList(); //gets the full applicationlist
             ArrayList<JobApplication> searchList = ApplifyMain.getServiceSavedJobs().createSearchList(searchword); //creates a list based on the typed searchword
             //in case both functions are activated

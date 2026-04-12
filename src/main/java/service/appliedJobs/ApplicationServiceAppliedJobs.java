@@ -1,0 +1,236 @@
+package service.appliedJobs;
+
+import database.appliedJobs.DatabaseHandlerAppliedJobs;
+import javafx.scene.control.DatePicker;
+import model.JobApplication;
+import service.ApplicationService;
+
+import java.lang.reflect.Field;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
+/**
+ * This class makes use of the DAO-Layer, which is the DatabaseHandler-class and, thus, offers a service to the user.
+ * This class represents the service layer.
+ */
+
+public class ApplicationServiceAppliedJobs extends ApplicationService {
+   //Fields
+    private List<JobApplication> applicationList;
+    private final DatabaseHandlerAppliedJobs databaseHandlerAppliedJobs;
+
+    //constructor with dependency injection
+    public ApplicationServiceAppliedJobs(DatabaseHandlerAppliedJobs databaseHandlerAppliedJobs) {
+        this.databaseHandlerAppliedJobs = databaseHandlerAppliedJobs;
+    }
+
+    /**
+     * Create a copy of the database in form of a list
+     */
+    public void readJobsFromDatabase() {
+        //read job applications from database and save them into application list
+        applicationList = databaseHandlerAppliedJobs.readDatabase();
+    }
+
+    /**
+     * Add a job application to database
+     */
+    public void addJob(JobApplication jobApplication) {
+        //Copy job applications from database into applicationlist
+        readJobsFromDatabase();
+
+        //Check if the jobApplication to add is already in the list / database
+        for (var a : applicationList) {
+            //If the job application is already in the list/database --> return error
+            if (a.getId() == jobApplication.getId()) {
+                //For Java-FX
+                System.out.println("This job application is already in the database. It can not be added to the database.");
+                applicationList.clear();
+                return;
+            }
+        }
+        //if the job application is not in the list/database --> call method insertIntoDatabase
+        databaseHandlerAppliedJobs.insertIntoDatabase(jobApplication);
+
+        //Delete application list
+        applicationList.clear();
+    }
+
+    /**
+     * Remove a job application from database
+     */
+    public void removeJob(JobApplication jobApplication) {
+        //check if jobApplication is in database
+        //Copy job applications from database into applicationlist
+        readJobsFromDatabase();
+
+        //Check if the jobApplication to add is already in the list / database
+        for (var a : applicationList) {
+            // if in database, call delete method
+            if (a.getId() == jobApplication.getId()) {
+                //For Java-FX
+                databaseHandlerAppliedJobs.deleteFromDatabase(jobApplication);
+                applicationList.clear();
+                return;
+            }
+        }
+        //For Java-FX
+        //if not, handle exception
+        System.out.println("The job application with posting name " + jobApplication.getPostingName() + " at company " + jobApplication.getCompany() + "" +
+                "can not be deleted from the database as it is not existent in the database. ");
+        applicationList.clear();
+    }
+
+    /**
+     * Class specific method, not in respective abstract class
+     * @param jobApplication
+     * @param newPostingName
+     * @param newCompanyName
+     * @param newPostingLink
+     * @param newApplicationStatus
+     * @param newNextInterviewDate
+     * @param datepicker
+     * @param newNextInterviewLink
+     * @param newNextInterviewPlace
+     * @param newContactPersonFullName
+     * @param newNotes
+     */
+
+    public void updateJob(JobApplication jobApplication, String newPostingName, String newCompanyName,
+                          String newPostingLink, String newApplicationStatus,
+                          Object newNextInterviewDate, DatePicker datepicker, String newNextInterviewLink, String newNextInterviewPlace,
+                          String newContactPersonFullName, String newNotes) {
+        //copy current database entries into list
+        readJobsFromDatabase();
+
+        //Check if jobApplication already in database / list
+        for (var a : applicationList) {
+            if (a.getId() == jobApplication.getId()) {
+                //For Java-FX
+                databaseHandlerAppliedJobs.updateDatabase(jobApplication, newPostingName, newCompanyName, newPostingLink,
+                        newApplicationStatus,newNextInterviewDate,  datepicker,  newNextInterviewLink,  newNextInterviewPlace,
+                        newContactPersonFullName, newNotes);
+                applicationList.clear();
+                return;
+            }
+        }
+        //Java-FX
+        //if jobApplication not in database / list
+        System.out.println("The job application with posting name " + jobApplication.getPostingName() + " at company " + jobApplication.getCompany() + " " +
+                "can not be updated in the database as it is not existent in the database. ");
+    }
+
+    /**
+     * Method that creates a list based on chosen filter criterion
+     * @param filterCriterion
+     * @return
+     */
+
+    public ArrayList<JobApplication> createFilterList(int filterCriterion) {
+        ArrayList<JobApplication> filterList = new ArrayList<>();
+
+        switch (filterCriterion) {
+            case 0: //no filter, i.e. full list/applicationList
+                filterList = (ArrayList<JobApplication>) applicationList;
+                break;
+
+            case 1: //show all applications with a current invitation
+                for (JobApplication application : applicationList) {
+                    if (application.getApplicationStatus().equals(JobApplication.convertStatusToString(JobApplication.Status.Invitation)))
+                        filterList.add(application);
+                }
+                break;
+            case 2: //show all applications from the last 2-3 weeks
+                for (JobApplication application : applicationList) {
+                    LocalDate date = application.getApplicationDate();
+                    LocalDate today = LocalDate.now();
+                    int numberOfweeks = 3;
+                    if (date.isAfter(today.minusWeeks(numberOfweeks)) && !date.isAfter(today)) {
+                        filterList.add(application);
+                    }
+                }
+                break;
+        }
+        return filterList;
+    }
+
+    /**
+     * Method that creates a list based on typed searchword
+     * @param searchword
+     * @return
+     * @throws IllegalAccessException
+     */
+    public ArrayList<JobApplication> createSearchList(String searchword) throws IllegalAccessException {
+        ArrayList<JobApplication> searchList = new ArrayList<>();
+        DateTimeFormatter formatterGerman = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        DateTimeFormatter formatterEnglish = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        if (searchword.equals("")) {
+            return null;
+        }
+
+        for (JobApplication application : applicationList) {
+            for (Field field : application.getClass().getDeclaredFields()) {
+                field.setAccessible(true);
+                Object value = field.get(application);
+
+                // search in fields that are of type String such as postingName or notes
+                if (value instanceof String && ((String) value).toLowerCase().contains(searchword.toLowerCase())) {
+                    searchList.add(application);
+                    break;
+                }
+                // search in fields that are of type LocalDate such as application or interview date
+                else if (value instanceof LocalDate && (((LocalDate) value).format(formatterGerman).contains(searchword) ||
+                        ((LocalDate) value).format(formatterEnglish).contains(searchword))) {
+                    searchList.add(application);
+                    break;
+                }
+            }
+        }
+
+        return searchList;
+    }
+
+    /**
+     * Method that creates a joint list out of search and filter list
+     * @param filterList
+     * @param searchList
+     * @return
+     */
+
+    public ArrayList<JobApplication> createJointList(ArrayList<JobApplication> filterList, ArrayList<JobApplication> searchList) {
+        ArrayList<JobApplication> jointList = new ArrayList<>();
+        if (searchList != null) {
+            for (JobApplication filterJob : filterList) {
+                for (JobApplication searchJob : searchList) {
+                    if (filterJob.getId() == searchJob.getId()) {
+                        jointList.add(filterJob);
+                    }
+                }
+            }
+        } else {
+            jointList = filterList;
+        }
+        return jointList;
+    }
+
+    private Predicate<JobApplication> getPredicateFromChoice(int choice) {
+        return null;
+    }
+
+    // Getters and Setters
+    public DatabaseHandlerAppliedJobs getDatabaseHandler() {
+        return databaseHandlerAppliedJobs;
+    }
+
+    public List<JobApplication> getApplicationList() {
+        return applicationList;
+    }
+
+    public void setApplicationList(List<JobApplication> applicationList) {
+        this.applicationList = applicationList;
+    }
+}

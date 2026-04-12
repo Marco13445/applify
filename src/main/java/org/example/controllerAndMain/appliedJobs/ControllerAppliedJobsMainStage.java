@@ -16,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.JobApplication;
 import org.example.controllerAndMain.ApplifyMain;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -149,7 +148,7 @@ public class ControllerAppliedJobsMainStage {
         selectedJobApplication = tableAppliedJobs.getSelectionModel().getSelectedItem();
         //If any job application has been selected
         if (selectedJobApplication != null) {
-            ApplifyMain.getService().removeJobApplication(selectedJobApplication);
+            ApplifyMain.getService().removeJob(selectedJobApplication);
             refreshTableView(filterNumber, searchword);
         }else{
             //If NOT any job application has been selected.
@@ -295,7 +294,7 @@ public class ControllerAppliedJobsMainStage {
         ArrayList<JobApplication> list = new ArrayList<>();
 
         try {
-            ApplifyMain.getService().readJobApplicationsFromDatabase(); //reads database and fills the (full) applicationlist
+            ApplifyMain.getService().readJobsFromDatabase(); //reads database and fills the (full) applicationlist
             ArrayList<JobApplication> fullList = (ArrayList<JobApplication>) ApplifyMain.getService().getApplicationList(); //gets the full applicationlist
             ArrayList<JobApplication> filterList = ApplifyMain.getService().createFilterList(filternumber); //creates a list based on the filter criterion
             ArrayList<JobApplication> searchList = ApplifyMain.getService().createSearchList(searchword); //creates a list based on the typed searchword

@@ -12,8 +12,6 @@ import javafx.stage.Stage;
 import model.JobApplication;
 import org.example.controllerAndMain.ApplifyMain;
 
-import java.time.LocalDate;
-
 //import static jdk.internal.net.http.common.Utils.close;
 
 /**
@@ -72,7 +70,7 @@ public class ControllerAddButton {
         String notes = AddNotesField.getText();
 
         //Execution through method
-        ApplifyMain.getServiceSavedJobs().addSavedJob(new JobApplication(-1, postingName,
+        ApplifyMain.getServiceSavedJobs().addJob(new JobApplication(-1, postingName,
                 companyName,postingLink, contactPerson, notes));
 
         //close secondary stage so that to turn back to primary stage
